@@ -48,6 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("eventCell")!
+        cell.textLabel!.textAlignment = NSTextAlignment.Center
         cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle
         
         return cell
