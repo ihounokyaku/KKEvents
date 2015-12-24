@@ -48,8 +48,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("eventCell")!
+        let event = NSMutableAttributedString(string:self.eventsToday[indexPath.row].eventTitle + "\n")
+        let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(8.0)]
+        let placeString = NSMutableAttributedString(string:self.eventsToday[indexPath.row].eventPlaceName, attributes: attrib)
         cell.textLabel!.textAlignment = NSTextAlignment.Center
-        cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle
+        cell.textLabel!.numberOfLines = 0
+        cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        event.appendAttributedString(placeString)
+        cell.textLabel!.attributedText = event
+    
+       // cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle + "\n " + "\(placeString)"
         
         return cell
     }
