@@ -49,17 +49,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("eventCell")!
         let event = NSMutableAttributedString(string:self.eventsToday[indexPath.row].eventTitle + "\n")
-        let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(8.0)]
-        let placeString = NSMutableAttributedString(string:self.eventsToday[indexPath.row].eventPlaceName, attributes: attrib)
+        let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12.0)]
+        let placeString = NSMutableAttributedString(string: self.eventsToday[indexPath.row].eventTime + " at " + self.eventsToday[indexPath.row].eventPlaceName, attributes: attrib)
         cell.textLabel!.textAlignment = NSTextAlignment.Center
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
         event.appendAttributedString(placeString)
         cell.textLabel!.attributedText = event
+        cell.imageView!.image = UIImage(named: self.eventsToday[indexPath.row].venueLogoImageUrl)
     
        // cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle + "\n " + "\(placeString)"
         
         return cell
+        
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {

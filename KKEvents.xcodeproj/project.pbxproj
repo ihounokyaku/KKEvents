@@ -40,6 +40,9 @@
 		C4692A0F1C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
 		C4692A101C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
 		C4692A111C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
+		C4B5A5E21C2BEF34005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E11C2BEF34005D690A /* supan.png */; };
+		C4B5A5E31C2BEF34005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E11C2BEF34005D690A /* supan.png */; };
+		C4B5A5E41C2BEF34005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E11C2BEF34005D690A /* supan.png */; };
 		C4F5C4C91C0F2573001389B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */; };
 		C4F5C4CB1C0F2573001389B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4CA1C0F2573001389B7 /* ViewController.swift */; };
 		C4F5C4CE1C0F2573001389B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F5C4CC1C0F2573001389B7 /* Main.storyboard */; };
@@ -86,6 +89,7 @@
 		45EE8B631C194C7700ED05A9 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		45EE8B641C194C7700ED05A9 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		C4692A0E1C2AC58100A5D2C4 /* eventz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eventz.json; sourceTree = "<group>"; };
+		C4B5A5E11C2BEF34005D690A /* supan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supan.png; sourceTree = "<group>"; };
 		C4F5C4C51C0F2573001389B7 /* KKEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4F5C4CA1C0F2573001389B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				C4F5C4CA1C0F2573001389B7 /* ViewController.swift */,
 				C4F5C4CC1C0F2573001389B7 /* Main.storyboard */,
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
+				C4B5A5E11C2BEF34005D690A /* supan.png */,
 				C4F5C4D11C0F2573001389B7 /* LaunchScreen.storyboard */,
 				C4F5C4D41C0F2573001389B7 /* Info.plist */,
 			);
@@ -338,6 +343,7 @@
 				C4F5C4D01C0F2573001389B7 /* Assets.xcassets in Resources */,
 				C4F5C4CE1C0F2573001389B7 /* Main.storyboard in Resources */,
 				C4692A0F1C2AC58100A5D2C4 /* eventz.json in Resources */,
+				C4B5A5E21C2BEF34005D690A /* supan.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4692A101C2AC58100A5D2C4 /* eventz.json in Resources */,
+				C4B5A5E31C2BEF34005D690A /* supan.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4692A111C2AC58100A5D2C4 /* eventz.json in Resources */,
+				C4B5A5E41C2BEF34005D690A /* supan.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
