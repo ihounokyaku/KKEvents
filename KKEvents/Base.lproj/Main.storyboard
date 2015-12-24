@@ -52,8 +52,11 @@
                         <constraints>
                             <constraint firstItem="Ygb-aK-V2T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3C1-Ps-L4a"/>
                             <constraint firstAttribute="bottom" secondItem="Ygb-aK-V2T" secondAttribute="bottom" id="BsK-cr-A5L"/>
-                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Zd2-DO-vVA"/>
+                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="Zd2-DO-vVA"/>
+                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="gAe-Ne-zSk"/>
                             <constraint firstAttribute="trailing" secondItem="Ygb-aK-V2T" secondAttribute="trailing" id="ouc-Hh-cf6"/>
+                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="uCt-WP-vkx"/>
+                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="z2f-eQ-pXj"/>
                         </constraints>
                     </view>
                     <connections>
