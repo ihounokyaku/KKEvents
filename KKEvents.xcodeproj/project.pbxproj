@@ -69,6 +69,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C48A9CA91C2D6D3300FB9E12 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4519CD2A1C2AC66700911174 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		457B148F1C101D1200CFE03C /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -245,6 +258,7 @@
 				C4F5C4C11C0F2573001389B7 /* Sources */,
 				C4F5C4C21C0F2573001389B7 /* Frameworks */,
 				C4F5C4C31C0F2573001389B7 /* Resources */,
+				C48A9CA91C2D6D3300FB9E12 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);

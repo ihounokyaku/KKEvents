@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="108" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ygb-aK-V2T">
-                                <rect key="frame" x="0.0" y="24" width="600" height="576"/>
+                                <rect key="frame" x="0.0" y="75" width="600" height="525"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -46,13 +46,40 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf1-4q-YNe">
+                                <rect key="frame" x="158" y="17" width="177" height="52"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="This Weekend"/>
+                                <connections>
+                                    <action selector="weekendButtonPush:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BPb-s5-FK8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etH-WD-bU6">
+                                <rect key="frame" x="61" y="20" width="101" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Today"/>
+                                <connections>
+                                    <action selector="todayButtonPush:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1gz-aA-CL3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHb-kP-GDD">
+                                <rect key="frame" x="363" y="17" width="77" height="52"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="All"/>
+                                <connections>
+                                    <action selector="allButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YPL-R4-9pl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ygb-aK-V2T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3C1-Ps-L4a"/>
                             <constraint firstAttribute="bottom" secondItem="Ygb-aK-V2T" secondAttribute="bottom" id="BsK-cr-A5L"/>
-                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="Zd2-DO-vVA"/>
+                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="Zd2-DO-vVA"/>
                             <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="gAe-Ne-zSk"/>
                             <constraint firstAttribute="trailing" secondItem="Ygb-aK-V2T" secondAttribute="trailing" id="ouc-Hh-cf6"/>
                             <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="uCt-WP-vkx"/>
@@ -60,7 +87,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="allButton" destination="XHb-kP-GDD" id="iP9-Vc-9Te"/>
                         <outlet property="mainTable" destination="Ygb-aK-V2T" id="zX1-93-7Zh"/>
+                        <outlet property="todayButton" destination="etH-WD-bU6" id="wLG-Qq-IsP"/>
+                        <outlet property="weekendButton" destination="vf1-4q-YNe" id="8DZ-h4-Boq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

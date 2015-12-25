@@ -13,7 +13,7 @@ class Event: NSObject {
     var venueLogoImageUrl =  ""
     var eventTitle = ""
     var eventDate = [Int]()
-    var eventDay = ""
+    var eventDay = 0
     var eventPlaceName = ""
     var eventTime = ""
 

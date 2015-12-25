@@ -5,18 +5,30 @@
 	"eventDate": [2015, 12, 26],
     "eventTime" : "18.00",
     "venueLogoImageUrl" : "supan.png",
-    "eventDay" : "Saturday"
+    "eventDay" : 7
  
 
 },
  
  {
 	"eventPlaceName": "Supan's in the City",
-	"eventTitle": "Super Happy Fun time",
-	"eventDate": [2015, 12, 24],
+	"eventTitle": "Another Event in the Future",
+	"eventDate": [2016, 1, 26],
  "eventTime" : "18.00",
  "venueLogoImageUrl" : "supan.png",
- "eventDay" : "Saturday"
+ "eventDay" : 7
+ 
+ 
+ },
+
+ 
+ {
+	"eventPlaceName": "Supan's in the City",
+	"eventTitle": "Christmas",
+	"eventDate": [2015, 12, 25],
+ "eventTime" : "18.00",
+ "venueLogoImageUrl" : "supan.png",
+ "eventDay" : 6
  
  
  }

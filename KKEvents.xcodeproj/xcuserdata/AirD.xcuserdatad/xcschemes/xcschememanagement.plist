@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Getdate.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>KKEvents.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>C48A9C9A1C2D6D3300FB9E12</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C4F5C4C41C0F2573001389B7</key>
 		<dict>
 			<key>primary</key>

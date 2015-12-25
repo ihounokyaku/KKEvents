@@ -9,12 +9,96 @@
 import UIKit
 import Parse
 
+extension NSDate {
+    convenience
+    init(dateString:String) {
+        let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.dateFormat = "yyyy-MM-dd"
+        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        let d = dateStringFormatter.dateFromString(dateString)!
+        self.init(timeInterval:0, sinceDate:d)
+    }
+}
+
+extension NSDate
+{
+    func isGreaterThanDate(dateToCompare : NSDate) -> Bool
+    {
+        //Declare Variables
+        var isGreater = false
+        
+        //Compare Values
+        if self.compare(dateToCompare) == NSComparisonResult.OrderedDescending
+        {
+            isGreater = true
+        }
+        
+        //Return Result
+        return isGreater
+    }
+    
+    
+    func isLessThanDate(dateToCompare : NSDate) -> Bool
+    {
+        //Declare Variables
+        var isLess = false
+        
+        //Compare Values
+        if self.compare(dateToCompare) == NSComparisonResult.OrderedAscending
+        {
+            isLess = true
+        }
+        
+        //Return Result
+        return isLess
+    }
+    
+    
+    
+    func addDays(daysToAdd : Int) -> NSDate
+    {
+        let secondsInDays : NSTimeInterval = Double(daysToAdd) * 60 * 60 * 24
+        let dateWithDaysAdded : NSDate = self.dateByAddingTimeInterval(secondsInDays)
+        
+        //Return Result
+        return dateWithDaysAdded
+    }
+    
+    
+    func addHours(hoursToAdd : Int) -> NSDate
+    {
+        let secondsInHours : NSTimeInterval = Double(hoursToAdd) * 60 * 60
+        let dateWithHoursAdded : NSDate = self.dateByAddingTimeInterval(secondsInHours)
+        
+        //Return Result
+        return dateWithHoursAdded
+    }
+}
+
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate   {
+    
     
     @IBOutlet weak var mainTable: UITableView!
     var eventsToday = [Event]()
-
+    var eventsWeekend = [Event]()
+    var eventsAll = [Event]()
+    
+    let daysOfTheWeek = ["poopday", "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"]
+    let monthsOfTheYear = ["Monthalicious", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    
+    // Day Selecrtion
+    var todaySelected = true
+    var weekendSelected = false
+    var allSelected = false
    
+// Selector Buttons
+    @IBOutlet weak var todayButton: UIButton!
+    @IBOutlet weak var weekendButton: UIButton!
+    @IBOutlet weak var allButton: UIButton!
+    
+    
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,14 +108,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("Object has been saved.")
         }
         
-        
-        
-       
+        self.todayButton.enabled = false
         self.mainTable.delegate = self
         self.mainTable.dataSource = self
         
         //self.getEventData()
         self.eventsToday = self.getEventData()
+       
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -40,23 +123,86 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    // Selecter Button Actions
+    @IBAction func todayButtonPush(sender: AnyObject) {
+        self.todaySelected = true
+        self.weekendSelected = false
+        self.allSelected = false
+        self.todayButton.enabled = false
+        self.weekendButton.enabled = true
+        self.allButton.enabled = true
+        
+        self.eventsToday = self.getEventData()
+        self.mainTable.reloadData()
+    }
+    
+    @IBAction func weekendButtonPush(sender: AnyObject) {
+        self.todaySelected = false
+        self.weekendSelected = true
+        self.allSelected = false
+        self.todayButton.enabled = true
+        self.weekendButton.enabled = false
+        self.allButton.enabled = true
+        self.eventsWeekend = self.getEventData()
+        self.mainTable.reloadData()
+    }
+    
+    @IBAction func allButton(sender: AnyObject) {
+        self.todaySelected = false
+        self.weekendSelected = false
+        self.allSelected = true
+        self.todayButton.enabled = true
+        self.weekendButton.enabled = true
+        self.allButton.enabled = false
+        self.eventsAll = self.getEventData()
+        self.mainTable.reloadData()
+    }
+
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.eventsToday.count
+        if todaySelected == true {
+            return self.eventsToday.count
+        } else if weekendSelected == true{
+            return self.eventsWeekend.count
+        } else if allSelected == true {
+            return self.eventsAll.count
+        } else {
+            return eventsToday.count
+        }
+        
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var eventsToDisplay = [Event]()
+        
+        if self.todaySelected == true {
+            eventsToDisplay = self.eventsToday
+        } else if weekendSelected == true {
+                eventsToDisplay = self.eventsWeekend
+        } else if allSelected == true {
+                eventsToDisplay = self.eventsAll
+        } else {
+            eventsToDisplay = self.eventsToday
+        }
+        
+        let monthName = self.monthsOfTheYear[(eventsToDisplay[indexPath.row].eventDate[1])]
+        let weekDayName = self.daysOfTheWeek[eventsToDisplay[indexPath.row].eventDay]
+        
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("eventCell")!
-        let event = NSMutableAttributedString(string:self.eventsToday[indexPath.row].eventTitle + "\n")
+        let eventName = NSMutableAttributedString(string:eventsToDisplay[indexPath.row].eventTitle + "\n")
         let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12.0)]
-        let placeString = NSMutableAttributedString(string: self.eventsToday[indexPath.row].eventTime + " at " + self.eventsToday[indexPath.row].eventPlaceName, attributes: attrib)
+        let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n",  attributes: attrib)
+        let placeString = NSMutableAttributedString(string: eventsToDisplay[indexPath.row].eventTime + " at " + eventsToDisplay[indexPath.row].eventPlaceName, attributes: attrib)
+            cell.imageView!.image = UIImage(named: eventsToDisplay[indexPath.row].venueLogoImageUrl)
         cell.textLabel!.textAlignment = NSTextAlignment.Center
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        event.appendAttributedString(eventName)
         event.appendAttributedString(placeString)
         cell.textLabel!.attributedText = event
-        cell.imageView!.image = UIImage(named: self.eventsToday[indexPath.row].venueLogoImageUrl)
     
        // cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle + "\n " + "\(placeString)"
         
@@ -98,6 +244,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func getEventData() -> [Event] {
         
         var eventsTodayArray:[Event] = [Event]()
+        var eventsWeekendArray: [Event] = [Event]()
+        var eventsAllArray: [Event] = [Event]()
         
         
         let jsonObjects:[NSDictionary] = self.getLocalJsonFile()
@@ -105,26 +253,78 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print(testCount)
         
          var index:Int
-          for index = 0; index < jsonObjects.count; index++ {
         
+        //calendar stuff
+        let date = NSDate()
+        
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: date)
+        let day = components.day
+        let year = components.year
+        let month = components.month
+       
+        
+
+          for index = 0; index < jsonObjects.count; index++ {
             let jsonDictionary:NSDictionary = jsonObjects[index]
             let e:Event = Event()
             e.eventTitle = jsonDictionary["eventTitle"] as! String
             e.eventTime = jsonDictionary["eventTime"] as! String
-           e.eventPlaceName = jsonDictionary["eventPlaceName"] as! String
-           e.eventDay = jsonDictionary["eventDay"] as! String
+            e.eventPlaceName = jsonDictionary["eventPlaceName"] as! String
+            e.eventDay = jsonDictionary["eventDay"] as! Int
             e.eventDate = jsonDictionary["eventDate"] as! [Int]
-           e.venueLogoImageUrl = jsonDictionary["venueLogoImageUrl"] as! String
-        eventsTodayArray.append(e)
-            print("Added")
-           
+            e.venueLogoImageUrl = jsonDictionary["venueLogoImageUrl"] as! String
+            let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
             
-        
-        
+            let compareDate = eventFullDate.addDays(-7)
+            
+
+
+            if e.eventDate[0] == year {
+                if e.eventDate[1] == month {
+                    if e.eventDate[2] == day {
+                    eventsTodayArray.append(e)
+                    }
+                }
+               
+            }
+            
+            if e.eventDay > 5 {
+                if compareDate.isLessThanDate(date) == true {
+                    eventsWeekendArray.append(e)
+                    
+                    
+                } else if e.eventDay == 1 {
+                if compareDate.isLessThanDate(date) == true{
+                    eventsWeekendArray.append(e)
+                    
+                }else {
+                   
+                    }
+                } else {
+                   
+                }
+                    
+
+            }
+          
+            eventsAllArray.append(e)
+           
         
         
     }
-        return eventsTodayArray
+        if self.todaySelected == true {
+            return eventsTodayArray
+        } else if weekendSelected == true {
+            return eventsWeekendArray
+        } else if allSelected == true {
+            return eventsAllArray
+        } else {
+            return eventsTodayArray
+        }
+
+        
+        
         //print(eventsTodayArray.count)
     }
 
@@ -132,4 +332,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
 }
+
 
