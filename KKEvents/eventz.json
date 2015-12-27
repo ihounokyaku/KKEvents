@@ -1,11 +1,25 @@
 [
-{
+ {
+	"eventPlaceName": "Supan's in the City",
+	"eventTitle": "Christmas",
+	"eventDate": [2015, 12, 25],
+ "eventTime" : "18.00",
+ "venueLogoImageUrl" : "supan.png",
+ "eventDay" : 6,
+ "eventDescription" : "super cristmas funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
+ "eventImage" : "rawk.png"
+ 
+ 
+ },
+ {
 	"eventPlaceName": "Supan's in the City",
 	"eventTitle": "Rawk da Nite!",
 	"eventDate": [2015, 12, 26],
     "eventTime" : "18.00",
     "venueLogoImageUrl" : "supan.png",
-    "eventDay" : 7
+    "eventDay" : 7,
+ "eventDescription" : "super RAWK funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
+ "eventImage" : "rawk.png"
  
 
 },
@@ -16,21 +30,14 @@
 	"eventDate": [2016, 1, 26],
  "eventTime" : "18.00",
  "venueLogoImageUrl" : "supan.png",
- "eventDay" : 7
+ "eventDay" : 7,
+ "eventDescription" : "super FUTURE!! funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
+ "eventImage" : "rawk.png"
  
- 
- },
 
- 
- {
-	"eventPlaceName": "Supan's in the City",
-	"eventTitle": "Christmas",
-	"eventDate": [2015, 12, 25],
- "eventTime" : "18.00",
- "venueLogoImageUrl" : "supan.png",
- "eventDay" : 6
  
  
  }
+
 
 ]

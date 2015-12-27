@@ -87,7 +87,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let daysOfTheWeek = ["poopday", "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"]
     let monthsOfTheYear = ["Monthalicious", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     
-    // Day Selecrtion
+    // Day Selection
     var todaySelected = true
     var weekendSelected = false
     var allSelected = false
@@ -96,8 +96,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var weekendButton: UIButton!
     @IBOutlet weak var allButton: UIButton!
+ 
+    
+    // event info to send to otherviewcontroller
+    var eventInfo = "default event info"
+    var eventDescriptionImageURL = ""
+    var eventDescriptionTitle = ""
     
     
+   
        
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +115,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("Object has been saved.")
         }
         
-        self.todayButton.enabled = false
+        if self.todaySelected == true{
+            self.todayButton.enabled = false
+        }
         self.mainTable.delegate = self
         self.mainTable.dataSource = self
         
@@ -117,6 +126,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
        
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    @IBAction func testButton(sender: AnyObject) {
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -203,6 +215,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         event.appendAttributedString(eventName)
         event.appendAttributedString(placeString)
         cell.textLabel!.attributedText = event
+        
+    
     
        // cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle + "\n " + "\(placeString)"
         
@@ -210,8 +224,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        //user selected the cell
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("this is happening")
+        var eventsToDisplay = [Event]()
+        
+        if self.todaySelected == true {
+            eventsToDisplay = self.eventsToday
+        } else if weekendSelected == true {
+            eventsToDisplay = self.eventsWeekend
+        } else if allSelected == true {
+            eventsToDisplay = self.eventsAll
+        } else {
+            eventsToDisplay = self.eventsToday
+        }
+        let cellNumber = indexPath.row
+        print("this is the cell no : \(cellNumber)")
+        let description = eventsToDisplay[cellNumber].eventDescription
+       self.eventInfo = description
+        let eventImageURL = eventsToDisplay[cellNumber].eventImage
+        let eventTitle = eventsToDisplay[cellNumber].eventTitle
+        self.eventDescriptionImageURL = eventImageURL
+        self.eventDescriptionTitle = eventTitle
+        
+        
+       print(self.eventInfo)
+        performSegueWithIdentifier("ShowEventInfoSegue", sender: self)
     }
     
     
@@ -274,6 +311,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.eventDay = jsonDictionary["eventDay"] as! Int
             e.eventDate = jsonDictionary["eventDate"] as! [Int]
             e.venueLogoImageUrl = jsonDictionary["venueLogoImageUrl"] as! String
+            e.eventDescription = jsonDictionary["eventDescription"] as! String
+            e.eventImage = jsonDictionary["eventImage"] as! String
             let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
             
             let compareDate = eventFullDate.addDays(-7)
@@ -327,9 +366,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //print(eventsTodayArray.count)
     }
+    
 
-
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowEventInfoSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? OtherViewController{
+                destinationVC.eventDeets = self.eventInfo
+                destinationVC.eventImageURL = self.eventDescriptionImageURL
+                destinationVC.eventTitle = self.eventDescriptionTitle
+                
+            }
+            //let destinationVC = segue.destinationViewController as? OtherViewController
+            //destinationVC!.eventDeets = self.eventInfo
+          
+        }
+        print("level 1 is OK")
+        print("\(segue.identifier)")
+    }
 
 }
 

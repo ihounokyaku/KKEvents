@@ -16,5 +16,7 @@ class Event: NSObject {
     var eventDay = 0
     var eventPlaceName = ""
     var eventTime = ""
+    var eventDescription = ""
+    var eventImage = ""
 
 }

@@ -40,6 +40,16 @@
 		C4692A0F1C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
 		C4692A101C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
 		C4692A111C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
+		C48A9CEB1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
+		C48A9CEC1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
+		C48A9CED1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
+		C48A9CEF1C2ED8B800FB9E12 /* rawk.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9CEE1C2ED8B800FB9E12 /* rawk.png */; };
+		C48A9CF01C2ED8B800FB9E12 /* rawk.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9CEE1C2ED8B800FB9E12 /* rawk.png */; };
+		C48A9CF11C2ED8B800FB9E12 /* rawk.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9CEE1C2ED8B800FB9E12 /* rawk.png */; };
+		C48A9CF21C2FDD4300FB9E12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4CA1C0F2573001389B7 /* ViewController.swift */; };
+		C48A9CF31C2FDD4400FB9E12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4CA1C0F2573001389B7 /* ViewController.swift */; };
+		C48A9CF41C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */; };
+		C48A9CF51C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */; };
 		C4B5A5E61C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
@@ -102,6 +112,8 @@
 		45EE8B631C194C7700ED05A9 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		45EE8B641C194C7700ED05A9 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		C4692A0E1C2AC58100A5D2C4 /* eventz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eventz.json; sourceTree = "<group>"; };
+		C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
+		C48A9CEE1C2ED8B800FB9E12 /* rawk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rawk.png; sourceTree = "<group>"; };
 		C4B5A5E51C2BF3D7005D690A /* supan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supan.png; sourceTree = "<group>"; };
 		C4F5C4C51C0F2573001389B7 /* KKEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -221,9 +233,11 @@
 				C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */,
 				4519CD2A1C2AC66700911174 /* Event.swift */,
 				C4F5C4CA1C0F2573001389B7 /* ViewController.swift */,
+				C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */,
 				C4F5C4CC1C0F2573001389B7 /* Main.storyboard */,
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
 				C4B5A5E51C2BF3D7005D690A /* supan.png */,
+				C48A9CEE1C2ED8B800FB9E12 /* rawk.png */,
 				C4F5C4D11C0F2573001389B7 /* LaunchScreen.storyboard */,
 				C4F5C4D41C0F2573001389B7 /* Info.plist */,
 			);
@@ -355,6 +369,7 @@
 			files = (
 				C4F5C4D31C0F2573001389B7 /* LaunchScreen.storyboard in Resources */,
 				C4F5C4D01C0F2573001389B7 /* Assets.xcassets in Resources */,
+				C48A9CEF1C2ED8B800FB9E12 /* rawk.png in Resources */,
 				C4F5C4CE1C0F2573001389B7 /* Main.storyboard in Resources */,
 				C4692A0F1C2AC58100A5D2C4 /* eventz.json in Resources */,
 				C4B5A5E61C2BF3D7005D690A /* supan.png in Resources */,
@@ -367,6 +382,7 @@
 			files = (
 				C4692A101C2AC58100A5D2C4 /* eventz.json in Resources */,
 				C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */,
+				C48A9CF01C2ED8B800FB9E12 /* rawk.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +392,7 @@
 			files = (
 				C4692A111C2AC58100A5D2C4 /* eventz.json in Resources */,
 				C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */,
+				C48A9CF11C2ED8B800FB9E12 /* rawk.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +407,7 @@
 				C4F5C4CB1C0F2573001389B7 /* ViewController.swift in Sources */,
 				457B14901C101D1200CFE03C /* Chat.swift in Sources */,
 				C4F5C4C91C0F2573001389B7 /* AppDelegate.swift in Sources */,
+				C48A9CEB1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +416,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4519CD2C1C2AC67D00911174 /* Event.swift in Sources */,
+				C48A9CEC1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
+				C48A9CF21C2FDD4300FB9E12 /* ViewController.swift in Sources */,
+				C48A9CF41C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */,
 				C4F5C4DE1C0F2574001389B7 /* KKEventsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +428,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4519CD2D1C2AC67E00911174 /* Event.swift in Sources */,
+				C48A9CED1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
+				C48A9CF31C2FDD4400FB9E12 /* ViewController.swift in Sources */,
+				C48A9CF51C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */,
 				C4F5C4E91C0F2574001389B7 /* KKEventsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
