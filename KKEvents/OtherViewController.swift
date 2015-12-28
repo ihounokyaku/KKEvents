@@ -47,15 +47,23 @@ class OtherViewController: UIViewController {
             } else {
                 self.englishButton.enabled = false
                 self.thaiButton.enabled = false
+                self.thaiButton.hidden = true
+                self.englishButton.hidden = true
+
                 self.eventDescription.text = self.eventDeets
             }
         } else if eventDeetsThai != "" {
             self.englishButton.enabled = false
             self.thaiButton.enabled = false
+            self.thaiButton.hidden = true
+            self.englishButton.hidden = true
             self.eventDescription.text = self.eventDeetsThai
         } else {
             self.englishButton.enabled = false
             self.thaiButton.enabled = false
+            self.thaiButton.hidden = true
+            self.englishButton.hidden = true
+
             self.eventDescription.text = "no description available \n ไม่มีข้อมูลรายละเอียดของอีเวนท์นี้"
         }
         
