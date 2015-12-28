@@ -22,8 +22,8 @@ class OtherViewController: UIViewController {
     @IBOutlet weak var thaiButton: UIButton!
     @IBOutlet weak var englishButton: UIButton!
     
-    var thai = true
-    var english = false
+   // var thai = true
+    // var english = false
     
     var eventDeets = ""
     var eventDeetsThai = ""
@@ -34,12 +34,32 @@ class OtherViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.eventImage.image = UIImage(named:eventImageURL)
-        self.eventDescription.text = self.eventDeetsThai
         self.venueLogo.image = UIImage(named:self.logo)
         self.thaiButton.alpha = 0.8
-        self.thaiButton.enabled = false
         self.englishButton.alpha = 0.8
-        self.englishButton.enabled = true
+        // check for both languages
+        
+        if eventDeets != "" {
+            if eventDeetsThai != "" {
+                self.englishButton.enabled = true
+                self.thaiButton.enabled = false
+                self.eventDescription.text = self.eventDeetsThai
+            } else {
+                self.englishButton.enabled = false
+                self.thaiButton.enabled = false
+                self.eventDescription.text = self.eventDeets
+            }
+        } else if eventDeetsThai != "" {
+            self.englishButton.enabled = false
+            self.thaiButton.enabled = false
+            self.eventDescription.text = self.eventDeetsThai
+        } else {
+            self.englishButton.enabled = false
+            self.thaiButton.enabled = false
+            self.eventDescription.text = "no description available \n ไม่มีข้อมูลรายละเอียดของอีเวนท์นี้"
+        }
+        
+        
         
         
     }
@@ -58,16 +78,12 @@ class OtherViewController: UIViewController {
     @IBAction func thaiButtonPress(sender: AnyObject) {
         thaiButton.enabled = false
         englishButton.enabled = true
-        thai = true
-        english = false
         self.eventDescription.text = self.eventDeetsThai
 
     }
     @IBAction func englishButtonPress(sender: AnyObject) {
         thaiButton.enabled = true
         englishButton.enabled = false
-        thai = false
-        english = true
         self.eventDescription.text = self.eventDeets
     }
     

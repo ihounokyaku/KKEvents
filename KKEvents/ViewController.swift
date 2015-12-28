@@ -334,8 +334,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
             
             let compareDate = eventFullDate.addDays(-7)
+            let dateAdjustedForTime = eventFullDate.addHours(30)
             
-            if eventFullDate.isLessThanDate(date){
+            if dateAdjustedForTime.isLessThanDate(date){
                 print("this is in the past")
             } else {
                 if e.eventDate[0] == year {

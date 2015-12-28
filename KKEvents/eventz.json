@@ -1,13 +1,24 @@
 [
  {
+ "eventPlaceName": "Supan's in the City",
+	"eventTitle": "Another Event in the Future",
+	"eventDate": [2015, 12, 28],
+ "eventTime" : "18.00",
+ "venueLogoImageUrl" : "supan.png",
+ "eventDay" : 7,
+ "eventDescription" : "",
+ "eventDescriptionThai" : "ภาษาไทย",
+ "eventImage" : "rawk.png"
+ },
+ {
 	"eventPlaceName": "Supan's in the City",
 	"eventTitle": "Games Night!",
 	"eventDate": [2016, 1, 3],
  "eventTime" : "18.00",
  "venueLogoImageUrl" : "supan.png",
  "eventDay" : 1,
- "eventDescription" : "Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games ",
- "eventDescriptionThai" : "อีเว้นคราวนี้ ขาร็อคไม่ควรพลาด \n พบกับวงร็อคแห่งขอนแก่น \n Muscle Cock \n The Loose ",
+ "eventDescription" : "",
+ "eventDescriptionThai" : "",
  "eventImage" : "supanGameNight.png"
  
  
@@ -34,12 +45,8 @@
  "venueLogoImageUrl" : "supan.png",
  "eventDay" : 7,
  "eventDescription" : "super FUTURE!! funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
- "eventDescriptionThai" : "อีเว้นคราวนี้ ขาร็อคไม่ควรพลาด \n พบกับวงร็อคแห่งขอนแก่น \n Muscle Cock \n The Loose ",
+ "eventDescriptionThai" : "",
  "eventImage" : "rawk.png"
- 
-
- 
- 
  }
 
 
