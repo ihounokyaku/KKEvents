@@ -1,24 +1,26 @@
 [
  {
 	"eventPlaceName": "Supan's in the City",
-	"eventTitle": "Christmas",
-	"eventDate": [2015, 12, 25],
+	"eventTitle": "Games Night!",
+	"eventDate": [2016, 1, 3],
  "eventTime" : "18.00",
  "venueLogoImageUrl" : "supan.png",
- "eventDay" : 6,
- "eventDescription" : "super cristmas funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
- "eventImage" : "rawk.png"
+ "eventDay" : 1,
+ "eventDescription" : "Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games Games ",
+ "eventDescriptionThai" : "อีเว้นคราวนี้ ขาร็อคไม่ควรพลาด \n พบกับวงร็อคแห่งขอนแก่น \n Muscle Cock \n The Loose ",
+ "eventImage" : "supanGameNight.png"
  
  
  },
  {
 	"eventPlaceName": "Supan's in the City",
 	"eventTitle": "Rawk da Nite!",
-	"eventDate": [2015, 12, 26],
+	"eventDate": [2016, 1, 9],
     "eventTime" : "18.00",
     "venueLogoImageUrl" : "supan.png",
     "eventDay" : 7,
- "eventDescription" : "super RAWK funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
+ "eventDescription" : "rawk out at Supan's with two of the city's best known rock bands! Drink promotions on the night! Arrive early to receive a free shot of strawberry shortcake!",
+ "eventDescriptionThai" : "อีเว้นคราวนี้ ขาร็อคไม่ควรพลาด \n พบกับวงร็อคแห่งขอนแก่น \n Muscle Cock \n The Loose ",
  "eventImage" : "rawk.png"
  
 
@@ -32,6 +34,7 @@
  "venueLogoImageUrl" : "supan.png",
  "eventDay" : 7,
  "eventDescription" : "super FUTURE!! funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
+ "eventDescriptionThai" : "อีเว้นคราวนี้ ขาร็อคไม่ควรพลาด \n พบกับวงร็อคแห่งขอนแก่น \n Muscle Cock \n The Loose ",
  "eventImage" : "rawk.png"
  
 

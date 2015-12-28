@@ -100,8 +100,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // event info to send to otherviewcontroller
     var eventInfo = "default event info"
+    var eventInfoThai = ""
     var eventDescriptionImageURL = ""
     var eventDescriptionTitle = ""
+    var venueLogo = ""
+
     
     
    
@@ -208,14 +211,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12.0)]
         let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n",  attributes: attrib)
         let placeString = NSMutableAttributedString(string: eventsToDisplay[indexPath.row].eventTime + " at " + eventsToDisplay[indexPath.row].eventPlaceName, attributes: attrib)
-            cell.imageView!.image = UIImage(named: eventsToDisplay[indexPath.row].venueLogoImageUrl)
+    
+        cell.imageView!.image = UIImage(named: eventsToDisplay[indexPath.row].venueLogoImageUrl)
+        cell.imageView!.alpha = 0.8
+
+
         cell.textLabel!.textAlignment = NSTextAlignment.Center
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
         event.appendAttributedString(eventName)
         event.appendAttributedString(placeString)
         cell.textLabel!.attributedText = event
+        cell.textLabel!.backgroundColor = (UIColor(white: 1, alpha: 0))
         
+        //set cell background
+        
+        cell.backgroundView = UIImageView(image: UIImage(named: eventsToDisplay[indexPath.row].eventImage)!)
+        cell.backgroundView!.contentMode = UIViewContentMode.ScaleAspectFill
+        cell.backgroundView?.alpha = 0.2
     
     
        // cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle + "\n " + "\(placeString)"
@@ -240,11 +253,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cellNumber = indexPath.row
         print("this is the cell no : \(cellNumber)")
         let description = eventsToDisplay[cellNumber].eventDescription
+        let descriptionThai = eventsToDisplay[cellNumber].eventDescriptionThai
        self.eventInfo = description
         let eventImageURL = eventsToDisplay[cellNumber].eventImage
+        let venueImageURL = eventsToDisplay[cellNumber].venueLogoImageUrl
         let eventTitle = eventsToDisplay[cellNumber].eventTitle
         self.eventDescriptionImageURL = eventImageURL
         self.eventDescriptionTitle = eventTitle
+        self.venueLogo = venueImageURL
+        self.eventInfoThai = descriptionThai
         
         
        print(self.eventInfo)
@@ -312,17 +329,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.eventDate = jsonDictionary["eventDate"] as! [Int]
             e.venueLogoImageUrl = jsonDictionary["venueLogoImageUrl"] as! String
             e.eventDescription = jsonDictionary["eventDescription"] as! String
+            e.eventDescriptionThai = jsonDictionary["eventDescriptionThai"] as! String
             e.eventImage = jsonDictionary["eventImage"] as! String
             let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
             
             let compareDate = eventFullDate.addDays(-7)
             
-
-
-            if e.eventDate[0] == year {
-                if e.eventDate[1] == month {
-                    if e.eventDate[2] == day {
-                    eventsTodayArray.append(e)
+            if eventFullDate.isLessThanDate(date){
+                print("this is in the past")
+            } else {
+                if e.eventDate[0] == year {
+                    if e.eventDate[1] == month {
+                        if e.eventDate[2] == day {
+                            eventsTodayArray.append(e)
                     }
                 }
                
@@ -333,22 +352,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     eventsWeekendArray.append(e)
                     
                     
-                } else if e.eventDay == 1 {
+                }
+                }
+                if e.eventDay == 1 {
                 if compareDate.isLessThanDate(date) == true{
                     eventsWeekendArray.append(e)
                     
                 }else {
                    
                     }
-                } else {
-                   
-                }
+              
                     
 
             }
           
             eventsAllArray.append(e)
-           
+            }
         
         
     }
@@ -375,14 +394,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destinationVC.eventDeets = self.eventInfo
                 destinationVC.eventImageURL = self.eventDescriptionImageURL
                 destinationVC.eventTitle = self.eventDescriptionTitle
+                destinationVC.logo = self.venueLogo
+                destinationVC.eventDeetsThai = self.eventInfoThai
+                
                 
             }
             //let destinationVC = segue.destinationViewController as? OtherViewController
             //destinationVC!.eventDeets = self.eventInfo
           
         }
-        print("level 1 is OK")
-        print("\(segue.identifier)")
+        
     }
 
 }

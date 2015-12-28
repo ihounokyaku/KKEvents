@@ -50,6 +50,9 @@
 		C48A9CF31C2FDD4400FB9E12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4CA1C0F2573001389B7 /* ViewController.swift */; };
 		C48A9CF41C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */; };
 		C48A9CF51C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */; };
+		C48A9D351C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
+		C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
+		C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
 		C4B5A5E61C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
@@ -114,6 +117,7 @@
 		C4692A0E1C2AC58100A5D2C4 /* eventz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eventz.json; sourceTree = "<group>"; };
 		C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		C48A9CEE1C2ED8B800FB9E12 /* rawk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rawk.png; sourceTree = "<group>"; };
+		C48A9D341C316C2200FB9E12 /* supanGameNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supanGameNight.png; sourceTree = "<group>"; };
 		C4B5A5E51C2BF3D7005D690A /* supan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supan.png; sourceTree = "<group>"; };
 		C4F5C4C51C0F2573001389B7 /* KKEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
 				C4B5A5E51C2BF3D7005D690A /* supan.png */,
 				C48A9CEE1C2ED8B800FB9E12 /* rawk.png */,
+				C48A9D341C316C2200FB9E12 /* supanGameNight.png */,
 				C4F5C4D11C0F2573001389B7 /* LaunchScreen.storyboard */,
 				C4F5C4D41C0F2573001389B7 /* Info.plist */,
 			);
@@ -367,6 +372,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48A9D351C316C2200FB9E12 /* supanGameNight.png in Resources */,
 				C4F5C4D31C0F2573001389B7 /* LaunchScreen.storyboard in Resources */,
 				C4F5C4D01C0F2573001389B7 /* Assets.xcassets in Resources */,
 				C48A9CEF1C2ED8B800FB9E12 /* rawk.png in Resources */,
@@ -381,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4692A101C2AC58100A5D2C4 /* eventz.json in Resources */,
+				C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */,
 				C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */,
 				C48A9CF01C2ED8B800FB9E12 /* rawk.png in Resources */,
 			);
@@ -391,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4692A111C2AC58100A5D2C4 /* eventz.json in Resources */,
+				C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */,
 				C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */,
 				C48A9CF11C2ED8B800FB9E12 /* rawk.png in Resources */,
 			);
