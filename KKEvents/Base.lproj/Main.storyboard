@@ -163,7 +163,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eI-ID-9Ng">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eI-ID-9Ng">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XW-Qg-mxj">
@@ -195,7 +195,7 @@
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Ct-Wc-eBX">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Ct-Wc-eBX">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <animations/>
                                                 <attributedString key="attributedText">
@@ -208,8 +208,9 @@
                                                     </fragment>
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="widthClass=compact">
+                                                <variation key="widthClass=compact" misplaced="YES">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="53" y="300" width="214" height="26"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVr-Zm-SJB">
@@ -217,23 +218,6 @@
                                                 <animations/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Saturday, January 21 at 18:00">
-                                                        <attributes>
-                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <font key="NSFont" size="18" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="widthClass=compact">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                </variation>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6X-xV-A2W">
-                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                <animations/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Entry: Free">
                                                         <attributes>
                                                             <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <font key="NSFont" size="18" name="HelveticaNeue"/>
@@ -268,6 +252,24 @@
                                                     <action selector="englishButtonPress:" destination="JTb-xN-9Ss" eventType="touchUpInside" id="7Sl-Iz-lD5"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6X-xV-A2W">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <animations/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Entry: Free">
+                                                        <attributes>
+                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <font key="NSFont" size="18" name="HelveticaNeue"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="widthClass=compact" misplaced="YES">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="116" y="353" width="88" height="21"/>
+                                                </variation>
+                                            </label>
                                         </subviews>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -312,9 +314,9 @@
                                                 <exclude reference="Qkz-wJ-fKz"/>
                                                 <exclude reference="0Ct-Wc-eBX"/>
                                                 <exclude reference="YVr-Zm-SJB"/>
-                                                <exclude reference="G6X-xV-A2W"/>
                                                 <exclude reference="Zs7-j9-eT8"/>
                                                 <exclude reference="QSi-IY-zTY"/>
+                                                <exclude reference="G6X-xV-A2W"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="UiQ-Xx-Ex7"/>
@@ -346,9 +348,9 @@
                                                 <include reference="Qkz-wJ-fKz"/>
                                                 <include reference="0Ct-Wc-eBX"/>
                                                 <include reference="YVr-Zm-SJB"/>
-                                                <include reference="G6X-xV-A2W"/>
                                                 <include reference="Zs7-j9-eT8"/>
                                                 <include reference="QSi-IY-zTY"/>
+                                                <include reference="G6X-xV-A2W"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="UiQ-Xx-Ex7"/>
@@ -416,6 +418,9 @@
                                                 <include reference="cBZ-sL-XN1"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="mapButtonPress:" destination="JTb-xN-9Ss" eventType="touchUpInside" id="Wks-Fs-MGM"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vh7-69-ple">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -540,6 +545,8 @@
                         <outlet property="entryCostLabel" destination="G6X-xV-A2W" id="1Hs-gy-VYl"/>
                         <outlet property="eventDescription" destination="Qkz-wJ-fKz" id="bwr-pU-Dwh"/>
                         <outlet property="eventImage" destination="u8W-zX-KQG" id="gAl-ce-lBl"/>
+                        <outlet property="eventTitleLabel" destination="0Ct-Wc-eBX" id="NhI-xr-n7X"/>
+                        <outlet property="mapButton" destination="6w7-jW-RdW" id="eRc-e1-vei"/>
                         <outlet property="thaiButton" destination="Zs7-j9-eT8" id="WU4-u6-pfL"/>
                         <outlet property="venueLogo" destination="vh7-69-ple" id="8ab-eU-hIn"/>
                     </connections>

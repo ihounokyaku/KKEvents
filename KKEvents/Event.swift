@@ -19,5 +19,6 @@ class Event: NSObject {
     var eventDescription = ""
     var eventImage = ""
     var eventDescriptionThai = ""
+    var entryCost = ""
 
 }

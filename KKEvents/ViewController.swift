@@ -86,6 +86,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let daysOfTheWeek = ["poopday", "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"]
     let monthsOfTheYear = ["Monthalicious", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    let daysOfTheWeekThai = ["วัน", "วันอาทิตย์", "วันจันทร์", "วันอังคาร", "วันพุธ","วันพฤหัสบดี", "วันศุกร์", "วันเสาร์"]
+    let monthsOfTheYearThai = ["เดือน", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]
     
     // Day Selection
     var todaySelected = true
@@ -104,6 +106,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var eventDescriptionImageURL = ""
     var eventDescriptionTitle = ""
     var venueLogo = ""
+    var dateOfEvent = ""
+    var dateOfEventThai = ""
+    var entryCost = ""
 
     
     
@@ -210,6 +215,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let eventName = NSMutableAttributedString(string:eventsToDisplay[indexPath.row].eventTitle + "\n")
         let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12.0)]
         let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n",  attributes: attrib)
+        
         let placeString = NSMutableAttributedString(string: eventsToDisplay[indexPath.row].eventTime + " at " + eventsToDisplay[indexPath.row].eventPlaceName, attributes: attrib)
     
         cell.imageView!.image = UIImage(named: eventsToDisplay[indexPath.row].venueLogoImageUrl)
@@ -254,14 +260,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("this is the cell no : \(cellNumber)")
         let description = eventsToDisplay[cellNumber].eventDescription
         let descriptionThai = eventsToDisplay[cellNumber].eventDescriptionThai
-       self.eventInfo = description
+        let monthName = self.monthsOfTheYear[(eventsToDisplay[indexPath.row].eventDate[1])]
+        let monthNameThai = self.monthsOfTheYearThai[(eventsToDisplay[indexPath.row].eventDate[1])]
+        let weekDayName = self.daysOfTheWeek[eventsToDisplay[indexPath.row].eventDay]
+        let weekDayNameThai = self.daysOfTheWeekThai[eventsToDisplay[indexPath.row].eventDay]
         let eventImageURL = eventsToDisplay[cellNumber].eventImage
         let venueImageURL = eventsToDisplay[cellNumber].venueLogoImageUrl
         let eventTitle = eventsToDisplay[cellNumber].eventTitle
+
+        self.eventInfo = description
         self.eventDescriptionImageURL = eventImageURL
         self.eventDescriptionTitle = eventTitle
         self.venueLogo = venueImageURL
         self.eventInfoThai = descriptionThai
+        self.dateOfEvent = "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])"
+        self.dateOfEventThai = "\(weekDayNameThai)ที่ \(eventsToDisplay[indexPath.row].eventDate[2]) \(monthNameThai)"
+        self.entryCost = eventsToDisplay[cellNumber].entryCost
         
         
        print(self.eventInfo)
@@ -331,7 +345,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.eventDescription = jsonDictionary["eventDescription"] as! String
             e.eventDescriptionThai = jsonDictionary["eventDescriptionThai"] as! String
             e.eventImage = jsonDictionary["eventImage"] as! String
+            e.entryCost = jsonDictionary["entryCost"] as! String
+            
             let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
+        
             
             let compareDate = eventFullDate.addDays(-7)
             let dateAdjustedForTime = eventFullDate.addHours(30)
@@ -397,6 +414,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destinationVC.eventTitle = self.eventDescriptionTitle
                 destinationVC.logo = self.venueLogo
                 destinationVC.eventDeetsThai = self.eventInfoThai
+                destinationVC.eventDateThai = self.dateOfEventThai
+                destinationVC.eventDate = self.dateOfEvent
+                destinationVC.entryNumber = self.entryCost
                 
                 
             }
