@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class OtherViewController: UIViewController {
     @IBOutlet weak var mapButton: UIButton!
@@ -39,6 +40,8 @@ class OtherViewController: UIViewController {
     var entryCost = ""
     var entryCostThai = ""
     var entryNumber = ""
+    var venueName = ""
+    var venueCoordinates = [0.0,0.0]
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,6 +49,7 @@ class OtherViewController: UIViewController {
         self.venueLogo.image = UIImage(named:self.logo)
         self.thaiButton.alpha = 0.8
         self.englishButton.alpha = 0.8
+        print("venco = \(self.venueCoordinates)")
        
         self.eventTitleLabel.text = self.eventTitle
         // Format entry cost
@@ -127,7 +131,19 @@ class OtherViewController: UIViewController {
         self.entryCostLabel.text = self.entryCost
     }
     
-    @IBAction func mapButtonPress(sender: AnyObject) {print("PRESSEDMAPBUTTON!")
+    @IBAction func mapButtonPress(sender: AnyObject) {
+     
+        
+           let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:self.venueCoordinates[0], longitude:self.venueCoordinates[1]), addressDictionary: nil))
+        
+       mapItem.name = self.venueName
+        
+        
+        //You could also choose: MKLaunchOptionsDirectionsModeWalking
+    //    let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+    
+        mapItem.openInMapsWithLaunchOptions(nil)
+        
     }
 
     /*

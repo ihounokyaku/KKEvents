@@ -20,5 +20,7 @@ class Event: NSObject {
     var eventImage = ""
     var eventDescriptionThai = ""
     var entryCost = ""
+    var venueCoordinates = [0.0, 0.0]
+    var phoneNumber = ""
 
 }

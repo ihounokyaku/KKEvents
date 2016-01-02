@@ -210,7 +210,7 @@
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact" misplaced="YES">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <rect key="frame" x="53" y="300" width="214" height="26"/>
+                                                    <rect key="frame" x="53" y="301" width="214" height="26"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVr-Zm-SJB">
@@ -265,9 +265,8 @@
                                                     </fragment>
                                                 </attributedString>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="widthClass=compact" misplaced="YES">
+                                                <variation key="widthClass=compact">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <rect key="frame" x="116" y="353" width="88" height="21"/>
                                                 </variation>
                                             </label>
                                         </subviews>

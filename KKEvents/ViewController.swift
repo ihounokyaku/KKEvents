@@ -109,6 +109,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var dateOfEvent = ""
     var dateOfEventThai = ""
     var entryCost = ""
+    var venueName = ""
+    var venueCoordinates = [0.0, 0.0]
 
     
     
@@ -276,6 +278,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.dateOfEvent = "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])"
         self.dateOfEventThai = "\(weekDayNameThai)ที่ \(eventsToDisplay[indexPath.row].eventDate[2]) \(monthNameThai)"
         self.entryCost = eventsToDisplay[cellNumber].entryCost
+        self.venueName = eventsToDisplay[cellNumber].eventPlaceName
+        self.venueCoordinates = eventsToDisplay[cellNumber].venueCoordinates
         
         
        print(self.eventInfo)
@@ -284,27 +288,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    func getLocalJsonFile() -> [NSDictionary]{
-        let appBundlePath:String? = NSBundle.mainBundle().pathForResource("eventz", ofType: "json")
+    func getLocalJsonFile(fileName:String) -> [NSDictionary]{
+        let appBundlePath:String? = NSBundle.mainBundle().pathForResource(fileName, ofType: "json")
         
         if let actualBundalPath = appBundlePath {
             let urlPath:NSURL = NSURL(fileURLWithPath: actualBundalPath)
             let jsonData:NSData? = NSData(contentsOfURL: urlPath)
+            print("getting the jsonfile: \(fileName)")
             if let actualJsonData = jsonData {
                 do {
                     let arrayOfDictionaries: [NSDictionary] = try NSJSONSerialization.JSONObjectWithData(actualJsonData, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
                     return arrayOfDictionaries
+                    print("returned for: \(fileName)")
                 }
                 catch{
-                    
+                    print("catch!")
                 }
             } else {
-                
+                print("2 something went wrong wtih: \(fileName)")
                 
             }
         }
         else {
-            
+            print("1 something went wrong wtih: \(fileName)")
         }
         return [NSDictionary]()
     }
@@ -316,9 +322,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var eventsAllArray: [Event] = [Event]()
         
         
-        let jsonObjects:[NSDictionary] = self.getLocalJsonFile()
-       let testCount = jsonObjects.count
-        print(testCount)
+        let jsonObjects:[NSDictionary] = self.getLocalJsonFile("eventz")
+        
         
          var index:Int
         
@@ -335,19 +340,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
           for index = 0; index < jsonObjects.count; index++ {
             let jsonDictionary:NSDictionary = jsonObjects[index]
+            let eventVenueInfo = jsonDictionary["eventVenue"] as! String
+            let venueJsonFile:[NSDictionary] = self.getLocalJsonFile(eventVenueInfo)
+            let venueJson:NSDictionary = venueJsonFile[0]
             let e:Event = Event()
+            
+            e.eventPlaceName = venueJson["venueName"] as! String
+            e.venueLogoImageUrl = venueJson["venueLogoImageUrl"] as! String
+            e.phoneNumber = venueJson["venuePhoneNumber"] as! String
+            e.venueCoordinates = venueJson["venueCoordinates"] as! [Double]
+            
             e.eventTitle = jsonDictionary["eventTitle"] as! String
             e.eventTime = jsonDictionary["eventTime"] as! String
-            e.eventPlaceName = jsonDictionary["eventPlaceName"] as! String
-            e.eventDay = jsonDictionary["eventDay"] as! Int
+            
             e.eventDate = jsonDictionary["eventDate"] as! [Int]
-            e.venueLogoImageUrl = jsonDictionary["venueLogoImageUrl"] as! String
             e.eventDescription = jsonDictionary["eventDescription"] as! String
             e.eventDescriptionThai = jsonDictionary["eventDescriptionThai"] as! String
             e.eventImage = jsonDictionary["eventImage"] as! String
             e.entryCost = jsonDictionary["entryCost"] as! String
             
+            
+            
             let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
+            let componentsEvent = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: eventFullDate)
+            
+            e.eventDay = componentsEvent.weekday
         
             
             let compareDate = eventFullDate.addDays(-7)
@@ -417,7 +434,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destinationVC.eventDateThai = self.dateOfEventThai
                 destinationVC.eventDate = self.dateOfEvent
                 destinationVC.entryNumber = self.entryCost
-                
+                destinationVC.venueName = self.venueName
+                destinationVC.venueCoordinates = self.venueCoordinates
                 
             }
             //let destinationVC = segue.destinationViewController as? OtherViewController
