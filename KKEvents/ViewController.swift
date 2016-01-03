@@ -269,6 +269,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let eventImageURL = eventsToDisplay[cellNumber].eventImage
         let venueImageURL = eventsToDisplay[cellNumber].venueLogoImageUrl
         let eventTitle = eventsToDisplay[cellNumber].eventTitle
+        
 
         self.eventInfo = description
         self.eventDescriptionImageURL = eventImageURL
@@ -299,18 +300,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 do {
                     let arrayOfDictionaries: [NSDictionary] = try NSJSONSerialization.JSONObjectWithData(actualJsonData, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
                     return arrayOfDictionaries
-                    print("returned for: \(fileName)")
                 }
                 catch{
-                    print("catch!")
+                   
                 }
             } else {
-                print("2 something went wrong wtih: \(fileName)")
+               
                 
             }
         }
         else {
-            print("1 something went wrong wtih: \(fileName)")
+            
         }
         return [NSDictionary]()
     }
@@ -358,6 +358,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.eventDescriptionThai = jsonDictionary["eventDescriptionThai"] as! String
             e.eventImage = jsonDictionary["eventImage"] as! String
             e.entryCost = jsonDictionary["entryCost"] as! String
+            
+            var testURL = jsonDictionary["eventURL"] as! String
+            if testURL != "" {
+                e.eventURL = testURL
+            } else {
+                e.eventURL = venueJson["venueURL"] as! String
+            }
             
             
             
@@ -438,9 +445,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destinationVC.venueCoordinates = self.venueCoordinates
                 
             }
-            //let destinationVC = segue.destinationViewController as? OtherViewController
-            //destinationVC!.eventDeets = self.eventInfo
-          
+                     
         }
         
     }

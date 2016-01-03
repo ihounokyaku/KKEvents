@@ -146,6 +146,16 @@ class OtherViewController: UIViewController {
         
     }
 
+    @IBAction func fbButtonPress(sender: AnyObject) {
+        let facebookURL = NSURL(string: "fb://profile/PageId")!
+        if UIApplication.sharedApplication().canOpenURL(facebookURL) {
+            UIApplication.sharedApplication().openURL(facebookURL)
+        } else {
+            UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/PageName")!)
+        }
+    }
+    
+    
     /*
     // MARK: - Navigation
 

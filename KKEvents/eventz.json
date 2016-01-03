@@ -7,7 +7,8 @@
     "eventDescription" : "",
     "eventDescriptionThai" : "ภาษาไทย",
     "eventImage" : "rawk.png",
-    "entryCost" : "500"
+    "entryCost" : "500",
+ "eventURL" : "https://www.facebook.com/events/1642231516035967/"
  },
  {
 	"eventVenue": "supans",
@@ -17,7 +18,8 @@
     "eventDescription" : "",
     "eventDescriptionThai" : "",
     "eventImage" : "supanGameNight.png",
-    "entryCost" : "free"
+    "entryCost" : "free",
+ "eventURL" : "https://www.facebook.com/events/1642231516035967/"
  
  
  },
@@ -29,7 +31,8 @@
     "eventDescription" : "rawk out at Supan's with two of the city's best known rock bands! Drink promotions on the night! Arrive early to receive a free shot of strawberry shortcake!",
     "eventDescriptionThai" : "อีเว้นคราวนี้ ขาร็อคไม่ควรพลาด \n พบกับวงร็อคแห่งขอนแก่น \n Muscle Cock \n The Loose ",
     "eventImage" : "rawk.png",
-    "entryCost" : "100"
+    "entryCost" : "100",
+ "eventURL" : "https://www.facebook.com/events/1642231516035967/"
  
 
 },
@@ -42,7 +45,9 @@
     "eventDescription" : "super FUTURE!! funtime texttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxttexttexttexttexxt",
     "eventDescriptionThai" : "",
     "eventImage" : "rawk.png",
-    "entryCost" : "1000"
+    "entryCost" : "1000",
+    "eventURL" : "https://www.facebook.com/events/1642231516035967/"
+ 
  }
 
 

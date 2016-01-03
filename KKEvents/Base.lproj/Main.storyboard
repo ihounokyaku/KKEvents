@@ -396,6 +396,9 @@
                                                 <include reference="rCj-1o-vVw"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="fbButtonPress:" destination="JTb-xN-9Ss" eventType="touchUpInside" id="fZX-Tw-a5s"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6w7-jW-RdW" userLabel="MapButton">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>

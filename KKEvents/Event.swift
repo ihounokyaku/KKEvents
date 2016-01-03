@@ -22,5 +22,6 @@ class Event: NSObject {
     var entryCost = ""
     var venueCoordinates = [0.0, 0.0]
     var phoneNumber = ""
+    var eventURL = ""
 
 }
