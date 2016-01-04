@@ -37,6 +37,9 @@
 		45EE8B701C194E0400ED05A9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB39B1C1882520039019E /* CoreGraphics.framework */; };
 		45EE8B711C194E0400ED05A9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3991C1882470039019E /* CFNetwork.framework */; };
 		45EE8B721C194E0400ED05A9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3971C1881AB0039019E /* AudioToolbox.framework */; };
+		C42D2E5F1C393F9C008DC4BB /* supansbkg.png in Resources */ = {isa = PBXBuildFile; fileRef = C42D2E5E1C393F9C008DC4BB /* supansbkg.png */; };
+		C42D2E601C393F9C008DC4BB /* supansbkg.png in Resources */ = {isa = PBXBuildFile; fileRef = C42D2E5E1C393F9C008DC4BB /* supansbkg.png */; };
+		C42D2E611C393F9C008DC4BB /* supansbkg.png in Resources */ = {isa = PBXBuildFile; fileRef = C42D2E5E1C393F9C008DC4BB /* supansbkg.png */; };
 		C4692A0F1C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
 		C4692A101C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
 		C4692A111C2AC58100A5D2C4 /* eventz.json in Resources */ = {isa = PBXBuildFile; fileRef = C4692A0E1C2AC58100A5D2C4 /* eventz.json */; };
@@ -118,6 +121,7 @@
 		45EE8B621C194C7700ED05A9 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		45EE8B631C194C7700ED05A9 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		45EE8B641C194C7700ED05A9 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		C42D2E5E1C393F9C008DC4BB /* supansbkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supansbkg.png; sourceTree = "<group>"; };
 		C4692A0E1C2AC58100A5D2C4 /* eventz.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eventz.json; sourceTree = "<group>"; };
 		C4715B8F1C338737003E641F /* supans.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = supans.json; sourceTree = "<group>"; };
 		C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */,
 				C4F5C4CC1C0F2573001389B7 /* Main.storyboard */,
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
+				C42D2E5E1C393F9C008DC4BB /* supansbkg.png */,
 				C4B5A5E51C2BF3D7005D690A /* supan.png */,
 				C48A9CEE1C2ED8B800FB9E12 /* rawk.png */,
 				C48A9D341C316C2200FB9E12 /* supanGameNight.png */,
@@ -382,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C48A9D351C316C2200FB9E12 /* supanGameNight.png in Resources */,
+				C42D2E5F1C393F9C008DC4BB /* supansbkg.png in Resources */,
 				C4F5C4D31C0F2573001389B7 /* LaunchScreen.storyboard in Resources */,
 				C4F5C4D01C0F2573001389B7 /* Assets.xcassets in Resources */,
 				C48A9CEF1C2ED8B800FB9E12 /* rawk.png in Resources */,
@@ -400,6 +406,7 @@
 				C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */,
 				C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */,
 				C48A9CF01C2ED8B800FB9E12 /* rawk.png in Resources */,
+				C42D2E601C393F9C008DC4BB /* supansbkg.png in Resources */,
 				C4715B911C338737003E641F /* supans.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +419,7 @@
 				C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */,
 				C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */,
 				C48A9CF11C2ED8B800FB9E12 /* rawk.png in Resources */,
+				C42D2E611C393F9C008DC4BB /* supansbkg.png in Resources */,
 				C4715B921C338737003E641F /* supans.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

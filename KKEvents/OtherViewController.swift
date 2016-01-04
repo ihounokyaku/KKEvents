@@ -20,6 +20,7 @@ class OtherViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var eventTitleLabel: UILabel!
     
+    @IBOutlet weak var venueBackImage: UIImageView!
     
     
     @IBOutlet weak var thaiButton: UIButton!
@@ -42,6 +43,9 @@ class OtherViewController: UIViewController {
     var entryNumber = ""
     var venueName = ""
     var venueCoordinates = [0.0,0.0]
+    var eventURL = ""
+    var venueURL = ""
+    var venueImage = ""
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,9 +53,16 @@ class OtherViewController: UIViewController {
         self.venueLogo.image = UIImage(named:self.logo)
         self.thaiButton.alpha = 0.8
         self.englishButton.alpha = 0.8
-        print("venco = \(self.venueCoordinates)")
+        
        
         self.eventTitleLabel.text = self.eventTitle
+        
+        // set bkg image
+        self.venueBackImage.alpha = 0.2
+        if self.venueImage != "" {
+            self.venueBackImage.image = UIImage(named:venueImage)
+        }
+        
         // Format entry cost
         if self.entryNumber == "free" {
             self.entryCostThai = "เข้างานฟรี!"
@@ -151,10 +162,16 @@ class OtherViewController: UIViewController {
         if UIApplication.sharedApplication().canOpenURL(facebookURL) {
             UIApplication.sharedApplication().openURL(facebookURL)
         } else {
-            UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/PageName")!)
+            UIApplication.sharedApplication().openURL(NSURL(string: eventURL)!)
         }
     }
     
+    @IBAction func LogoButton(sender: AnyObject) {
+        
+        if self.venueURL != ""{
+        UIApplication.sharedApplication().openURL(NSURL(string:self.venueURL)!)
+        }
+    }
     
     /*
     // MARK: - Navigation

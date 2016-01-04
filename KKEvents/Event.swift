@@ -23,5 +23,7 @@ class Event: NSObject {
     var venueCoordinates = [0.0, 0.0]
     var phoneNumber = ""
     var eventURL = ""
+    var venueURL = ""
+    var venueImage = ""
 
 }

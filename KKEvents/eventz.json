@@ -8,7 +8,7 @@
     "eventDescriptionThai" : "ภาษาไทย",
     "eventImage" : "rawk.png",
     "entryCost" : "500",
- "eventURL" : "https://www.facebook.com/events/1642231516035967/"
+ "eventURL" : ""
  },
  {
 	"eventVenue": "supans",
@@ -19,7 +19,7 @@
     "eventDescriptionThai" : "",
     "eventImage" : "supanGameNight.png",
     "entryCost" : "free",
- "eventURL" : "https://www.facebook.com/events/1642231516035967/"
+ "eventURL" : ""
  
  
  },
@@ -46,7 +46,7 @@
     "eventDescriptionThai" : "",
     "eventImage" : "rawk.png",
     "entryCost" : "1000",
-    "eventURL" : "https://www.facebook.com/events/1642231516035967/"
+    "eventURL" : ""
  
  }
 

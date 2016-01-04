@@ -111,6 +111,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var entryCost = ""
     var venueName = ""
     var venueCoordinates = [0.0, 0.0]
+    var eventURL = ""
+    var venueURL = ""
+    var venueImage = ""
 
     
     
@@ -281,7 +284,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.entryCost = eventsToDisplay[cellNumber].entryCost
         self.venueName = eventsToDisplay[cellNumber].eventPlaceName
         self.venueCoordinates = eventsToDisplay[cellNumber].venueCoordinates
-        
+        self.eventURL = eventsToDisplay[cellNumber].eventURL
+        self.venueURL = eventsToDisplay[cellNumber].venueURL
+        self.venueImage = eventsToDisplay[cellNumber].venueImage
         
        print(self.eventInfo)
         performSegueWithIdentifier("ShowEventInfoSegue", sender: self)
@@ -349,6 +354,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.venueLogoImageUrl = venueJson["venueLogoImageUrl"] as! String
             e.phoneNumber = venueJson["venuePhoneNumber"] as! String
             e.venueCoordinates = venueJson["venueCoordinates"] as! [Double]
+            e.venueImage = venueJson["venueImage"] as! String
             
             e.eventTitle = jsonDictionary["eventTitle"] as! String
             e.eventTime = jsonDictionary["eventTime"] as! String
@@ -359,12 +365,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.eventImage = jsonDictionary["eventImage"] as! String
             e.entryCost = jsonDictionary["entryCost"] as! String
             
-            var testURL = jsonDictionary["eventURL"] as! String
-            if testURL != "" {
-                e.eventURL = testURL
+            
+            let testURLFB = jsonDictionary["eventURL"] as! String
+            if testURLFB != "" {
+                e.eventURL = testURLFB
             } else {
-                e.eventURL = venueJson["venueURL"] as! String
+                e.eventURL = venueJson["venueURLFB"] as! String
             }
+            
+            let testURL = venueJson["venueURL"] as! String
+            if testURL != "" {
+                e.venueURL = testURLFB
+            } else {
+                e.venueURL = venueJson["venueURLFB"] as! String
+            }
+
             
             
             
@@ -443,6 +458,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destinationVC.entryNumber = self.entryCost
                 destinationVC.venueName = self.venueName
                 destinationVC.venueCoordinates = self.venueCoordinates
+                destinationVC.eventURL = self.eventURL
+                destinationVC.venueURL = self.venueURL
+                destinationVC.venueImage = self.venueImage
                 
             }
                      
