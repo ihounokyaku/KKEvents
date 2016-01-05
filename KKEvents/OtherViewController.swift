@@ -50,8 +50,16 @@ class OtherViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.eventImage.image = UIImage(named:eventImageURL)
-        self.venueLogo.image = UIImage(named:self.logo)
+        
+        let gimage = GetImage()
+        let eventImageName = eventImageURL
+        let eventImageToUse:UIImage = gimage.getImageFromDocuments(eventImageName)
+        let logoImageName = logo
+        let logoImageToUse:UIImage = gimage.getImageFromDocuments(logoImageName)
+        
+        
+        self.eventImage.image = eventImageToUse
+        self.venueLogo.image = logoImageToUse
         self.thaiButton.alpha = 0.8
         self.englishButton.alpha = 0.8
         
@@ -126,6 +134,8 @@ class OtherViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
     @IBAction func thaiButtonPress(sender: AnyObject) {
         thaiButton.enabled = false

@@ -75,8 +75,6 @@ extension NSDate
         return dateWithHoursAdded
     }
 }
-
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate   {
     
     
@@ -152,6 +150,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/eventz.json")
             self.jsonObjects = self.getLocalJsonFile("eventz.json")
             self.downloadOtherJsonData()
+            self.downloadImageData("venueImages")
+            self.downloadImageData("eventImages")
+            self.clearUnusedImages()
             self.populateEventArray()
             self.eventsAll = self.getEventData()
             self.eventsWeekend = self.getEventData()
@@ -226,7 +227,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.mainTable.reloadData()
     }
 
-    // refresh
+    // refres
 
     @IBAction func pressRefresh(sender: AnyObject) {
         self.upcomingEventsLabel.text = "Loading Events"
@@ -335,6 +336,67 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    func downloadImageData(kind:String){
+        
+        var index: Int
+        let imageList:NSArray = (self.urlList[2])[kind]! as! NSArray
+        for index = 0; index < imageList.count; index++ {
+            let imageFileName = imageList[index] as! String
+            let url = "https://dl.dropboxusercontent.com/u/2223187/Images/"+imageFileName
+            
+            if let imageURL = NSURL(string: url) {
+                // create your document folder url
+                let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
+                // your destination file url
+                let destinationUrl = documentsUrl.URLByAppendingPathComponent(imageURL.lastPathComponent!)
+                
+                // check if it exists before downloading it
+                if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
+                }
+                
+                if let imageFileFromUrl = NSData(contentsOfURL: imageURL){
+                    // after downloading your data you need to save it to your destination url
+                    if imageFileFromUrl.writeToURL(destinationUrl, atomically: true) {
+                        
+                    } else {
+                        print("error saving file")
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func clearUnusedImages() {
+        var index: Int
+        let imageList:NSArray = (self.urlList[2])["trash"]! as! NSArray
+        for index = 0; index < imageList.count; index++ {
+            let imageFileName = imageList[index] as! String
+            let url = "https://dl.dropboxusercontent.com/u/2223187/Images/"+imageFileName
+            
+            if let imageURL = NSURL(string: url) {
+                // create your document folder url
+                let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
+                // your destination file url
+                let destinationUrl = documentsUrl.URLByAppendingPathComponent(imageURL.lastPathComponent!)
+                
+                // check if it exists before downloading it
+                if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
+                    print("The file already exists at path")
+                    do {
+                        try NSFileManager.defaultManager().removeItemAtPath(destinationUrl.path!)
+                        print("fileRemoved")
+                    }catch {
+                        print("file not removed")
+                    }
+                }
+                
+            }
+            
+        }
+        
+    }
 
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -372,11 +434,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n",  attributes: attrib)
         
         let placeString = NSMutableAttributedString(string: eventsToDisplay[indexPath.row].eventTime + " at " + eventsToDisplay[indexPath.row].eventPlaceName, attributes: attrib)
-    
-        cell.imageView!.image = UIImage(named: eventsToDisplay[indexPath.row].venueLogoImageUrl)
+        
+        
+        let gimage = GetImage()
+        let eventImageName = eventsToDisplay[indexPath.row].eventImage
+        let eventImageToUse:UIImage = gimage.getImageFromDocuments(eventImageName)
+        let logoImageName = eventsToDisplay[indexPath.row].venueLogoImageUrl
+        let logoImageToUse:UIImage = gimage.getImageFromDocuments(logoImageName)
+        
+        //set cell image
+        cell.imageView!.image = logoImageToUse
         cell.imageView!.alpha = 0.8
-
-
+        
+        //set cell background
+        cell.backgroundView = UIImageView(image: eventImageToUse)
+        cell.backgroundView!.contentMode = UIViewContentMode.ScaleAspectFill
+        cell.backgroundView?.alpha = 0.2
+        
+        
         cell.textLabel!.textAlignment = NSTextAlignment.Center
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -385,11 +460,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel!.attributedText = event
         cell.textLabel!.backgroundColor = (UIColor(white: 1, alpha: 0))
         
-        //set cell background
+      
         
-        cell.backgroundView = UIImageView(image: UIImage(named: eventsToDisplay[indexPath.row].eventImage)!)
-        cell.backgroundView!.contentMode = UIViewContentMode.ScaleAspectFill
-        cell.backgroundView?.alpha = 0.2
     
     
        // cell.textLabel!.text = self.eventsToday[indexPath.row].eventTitle + "\n " + "\(placeString)"
@@ -397,6 +469,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
         
     }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("this is happening")
@@ -443,6 +516,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    
     func getLocalJsonFile(fileName:String) -> [NSDictionary]{
         
         let fileManager = NSFileManager.defaultManager()
@@ -450,7 +524,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let documentsUrl =  fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL? {
             let urlPath = documentsUrl.URLByAppendingPathComponent(fileName)
             
-            print("playYoda is \(urlPath)")
             let jsonData:NSData? = NSData(contentsOfURL: urlPath)
             if let actualJsonData = jsonData {
                 do {
@@ -500,7 +573,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let dateAdjustedForTime = eventFullDate.addHours(30)
             
             if dateAdjustedForTime.isLessThanDate(date){
-                print("this is in the past")
+               
             } else {
                 if e.eventDate[0] == year {
                     if e.eventDate[1] == month {

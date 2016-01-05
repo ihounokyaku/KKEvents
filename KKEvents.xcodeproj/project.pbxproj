@@ -45,6 +45,9 @@
 		C42D2E841C3A7120008DC4BB /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */; };
 		C42D2E851C3A7120008DC4BB /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */; };
 		C42D2E861C3A7120008DC4BB /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */; };
+		C430C0271C3C200C00C6AF08 /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430C0261C3C200C00C6AF08 /* GetImage.swift */; };
+		C430C0281C3C200C00C6AF08 /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430C0261C3C200C00C6AF08 /* GetImage.swift */; };
+		C430C0291C3C200C00C6AF08 /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430C0261C3C200C00C6AF08 /* GetImage.swift */; };
 		C48A9CEB1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
 		C48A9CEC1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
 		C48A9CED1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
@@ -190,6 +193,7 @@
 		C42D2E621C3A0E51008DC4BB /* supansbkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supansbkg.png; sourceTree = "<group>"; };
 		C42D2E661C3A364C008DC4BB /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
+		C430C0261C3C200C00C6AF08 /* GetImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImage.swift; sourceTree = "<group>"; };
 		C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		C48A9CEE1C2ED8B800FB9E12 /* rawk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rawk.png; sourceTree = "<group>"; };
 		C48A9D341C316C2200FB9E12 /* supanGameNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supanGameNight.png; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 				4519CD2A1C2AC66700911174 /* Event.swift */,
 				C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */,
 				C4F5C4CA1C0F2573001389B7 /* ViewController.swift */,
+				C430C0261C3C200C00C6AF08 /* GetImage.swift */,
 				C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */,
 				C4F5C4CC1C0F2573001389B7 /* Main.storyboard */,
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
@@ -567,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4519CD2B1C2AC66800911174 /* Event.swift in Sources */,
+				C430C0271C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C4F5C4CB1C0F2573001389B7 /* ViewController.swift in Sources */,
 				C42D2E841C3A7120008DC4BB /* NetworkConnection.swift in Sources */,
 				457B14901C101D1200CFE03C /* Chat.swift in Sources */,
@@ -580,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4519CD2C1C2AC67D00911174 /* Event.swift in Sources */,
+				C430C0281C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C48A9CEC1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
 				C42D2E851C3A7120008DC4BB /* NetworkConnection.swift in Sources */,
 				C48A9CF21C2FDD4300FB9E12 /* ViewController.swift in Sources */,
@@ -593,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4519CD2D1C2AC67E00911174 /* Event.swift in Sources */,
+				C430C0291C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C48A9CED1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
 				C42D2E861C3A7120008DC4BB /* NetworkConnection.swift in Sources */,
 				C48A9CF31C2FDD4400FB9E12 /* ViewController.swift in Sources */,
