@@ -25,5 +25,6 @@ class Event: NSObject {
     var eventURL = ""
     var venueURL = ""
     var venueImage = ""
+    
 
 }

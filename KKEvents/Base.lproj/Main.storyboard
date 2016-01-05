@@ -70,15 +70,27 @@
                                 <color key="textColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBg-TT-a1A">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <animations/>
+                                <state key="normal" title="R"/>
+                                <connections>
+                                    <action selector="pressRefresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mu9-Ct-B2y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ygb-aK-V2T" secondAttribute="trailing" constant="10" id="2bU-gV-ArS"/>
                             <constraint firstItem="Ygb-aK-V2T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3C1-Ps-L4a"/>
                             <constraint firstAttribute="bottom" secondItem="Ygb-aK-V2T" secondAttribute="bottom" id="BsK-cr-A5L"/>
+                            <constraint firstItem="XHb-kP-GDD" firstAttribute="leading" secondItem="aBg-TT-a1A" secondAttribute="trailing" constant="8" symbolic="YES" id="Gy5-uM-jLc"/>
+                            <constraint firstItem="aBg-TT-a1A" firstAttribute="baseline" secondItem="EPj-lh-YQw" secondAttribute="baseline" id="L4R-XK-XFg"/>
                             <constraint firstItem="vf1-4q-YNe" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="Ns8-5y-KuF"/>
                             <constraint firstItem="EPj-lh-YQw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SXo-RG-U2n"/>
                             <constraint firstItem="etH-WD-bU6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="TZb-fT-oJc"/>
+                            <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="Z7p-uF-QQh"/>
                             <constraint firstItem="Ygb-aK-V2T" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="Zd2-DO-vVA"/>
                             <constraint firstItem="vf1-4q-YNe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aKP-FM-fos">
                                 <variation key="widthClass=compact" constant="10"/>
@@ -100,21 +112,31 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="EPj-lh-YQw"/>
+                                <exclude reference="aBg-TT-a1A"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2bU-gV-ArS"/>
+                                <exclude reference="Z7p-uF-QQh"/>
                                 <exclude reference="SXo-RG-U2n"/>
                                 <exclude reference="t1n-sd-KGT"/>
                                 <exclude reference="aKP-FM-fos"/>
+                                <exclude reference="L4R-XK-XFg"/>
+                                <exclude reference="Gy5-uM-jLc"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="EPj-lh-YQw"/>
+                                <include reference="aBg-TT-a1A"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2bU-gV-ArS"/>
+                                <include reference="Z7p-uF-QQh"/>
                                 <include reference="SXo-RG-U2n"/>
                                 <include reference="t1n-sd-KGT"/>
                                 <include reference="aKP-FM-fos"/>
+                                <include reference="L4R-XK-XFg"/>
+                                <include reference="Gy5-uM-jLc"/>
                                 <exclude reference="jmu-ji-ixi"/>
                             </mask>
                         </variation>
@@ -124,6 +146,7 @@
                         <outlet property="allButton" destination="XHb-kP-GDD" id="iP9-Vc-9Te"/>
                         <outlet property="mainTable" destination="Ygb-aK-V2T" id="zX1-93-7Zh"/>
                         <outlet property="todayButton" destination="etH-WD-bU6" id="wLG-Qq-IsP"/>
+                        <outlet property="upcomingEventsLabel" destination="EPj-lh-YQw" id="cA9-eN-4GA"/>
                         <outlet property="weekendButton" destination="vf1-4q-YNe" id="8DZ-h4-Boq"/>
                         <segue destination="JTb-xN-9Ss" kind="show" identifier="ShowEventInfoSegue" id="lxL-Xa-FQs"/>
                     </connections>

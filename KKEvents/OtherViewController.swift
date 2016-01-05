@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
 class OtherViewController: UIViewController {
     @IBOutlet weak var mapButton: UIButton!
@@ -58,7 +59,7 @@ class OtherViewController: UIViewController {
         self.eventTitleLabel.text = self.eventTitle
         
         // set bkg image
-        self.venueBackImage.alpha = 0.2
+        self.venueBackImage.alpha = 0.8
         if self.venueImage != "" {
             self.venueBackImage.image = UIImage(named:venueImage)
         }

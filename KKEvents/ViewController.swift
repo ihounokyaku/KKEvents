@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Alamofire
 
 extension NSDate {
     convenience
@@ -80,9 +81,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     @IBOutlet weak var mainTable: UITableView!
+    @IBOutlet weak var upcomingEventsLabel: UILabel!
+    
+    
+    
     var eventsToday = [Event]()
     var eventsWeekend = [Event]()
     var eventsAll = [Event]()
+    var eventsUnsorted = [Event]()
     
     let daysOfTheWeek = ["poopday", "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"]
     let monthsOfTheYear = ["Monthalicious", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -117,7 +123,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     
     
-   
+   //dictionaries
+    var jsonObjects = [NSDictionary]()
+    var urlList = [NSDictionary]()
+    
+    
        
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,9 +143,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         self.mainTable.delegate = self
         self.mainTable.dataSource = self
+        self.upcomingEventsLabel.text = "Loading Events"
+        let checkConnection = Reachability()
+        let networkConnection = checkConnection.isConnectedToNetwork()
+        if  networkConnection == true {
+            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/urlList.json")
+            self.urlList = self.getLocalJsonFile("urlList.json")
+            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/eventz.json")
+            self.jsonObjects = self.getLocalJsonFile("eventz.json")
+            self.downloadOtherJsonData()
+            self.populateEventArray()
+            self.eventsAll = self.getEventData()
+            self.eventsWeekend = self.getEventData()
+            self.eventsToday = self.getEventData()
+            self.mainTable.reloadData()
+            self.upcomingEventsLabel.text = "Upcoming Events"
+     
+            print("GOT JSON FILE")
+
+        } else {
+            self.urlList = self.getLocalJsonFile("urlList.json")
+            self.jsonObjects = self.getLocalJsonFile("eventz.json")
+            self.populateEventArray()
+            self.eventsAll = self.getEventData()
+            self.eventsWeekend = self.getEventData()
+            self.eventsToday = self.getEventData()
+            self.mainTable.reloadData()
+            self.upcomingEventsLabel.text = "No Internet Connection"
+
+                    }
+
         
         //self.getEventData()
-        self.eventsToday = self.getEventData()
+        
        
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -143,6 +183,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func testButton(sender: AnyObject) {
         
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -170,7 +211,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.todayButton.enabled = true
         self.weekendButton.enabled = false
         self.allButton.enabled = true
-        self.eventsWeekend = self.getEventData()
+         self.eventsWeekend = self.getEventData()
         self.mainTable.reloadData()
     }
     
@@ -185,8 +226,117 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.mainTable.reloadData()
     }
 
+    // refresh
 
+    @IBAction func pressRefresh(sender: AnyObject) {
+        self.upcomingEventsLabel.text = "Loading Events"
+        let checkConnection = Reachability()
+        let networkConnection = checkConnection.isConnectedToNetwork()
+        if  networkConnection == true {
+            
+            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/urlList.json")
+            self.urlList = self.getLocalJsonFile("urlList.json")
+            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/eventz.json")
+            self.jsonObjects = self.getLocalJsonFile("eventz.json")
+            self.downloadOtherJsonData()
+            self.eventsAll = self.getEventData()
+            self.eventsWeekend = self.getEventData()
+            self.eventsToday = self.getEventData()
+            self.mainTable.reloadData()
+            self.upcomingEventsLabel.text = "Upcoming Events"
+      
+        } else {
+            self.upcomingEventsLabel.text = "No Internet Connection"
+            print("NO NETWORK CONNECTION")
+        }
+            }
     
+    
+    func downloadMainJsonData(url:String){
+        if let jsonURL = NSURL(string: url) {
+            // create your document folder url
+            let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
+            // your destination file url
+            let destinationUrl = documentsUrl.URLByAppendingPathComponent(jsonURL.lastPathComponent!)
+            print("this is the path: \(destinationUrl)")
+            
+            // check if it exists before downloading it
+            if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
+                print("The file already exists at path")
+                do {
+                    try NSFileManager.defaultManager().removeItemAtPath(destinationUrl.path!)
+                    print("fileRemoved")
+                }catch {
+                    print("file not removed")
+                }
+            }
+            
+            //  if the file doesn't exist
+            //  just download the data from your url
+            if let jsonFileFromUrl = NSData(contentsOfURL: jsonURL){
+                // after downloading your data you need to save it to your destination url
+                if jsonFileFromUrl.writeToURL(destinationUrl, atomically: true) {
+                    print("file saved")
+                    print("this is the path: \(destinationUrl.path)")
+                    
+                } else {
+                    print("error saving file")
+                    
+                }
+            }
+        }
+        
+    }
+    func downloadOtherJsonData(){
+        var index: Int
+        var downloadedArray = [String]()
+        
+        //for index = 0; index < self.jsonObjects.count; index++ {
+        let eventUrlList = self.urlList[1]
+        for index = 0; index < eventUrlList.count; index++ {
+            let jsonDictionary:NSDictionary = eventUrlList
+            print("\(index)")
+            let url = jsonDictionary["\(index)"] as! String
+          
+                if let jsonURL = NSURL(string: url) {
+            // create your document folder url
+                    let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
+            // your destination file url
+                    let destinationUrl = documentsUrl.URLByAppendingPathComponent(jsonURL.lastPathComponent!)
+                    print("this is the path: \(destinationUrl)")
+            
+            // check if it exists before downloading it
+                    if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
+                        print("The file already exists at path")
+                        do {
+                            try NSFileManager.defaultManager().removeItemAtPath(destinationUrl.path!)
+                            print("fileRemoved")
+                        }catch {
+                            print("file not removed")
+                        }
+                    }
+            
+            //  if the file doesn't exist
+            //  just download the data from your url
+                    if let jsonFileFromUrl = NSData(contentsOfURL: jsonURL){
+                // after downloading your data you need to save it to your destination url
+                        if jsonFileFromUrl.writeToURL(destinationUrl, atomically: true) {
+                            print("file saved")
+                            print("this is the path: \(destinationUrl.path)")
+                            downloadedArray.append(url)
+                            
+                        } else {
+                            print("error saving file")
+                    
+                }
+            }
+        }
+            }
+        
+    }
+    
+
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if todaySelected == true {
             return self.eventsToday.count
@@ -293,24 +443,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    
     func getLocalJsonFile(fileName:String) -> [NSDictionary]{
-        let appBundlePath:String? = NSBundle.mainBundle().pathForResource(fileName, ofType: "json")
         
-        if let actualBundalPath = appBundlePath {
-            let urlPath:NSURL = NSURL(fileURLWithPath: actualBundalPath)
+        let fileManager = NSFileManager.defaultManager()
+    
+        if let documentsUrl =  fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL? {
+            let urlPath = documentsUrl.URLByAppendingPathComponent(fileName)
+            
+            print("playYoda is \(urlPath)")
             let jsonData:NSData? = NSData(contentsOfURL: urlPath)
-            print("getting the jsonfile: \(fileName)")
             if let actualJsonData = jsonData {
                 do {
                     let arrayOfDictionaries: [NSDictionary] = try NSJSONSerialization.JSONObjectWithData(actualJsonData, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
                     return arrayOfDictionaries
                 }
-                catch{
-                   
+                catch{ print("couldn't get the file")
+                    
                 }
             } else {
-               
+                
                 
             }
         }
@@ -320,17 +471,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return [NSDictionary]()
     }
     
-    func getEventData() -> [Event] {
+    
+    func getEventData() -> [Event]{
         
         var eventsTodayArray:[Event] = [Event]()
         var eventsWeekendArray: [Event] = [Event]()
         var eventsAllArray: [Event] = [Event]()
-        
-        
-        let jsonObjects:[NSDictionary] = self.getLocalJsonFile("eventz")
-        
-        
-         var index:Int
         
         //calendar stuff
         let date = NSDate()
@@ -340,12 +486,80 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let day = components.day
         let year = components.year
         let month = components.month
-       
         
+        var index: Int
+        for index = 0; index < self.eventsUnsorted.count; index++ {
+            let e = self.eventsUnsorted[index]
+            let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
+            let componentsEvent = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: eventFullDate)
+            
+            e.eventDay = componentsEvent.weekday
+            
+            
+            let compareDate = eventFullDate.addDays(-7)
+            let dateAdjustedForTime = eventFullDate.addHours(30)
+            
+            if dateAdjustedForTime.isLessThanDate(date){
+                print("this is in the past")
+            } else {
+                if e.eventDate[0] == year {
+                    if e.eventDate[1] == month {
+                        if e.eventDate[2] == day {
+                            eventsTodayArray.append(e)
+                        }
+                    }
+                    
+                }
+            
+            
+            if e.eventDay > 5 {
+                if compareDate.isLessThanDate(date) == true {
+                    eventsWeekendArray.append(e)
+                    
+                    
+                }
+            }
+            if e.eventDay == 1 {
+                if compareDate.isLessThanDate(date) == true{
+                    eventsWeekendArray.append(e)
+                    
+                }else {
+                    
+                }
+                
+                
+                
+            }
+            
+            eventsAllArray.append(e)
+            }
+        }
+        
+        
+        
+        if self.todaySelected == true {
+            return eventsTodayArray
+        } else if weekendSelected == true {
+            return eventsWeekendArray
+        } else if allSelected == true {
+            return eventsAllArray
+        } else {
+            return eventsTodayArray
+        }
+        
+    }
+    
 
-          for index = 0; index < jsonObjects.count; index++ {
-            let jsonDictionary:NSDictionary = jsonObjects[index]
-            let eventVenueInfo = jsonDictionary["eventVenue"] as! String
+    
+    func populateEventArray () {
+        var index: Int
+    
+          for index = 0; index < self.jsonObjects.count; index++ {
+            let jsonDictionary:NSDictionary = self.jsonObjects[index]
+            
+            let eventVenueInfoNoJson = jsonDictionary["eventVenue"] as! String
+            let eventVenueInfo = eventVenueInfoNoJson+".json"
+            
             let venueJsonFile:[NSDictionary] = self.getLocalJsonFile(eventVenueInfo)
             let venueJson:NSDictionary = venueJsonFile[0]
             let e:Event = Event()
@@ -380,70 +594,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 e.venueURL = venueJson["venueURLFB"] as! String
             }
 
-            
-            
-            
-            let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
-            let componentsEvent = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: eventFullDate)
-            
-            e.eventDay = componentsEvent.weekday
-        
-            
-            let compareDate = eventFullDate.addDays(-7)
-            let dateAdjustedForTime = eventFullDate.addHours(30)
-            
-            if dateAdjustedForTime.isLessThanDate(date){
-                print("this is in the past")
-            } else {
-                if e.eventDate[0] == year {
-                    if e.eventDate[1] == month {
-                        if e.eventDate[2] == day {
-                            eventsTodayArray.append(e)
-                    }
-                }
-               
-            }
-            
-            if e.eventDay > 5 {
-                if compareDate.isLessThanDate(date) == true {
-                    eventsWeekendArray.append(e)
-                    
-                    
-                }
-                }
-                if e.eventDay == 1 {
-                if compareDate.isLessThanDate(date) == true{
-                    eventsWeekendArray.append(e)
-                    
-                }else {
-                   
-                    }
-              
-                    
-
-            }
-          
-            eventsAllArray.append(e)
-            }
-        
-        
-    }
-        if self.todaySelected == true {
-            return eventsTodayArray
-        } else if weekendSelected == true {
-            return eventsWeekendArray
-        } else if allSelected == true {
-            return eventsAllArray
-        } else {
-            return eventsTodayArray
+            self.eventsUnsorted.append(e)
         }
-
-        
-        
-        //print(eventsTodayArray.count)
     }
-    
 
+
+   
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowEventInfoSegue"
         {
