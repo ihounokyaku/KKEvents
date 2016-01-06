@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-import Alamofire
+
 
 extension NSDate {
     convenience

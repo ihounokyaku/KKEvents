@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-import Alamofire
+
 
 class OtherViewController: UIViewController {
     @IBOutlet weak var mapButton: UIButton!
