@@ -86,7 +86,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var eventsToday = [Event]()
     var eventsWeekend = [Event]()
     var eventsAll = [Event]()
-    var eventsUnsorted = [Event]()
+    
     
     let daysOfTheWeek = ["poopday", "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"]
     let monthsOfTheYear = ["Monthalicious", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -145,12 +145,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.urlList = self.getLocalJsonFile("urlList.json")
         self.jsonObjects = self.getLocalJsonFile("eventz.json")
-        self.populateEventArray()
         self.eventsAll = self.getEventData()
         self.eventsWeekend = self.getEventData()
         self.eventsToday = self.getEventData()
         self.mainTable.reloadData()
-        self.upcomingEventsLabel.text = "Downloading Data"
+        self.upcomingEventsLabel.text = "Downloading Event Information"
         
         
         
@@ -175,6 +174,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.refreshData()
+        
+    }
+    
+    func refreshData(){
+        
         let checkConnection = Reachability()
         let networkConnection = checkConnection.isConnectedToNetwork()
         if  networkConnection == true {
@@ -186,7 +191,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.downloadImageData("venueImages")
             self.downloadImageData("eventImages")
             self.clearUnusedImages()
-            self.populateEventArray()
+            
             self.eventsAll = self.getEventData()
             self.eventsWeekend = self.getEventData()
             self.eventsToday = self.getEventData()
@@ -196,12 +201,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("GOT JSON FILE")
             
         } else {
-            
+            self.upcomingEventsLabel.text = "No Internet Connection"
         }
 
-        
     }
-    
     // Selecter Button Actions
     @IBAction func todayButtonPush(sender: AnyObject) {
         self.todaySelected = true
@@ -240,27 +243,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // refres
 
     @IBAction func pressRefresh(sender: AnyObject) {
-        self.upcomingEventsLabel.text = "Loading Events"
-        let checkConnection = Reachability()
-        let networkConnection = checkConnection.isConnectedToNetwork()
-        if  networkConnection == true {
-            
-            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/urlList.json")
-            self.urlList = self.getLocalJsonFile("urlList.json")
-            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/eventz.json")
-            self.jsonObjects = self.getLocalJsonFile("eventz.json")
-            self.downloadOtherJsonData()
-            self.eventsAll = self.getEventData()
-            self.eventsWeekend = self.getEventData()
-            self.eventsToday = self.getEventData()
-            self.mainTable.reloadData()
-            self.upcomingEventsLabel.text = "Upcoming Events"
-      
-        } else {
-            self.upcomingEventsLabel.text = "No Internet Connection"
-            print("NO NETWORK CONNECTION")
-        }
-            }
+        self.refreshData()
+    }
     
     
     func downloadMainJsonData(url:String){
@@ -564,6 +548,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var eventsTodayArray:[Event] = [Event]()
         var eventsWeekendArray: [Event] = [Event]()
         var eventsAllArray: [Event] = [Event]()
+        var eventsUnsorted: [Event] = self.getEventsUnsortedArray()
         
         //calendar stuff
         let date = NSDate()
@@ -575,8 +560,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let month = components.month
         
         var index: Int
-        for index = 0; index < self.eventsUnsorted.count; index++ {
-            let e = self.eventsUnsorted[index]
+        for index = 0; index < eventsUnsorted.count; index++ {
+            let e = eventsUnsorted[index]
             let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
             let componentsEvent = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: eventFullDate)
             
@@ -638,8 +623,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
 
     
-    func populateEventArray () {
+    func getEventsUnsortedArray () ->[Event]{
         var index: Int
+        var eventsUnsorted: [Event] = [Event]()
     
           for index = 0; index < self.jsonObjects.count; index++ {
             let jsonDictionary:NSDictionary = self.jsonObjects[index]
@@ -681,8 +667,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 e.venueURL = venueJson["venueURLFB"] as! String
             }
 
-            self.eventsUnsorted.append(e)
+            eventsUnsorted.append(e)
         }
+        return eventsUnsorted
     }
 
 
