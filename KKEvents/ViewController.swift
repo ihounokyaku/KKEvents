@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Parse
 
+import Parse
 
 extension NSDate {
     convenience
@@ -142,6 +142,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.mainTable.delegate = self
         self.mainTable.dataSource = self
         self.upcomingEventsLabel.text = "Loading Events"
+        
+        self.urlList = self.getLocalJsonFile("urlList.json")
+        self.jsonObjects = self.getLocalJsonFile("eventz.json")
+        self.populateEventArray()
+        self.eventsAll = self.getEventData()
+        self.eventsWeekend = self.getEventData()
+        self.eventsToday = self.getEventData()
+        self.mainTable.reloadData()
+        self.upcomingEventsLabel.text = "Downloading Data"
+        
+        
+        
+        //self.getEventData()
+        
+       
+        
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    
+    
+    @IBAction func testButton(sender: AnyObject) {
+        
+    }
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         let checkConnection = Reachability()
         let networkConnection = checkConnection.isConnectedToNetwork()
         if  networkConnection == true {
@@ -159,38 +192,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.eventsToday = self.getEventData()
             self.mainTable.reloadData()
             self.upcomingEventsLabel.text = "Upcoming Events"
-     
+            
             print("GOT JSON FILE")
-
+            
         } else {
-            self.urlList = self.getLocalJsonFile("urlList.json")
-            self.jsonObjects = self.getLocalJsonFile("eventz.json")
-            self.populateEventArray()
-            self.eventsAll = self.getEventData()
-            self.eventsWeekend = self.getEventData()
-            self.eventsToday = self.getEventData()
-            self.mainTable.reloadData()
-            self.upcomingEventsLabel.text = "No Internet Connection"
-
-                    }
+            
+        }
 
         
-        //self.getEventData()
-        
-       
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
-    @IBAction func testButton(sender: AnyObject) {
-        
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     // Selecter Button Actions
     @IBAction func todayButtonPush(sender: AnyObject) {
@@ -262,6 +272,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("this is the path: \(destinationUrl)")
             
             // check if it exists before downloading it
+            
             if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
                 print("The file already exists at path")
                 do {
@@ -352,8 +363,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 // check if it exists before downloading it
                 if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
-                }
-                
+                } else {
+                  
                 if let imageFileFromUrl = NSData(contentsOfURL: imageURL){
                     // after downloading your data you need to save it to your destination url
                     if imageFileFromUrl.writeToURL(destinationUrl, atomically: true) {
@@ -362,6 +373,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         print("error saving file")
                         
                     }
+                    
+                }
+                    
                 }
             }
         }

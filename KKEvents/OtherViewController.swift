@@ -13,6 +13,10 @@ import MapKit
 class OtherViewController: UIViewController {
     @IBOutlet weak var mapButton: UIButton!
 
+    @IBAction func gotoFullscreenPic(sender: AnyObject) {
+        performSegueWithIdentifier("fullScreenPicSegue", sender: self)
+    }
+   
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventDescription: UILabel!
     @IBOutlet weak var venueLogo: UIImageView!
@@ -47,6 +51,8 @@ class OtherViewController: UIViewController {
     var eventURL = ""
     var venueURL = ""
     var venueImage = ""
+    var eventImageFile:UIImage = UIImage()
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -62,6 +68,7 @@ class OtherViewController: UIViewController {
         self.venueLogo.image = logoImageToUse
         self.thaiButton.alpha = 0.8
         self.englishButton.alpha = 0.8
+        self.eventImageFile = eventImageToUse
         
        
         self.eventTitleLabel.text = self.eventTitle
@@ -184,6 +191,18 @@ class OtherViewController: UIViewController {
         }
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "fullScreenPicSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? EventPicViewController{
+                destinationVC.eventImage = self.eventImageFile
+                
+            }
+            
+        }
+
+    }
     /*
     // MARK: - Navigation
 
