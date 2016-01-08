@@ -8,7 +8,7 @@
 
 import UIKit
 
-import Parse
+
 
 extension NSDate {
     convenience
@@ -102,6 +102,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var weekendButton: UIButton!
     @IBOutlet weak var allButton: UIButton!
+    @IBOutlet weak var syncImage: UIImageView!
  
     
     // event info to send to otherviewcontroller
@@ -130,11 +131,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let testObject = PFObject(className: "TestObject")
-        testObject["foo"] = "bar"
-        testObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("Object has been saved.")
-        }
+
         
         if self.todaySelected == true{
             self.todayButton.enabled = false
@@ -179,7 +176,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func refreshData(){
-        
+        self.syncImage.startRotating()
         let checkConnection = Reachability()
         let networkConnection = checkConnection.isConnectedToNetwork()
         if  networkConnection == true {
@@ -202,6 +199,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else {
             self.upcomingEventsLabel.text = "No Internet Connection"
+            syncImage.stopRotating()
         }
 
     }

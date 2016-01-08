@@ -66,6 +66,9 @@
 		C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
 		C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
 		C48A9D391C328B3F00FB9E12 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A9D381C328B3F00FB9E12 /* MapKit.framework */; };
+		C4A3ACD31C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
+		C4A3ACD41C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
+		C4A3ACD51C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
 		C4B5A5E61C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
@@ -135,6 +138,7 @@
 		C48A9CEE1C2ED8B800FB9E12 /* rawk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rawk.png; sourceTree = "<group>"; };
 		C48A9D341C316C2200FB9E12 /* supanGameNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supanGameNight.png; sourceTree = "<group>"; };
 		C48A9D381C328B3F00FB9E12 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rotation.swift"; sourceTree = "<group>"; };
 		C4B5A5E51C2BF3D7005D690A /* supan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supan.png; sourceTree = "<group>"; };
 		C4F5C4C51C0F2573001389B7 /* KKEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */,
 				C414A1081C3E5AFB00D435B0 /* Main.storyboard */,
 				C414A1041C3E564E00D435B0 /* EventPicViewController.swift */,
+				C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */,
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
 				C42D2E621C3A0E51008DC4BB /* supansbkg.png */,
 				C4B5A5E51C2BF3D7005D690A /* supan.png */,
@@ -442,6 +447,7 @@
 				457B14901C101D1200CFE03C /* Chat.swift in Sources */,
 				C4F5C4C91C0F2573001389B7 /* AppDelegate.swift in Sources */,
 				C48A9CEB1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
+				C4A3ACD31C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +463,7 @@
 				C48A9CF21C2FDD4300FB9E12 /* ViewController.swift in Sources */,
 				C48A9CF41C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */,
 				C4F5C4DE1C0F2574001389B7 /* KKEventsTests.swift in Sources */,
+				C4A3ACD41C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +479,7 @@
 				C48A9CF31C2FDD4400FB9E12 /* ViewController.swift in Sources */,
 				C48A9CF51C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */,
 				C4F5C4E91C0F2574001389B7 /* KKEventsUITests.swift in Sources */,
+				C4A3ACD51C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
