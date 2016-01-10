@@ -226,7 +226,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XW-Qg-mxj">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZO-e2-ARu" userLabel="bkgImg">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZO-e2-ARu" userLabel="bkgImg">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 <animations/>
                                                 <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
@@ -243,11 +243,13 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="0.92549019610000005" green="0.94901960780000005" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <variation key="widthClass=compact">
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                                    <rect key="frame" x="53" y="301" width="214" height="26"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVr-Zm-SJB">
@@ -265,6 +267,9 @@
                                                 <nil key="highlightedColor"/>
                                                 <variation key="widthClass=compact">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="40" y="330" width="240" height="21"/>
                                                 </variation>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSi-IY-zTY">
@@ -284,7 +289,8 @@
                                                 <variation key="widthClass=compact" fixedFrame="YES">
                                                     <rect key="frame" x="230" y="353" width="40" height="27"/>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="40" y="354" width="29" height="20"/>
                                                     <mask key="constraints">
                                                         <include reference="1I7-9e-XhT"/>
                                                         <include reference="SHl-px-hIV"/>
@@ -321,7 +327,8 @@
                                                 <variation key="widthClass=compact" fixedFrame="YES">
                                                     <rect key="frame" x="40" y="356" width="40" height="27"/>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="251" y="354" width="29" height="20"/>
                                                     <mask key="constraints">
                                                         <include reference="RjN-70-fBq"/>
                                                         <include reference="nWm-Ib-def"/>
@@ -347,6 +354,9 @@
                                                 <variation key="widthClass=compact">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 </variation>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="116" y="354" width="88" height="21"/>
+                                                </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qkz-wJ-fKz">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -368,6 +378,9 @@
                                                     <mask key="constraints">
                                                         <include reference="Z6p-8M-gjh"/>
                                                     </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="8" y="395" width="304" height="189"/>
                                                 </variation>
                                             </label>
                                         </subviews>

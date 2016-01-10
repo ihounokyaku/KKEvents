@@ -120,7 +120,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var venueURL = ""
     var venueImage = ""
 
-    
+    var gotJson:Bool = false
     
    //dictionaries
     var jsonObjects = [NSDictionary]()
@@ -527,21 +527,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let urlPath = documentsUrl.URLByAppendingPathComponent(fileName)
             
             let jsonData:NSData? = NSData(contentsOfURL: urlPath)
+            
             if let actualJsonData = jsonData {
                 do {
                     let arrayOfDictionaries: [NSDictionary] = try NSJSONSerialization.JSONObjectWithData(actualJsonData, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
+                    self.gotJson = true
                     return arrayOfDictionaries
-                }
-                catch{ print("couldn't get the file")
                     
                 }
+                catch{ print("couldn't get the file")
+                    self.gotJson = false
+                }
             } else {
-                
-                
+                print("dunnowhathappend")
+                self.gotJson = false
             }
         }
-        else {
-            
+        else { print("alsodunnowhat happend")
+            self.gotJson = false
         }
         return [NSDictionary]()
     }
@@ -638,6 +641,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let eventVenueInfo = eventVenueInfoNoJson+".json"
             
             let venueJsonFile:[NSDictionary] = self.getLocalJsonFile(eventVenueInfo)
+            if self.gotJson == true {
             let venueJson:NSDictionary = venueJsonFile[0]
             let e:Event = Event()
             
@@ -672,8 +676,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
 
             eventsUnsorted.append(e)
+        
+            }
         }
+        
         return eventsUnsorted
+        
     }
 
 
