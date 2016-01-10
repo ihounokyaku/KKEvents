@@ -12,7 +12,16 @@ struct GetImage {
     func getImageFromDocuments (imageName: String) -> UIImage {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let getImagePath = paths.stringByAppendingPathComponent(imageName)
-        let image = UIImage(contentsOfFile: getImagePath)
-        return image!
+        var image:UIImage = UIImage()
+        if NSFileManager().fileExistsAtPath(getImagePath) {
+            
+            image = UIImage(contentsOfFile: getImagePath)!
+        } else {
+            image = UIImage(named: "noImage.png")!
+        }
+        
+            return image
+    
+    
     }
 }
