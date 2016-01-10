@@ -70,9 +70,9 @@ class OtherViewController: UIViewController {
         self.englishButton.alpha = 0.8
         self.eventImageFile = eventImageToUse
         
-       
-        self.eventTitleLabel.text = self.eventTitle
-        
+        //self.eventTitleLabel.font = UIFont.systemFontOfSize(20)
+       // self.eventTitleLabel.text = self.eventTitle
+        self.eventTitleLabel.text = "doggy woggy"
         // set bkg image
         self.venueBackImage.alpha = 0.8
         if self.venueImage != "" {

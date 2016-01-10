@@ -146,7 +146,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.eventsWeekend = self.getEventData()
         self.eventsToday = self.getEventData()
         self.mainTable.reloadData()
-        self.upcomingEventsLabel.text = "Downloading Event Information"
+        self.syncImage.startRotating()
+        
         
         
         
@@ -179,29 +180,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.syncImage.startRotating()
         let checkConnection = Reachability()
         let networkConnection = checkConnection.isConnectedToNetwork()
-        if  networkConnection == true {
-            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/urlList.json")
-            self.urlList = self.getLocalJsonFile("urlList.json")
-            self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/eventz.json")
-            self.jsonObjects = self.getLocalJsonFile("eventz.json")
-            self.downloadOtherJsonData()
-            self.downloadImageData("venueImages")
-            self.downloadImageData("eventImages")
-            self.clearUnusedImages()
-            
-            self.eventsAll = self.getEventData()
-            self.eventsWeekend = self.getEventData()
-            self.eventsToday = self.getEventData()
-            self.mainTable.reloadData()
-            self.upcomingEventsLabel.text = "Upcoming Events"
-            
-            print("GOT JSON FILE")
-            
-        } else {
-            self.upcomingEventsLabel.text = "No Internet Connection"
-            syncImage.stopRotating()
-        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if  networkConnection == true {
+                self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/urlList.json")
+                self.urlList = self.getLocalJsonFile("urlList.json")
+                self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/eventz.json")
+                self.jsonObjects = self.getLocalJsonFile("eventz.json")
+                self.downloadOtherJsonData()
+                self.downloadImageData("venueImages")
+                self.downloadImageData("eventImages")
+                self.clearUnusedImages()
+                
+                self.eventsAll = self.getEventData()
+                self.eventsWeekend = self.getEventData()
+                self.eventsToday = self.getEventData()
+                self.mainTable.reloadData()
+                self.upcomingEventsLabel.text = "Upcoming Events"
+                
+                print("GOT JSON FILE")
+                self.syncImage.stopRotating()
+            } else {
+                self.upcomingEventsLabel.text = "No Internet Connection"
+                self.syncImage.stopRotating()
+            }
+            dispatch_async(dispatch_get_main_queue(),{
+            })
 
+            })
+        
     }
     // Selecter Button Actions
     @IBAction func todayButtonPush(sender: AnyObject) {
