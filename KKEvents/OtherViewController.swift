@@ -70,9 +70,9 @@ class OtherViewController: UIViewController {
         self.englishButton.alpha = 0.8
         self.eventImageFile = eventImageToUse
         
-        //self.eventTitleLabel.font = UIFont.systemFontOfSize(20)
-       // self.eventTitleLabel.text = self.eventTitle
-        self.eventTitleLabel.text = "doggy woggy"
+        self.eventTitleLabel.font = UIFont.systemFontOfSize(20)
+        self.eventTitleLabel.text = self.eventTitle
+        
         // set bkg image
         self.venueBackImage.alpha = 0.8
         if self.venueImage != "" {
@@ -166,10 +166,6 @@ class OtherViewController: UIViewController {
            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:self.venueCoordinates[0], longitude:self.venueCoordinates[1]), addressDictionary: nil))
         
        mapItem.name = self.venueName
-        
-        
-        //You could also choose: MKLaunchOptionsDirectionsModeWalking
-    //    let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
     
         mapItem.openInMapsWithLaunchOptions(nil)
         
@@ -203,14 +199,6 @@ class OtherViewController: UIViewController {
         }
 
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 
 }
