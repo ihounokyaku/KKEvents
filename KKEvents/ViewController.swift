@@ -97,13 +97,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var todaySelected = true
     var weekendSelected = false
     var allSelected = false
-   
+    
 // Selector Buttons
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var weekendButton: UIButton!
     @IBOutlet weak var allButton: UIButton!
     @IBOutlet weak var syncImage: UIImageView!
  
+    let selectedButtonFont:UIFont! =  UIFont(name: "HelveticaNeue-Medium", size: 22)
+    let unselectedButtonFont:UIFont! =  UIFont(name: "HelveticaNeue-Thin", size: 22)
     
     // event info to send to otherviewcontroller
     var eventInfo = "default event info"
@@ -233,6 +235,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.weekendButton.enabled = true
         self.allButton.enabled = true
         
+        self.todayButton.titleLabel!.font =  self.selectedButtonFont
+        self.weekendButton.titleLabel!.font = self.unselectedButtonFont
+        self.allButton.titleLabel!.font = self.unselectedButtonFont
         self.eventsToday = self.getEventData()
         self.mainTable.reloadData()
     }
@@ -244,6 +249,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.todayButton.enabled = true
         self.weekendButton.enabled = false
         self.allButton.enabled = true
+        
+        self.todayButton.titleLabel!.font =  self.unselectedButtonFont
+        self.weekendButton.titleLabel!.font = self.selectedButtonFont
+        self.allButton.titleLabel!.font = self.unselectedButtonFont
+        
          self.eventsWeekend = self.getEventData()
         self.mainTable.reloadData()
     }
@@ -255,6 +265,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.todayButton.enabled = true
         self.weekendButton.enabled = true
         self.allButton.enabled = false
+        
+        self.todayButton.titleLabel!.font =  self.unselectedButtonFont
+        self.weekendButton.titleLabel!.font = self.unselectedButtonFont
+        self.allButton.titleLabel!.font = self.selectedButtonFont
+        
         self.eventsAll = self.getEventData()
         self.mainTable.reloadData()
     }
