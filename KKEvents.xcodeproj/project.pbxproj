@@ -66,6 +66,15 @@
 		C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
 		C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
 		C48A9D391C328B3F00FB9E12 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A9D381C328B3F00FB9E12 /* MapKit.framework */; };
+		C49AE60D1C47BAB800B38424 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE60C1C47BAB800B38424 /* Downloader.swift */; };
+		C49AE60E1C47BAB800B38424 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE60C1C47BAB800B38424 /* Downloader.swift */; };
+		C49AE60F1C47BAB800B38424 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE60C1C47BAB800B38424 /* Downloader.swift */; };
+		C49AE6121C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */; };
+		C49AE6131C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */; };
+		C49AE6141C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */; };
+		C49AE61A1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6191C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf */; };
+		C49AE61B1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6191C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf */; };
+		C49AE61C1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6191C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf */; };
 		C4A3ACD31C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
 		C4A3ACD41C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
 		C4A3ACD51C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
@@ -138,6 +147,9 @@
 		C48A9CEE1C2ED8B800FB9E12 /* rawk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rawk.png; sourceTree = "<group>"; };
 		C48A9D341C316C2200FB9E12 /* supanGameNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supanGameNight.png; sourceTree = "<group>"; };
 		C48A9D381C328B3F00FB9E12 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C49AE60C1C47BAB800B38424 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DB Helvethaica X Thin It v3.2.ttf"; sourceTree = "<group>"; };
+		C49AE6191C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DB Helvethaica X Thin v3.2.ttf"; sourceTree = "<group>"; };
 		C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rotation.swift"; sourceTree = "<group>"; };
 		C4B5A5E51C2BF3D7005D690A /* supan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supan.png; sourceTree = "<group>"; };
 		C4F5C4C51C0F2573001389B7 /* KKEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,9 +242,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C49AE6101C47D8FF00B38424 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C49AE6191C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf */,
+				C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		C4F5C4BC1C0F2573001389B7 = {
 			isa = PBXGroup;
 			children = (
+				C49AE6101C47D8FF00B38424 /* Resources */,
 				45EE8B731C194E1000ED05A9 /* Frameworks */,
 				C4F5C4C71C0F2573001389B7 /* KKEvents */,
 				C4F5C4DC1C0F2574001389B7 /* KKEventsTests */,
@@ -262,6 +284,7 @@
 				C430C0261C3C200C00C6AF08 /* GetImage.swift */,
 				C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */,
 				C414A1081C3E5AFB00D435B0 /* Main.storyboard */,
+				C49AE60C1C47BAB800B38424 /* Downloader.swift */,
 				C414A1041C3E564E00D435B0 /* EventPicViewController.swift */,
 				C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */,
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
@@ -404,7 +427,9 @@
 				C4F5C4D31C0F2573001389B7 /* LaunchScreen.storyboard in Resources */,
 				C4F5C4D01C0F2573001389B7 /* Assets.xcassets in Resources */,
 				C48A9CEF1C2ED8B800FB9E12 /* rawk.png in Resources */,
+				C49AE6121C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */,
 				C4B5A5E61C2BF3D7005D690A /* supan.png in Resources */,
+				C49AE61A1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +440,9 @@
 				C42D2E641C3A0E51008DC4BB /* supansbkg.png in Resources */,
 				C414A10A1C3E5AFB00D435B0 /* Main.storyboard in Resources */,
 				C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */,
+				C49AE61B1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */,
 				C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */,
+				C49AE6131C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */,
 				C48A9CF01C2ED8B800FB9E12 /* rawk.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +454,9 @@
 				C42D2E651C3A0E51008DC4BB /* supansbkg.png in Resources */,
 				C414A10B1C3E5AFB00D435B0 /* Main.storyboard in Resources */,
 				C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */,
+				C49AE61C1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */,
 				C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */,
+				C49AE6141C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */,
 				C48A9CF11C2ED8B800FB9E12 /* rawk.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49AE60D1C47BAB800B38424 /* Downloader.swift in Sources */,
 				4519CD2B1C2AC66800911174 /* Event.swift in Sources */,
 				C430C0271C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C4F5C4CB1C0F2573001389B7 /* ViewController.swift in Sources */,
@@ -455,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49AE60E1C47BAB800B38424 /* Downloader.swift in Sources */,
 				4519CD2C1C2AC67D00911174 /* Event.swift in Sources */,
 				C430C0281C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C48A9CEC1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
@@ -471,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C49AE60F1C47BAB800B38424 /* Downloader.swift in Sources */,
 				4519CD2D1C2AC67E00911174 /* Event.swift in Sources */,
 				C430C0291C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C48A9CED1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,

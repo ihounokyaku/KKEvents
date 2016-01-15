@@ -121,15 +121,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var venueImage = ""
 
     var gotJson:Bool = false
+    var gotUrlJson:Bool = false
+    var gotEventJson:Bool = false
+    
+    var loadedOnce = false
     
    //dictionaries
     var jsonObjects = [NSDictionary]()
     var urlList = [NSDictionary]()
     
     
-       
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
         
 
         
@@ -172,7 +184,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        if self.loadedOnce == false {
         self.refreshData()
+        }
+        self.loadedOnce = true
         
     }
     
