@@ -75,13 +75,31 @@ extension NSDate
         return dateWithHoursAdded
     }
 }
+
+extension String  {
+    func truncateTail (maxCharacters:Int)->String {
+        var stringy = self
+        let difference = stringy.characters.count - maxCharacters
+        var index = 0
+        if difference > 0 {
+            for index = 0; index <= difference; index++ {
+           stringy.removeAtIndex(stringy.endIndex.predecessor())
+            }
+            let
+            stringy = stringy+"…"
+            return stringy
+        } else {
+        return self
+        }
+    }
+}
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate   {
     
     
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var upcomingEventsLabel: UILabel!
     
-    
+
     
     var eventsToday = [Event]()
     var eventsWeekend = [Event]()
@@ -121,6 +139,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var eventURL = ""
     var venueURL = ""
     var venueImage = ""
+    var venuePhone = ""
+    var eventDateFull = NSDate()
+    var eventTitleThai = ""
 
     var gotJson:Bool = false
     var gotUrlJson:Bool = false
@@ -160,6 +181,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.eventsWeekend = self.getEventData()
         self.eventsToday = self.getEventData()
         self.mainTable.reloadData()
+        self.syncImage.image = UIImage(named: "syncDis.png")
         self.syncImage.startRotating()
         
         
@@ -194,6 +216,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func refreshData(){
+        self.syncImage.image = UIImage(named: "syncDis.png")
         self.syncImage.startRotating()
         let checkConnection = Reachability()
         let networkConnection = checkConnection.isConnectedToNetwork()
@@ -215,9 +238,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.upcomingEventsLabel.text = "Upcoming Events"
                 
                 print("GOT JSON FILE")
+                self.syncImage.image = UIImage(named: "syncEn")
                 self.syncImage.stopRotating()
             } else {
                 self.upcomingEventsLabel.text = "No Internet Connection"
+                self.syncImage.image = UIImage(named: "syncEn")
                 self.syncImage.stopRotating()
             }
             dispatch_async(dispatch_get_main_queue(),{
@@ -287,7 +312,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
             // your destination file url
             let destinationUrl = documentsUrl.URLByAppendingPathComponent(jsonURL.lastPathComponent!)
-            print("this is the path: \(destinationUrl)")
+            
             
             // check if it exists before downloading it
             
@@ -307,7 +332,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 // after downloading your data you need to save it to your destination url
                 if jsonFileFromUrl.writeToURL(destinationUrl, atomically: true) {
                     print("file saved")
-                    print("this is the path: \(destinationUrl.path)")
+                    
                     
                 } else {
                     print("error saving file")
@@ -317,23 +342,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
     }
+    
     func downloadOtherJsonData(){
         var index: Int
         var downloadedArray = [String]()
         
         //for index = 0; index < self.jsonObjects.count; index++ {
-        let eventUrlList = self.urlList[1]
-        for index = 0; index < eventUrlList.count; index++ {
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let jsonPath = paths.stringByAppendingPathComponent("urlList.json")
+
+        if NSFileManager().fileExistsAtPath(jsonPath) {
+            let eventUrlList = self.urlList[1]
+            for index = 0; index < eventUrlList.count; index++ {
             let jsonDictionary:NSDictionary = eventUrlList
-            print("\(index)")
+            
             let url = jsonDictionary["\(index)"] as! String
           
-                if let jsonURL = NSURL(string: url) {
+                if let jsonURL = NSURL(string: "https://dl.dropboxusercontent.com/u/2223187/\(url)") {
             // create your document folder url
                     let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
             // your destination file url
                     let destinationUrl = documentsUrl.URLByAppendingPathComponent(jsonURL.lastPathComponent!)
-                    print("this is the path: \(destinationUrl)")
+                   
             
             // check if it exists before downloading it
                     if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
@@ -352,7 +383,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 // after downloading your data you need to save it to your destination url
                         if jsonFileFromUrl.writeToURL(destinationUrl, atomically: true) {
                             print("file saved")
-                            print("this is the path: \(destinationUrl.path)")
+                            
                             downloadedArray.append(url)
                             
                         } else {
@@ -362,7 +393,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
             }
-        
+        } else {
+            print("no Jsonfile at path")
+        }
     }
     
     func downloadImageData(kind:String){
@@ -461,9 +494,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let weekDayName = self.daysOfTheWeek[eventsToDisplay[indexPath.row].eventDay]
         
         let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("eventCell")!
-        let eventName = NSMutableAttributedString(string:eventsToDisplay[indexPath.row].eventTitle + "\n")
-        let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12.0)]
-        let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n",  attributes: attrib)
+        
+        var titleToAlter = ""
+        //let attrib = [NSFontAttributeName: UIFont(name: "DBHelvethaicaX-35Thin", size: 18)!]
+        //let attrib2 = [NSFontAttributeName: UIFont(name: "DBHelvethaicaX-36ThinIt", size: 26)!]
+        
+        let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12)]
+    
+        if eventsToDisplay[indexPath.row].eventTitle != "" {
+            titleToAlter = eventsToDisplay[indexPath.row].eventTitle
+            
+        } else {
+            titleToAlter = eventsToDisplay[indexPath.row].eventTitleThai
+           
+        }
+        
+        let titleToDisplay = titleToAlter.truncateTail(19)
+        
+        let eventName = NSMutableAttributedString(string:titleToDisplay + "\n")
+        
+        
+        let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n", attributes:attrib)
         
         let placeString = NSMutableAttributedString(string: eventsToDisplay[indexPath.row].eventTime + " at " + eventsToDisplay[indexPath.row].eventPlaceName, attributes: attrib)
         
@@ -482,8 +533,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.backgroundView = UIImageView(image: eventImageToUse)
         cell.backgroundView!.contentMode = UIViewContentMode.ScaleAspectFill
         cell.backgroundView?.alpha = 0.2
-        
-        
+        //cell.backgroundColor = UIColor.grayColor()
+    
+        cell.textLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         cell.textLabel!.textAlignment = NSTextAlignment.Center
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -504,7 +556,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("this is happening")
+       
         var eventsToDisplay = [Event]()
         
         if self.todaySelected == true {
@@ -517,7 +569,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             eventsToDisplay = self.eventsToday
         }
         let cellNumber = indexPath.row
-        print("this is the cell no : \(cellNumber)")
+        
         let description = eventsToDisplay[cellNumber].eventDescription
         let descriptionThai = eventsToDisplay[cellNumber].eventDescriptionThai
         let monthName = self.monthsOfTheYear[(eventsToDisplay[indexPath.row].eventDate[1])]
@@ -542,8 +594,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.eventURL = eventsToDisplay[cellNumber].eventURL
         self.venueURL = eventsToDisplay[cellNumber].venueURL
         self.venueImage = eventsToDisplay[cellNumber].venueImage
+        self.venuePhone = eventsToDisplay[cellNumber].phoneNumber
+        self.eventDateFull = eventsToDisplay[cellNumber].eventDateFull
+        self.eventTitleThai = eventsToDisplay[cellNumber].eventTitleThai
         
-       print(self.eventInfo)
+        
+       
         performSegueWithIdentifier("ShowEventInfoSegue", sender: self)
     }
     
@@ -565,15 +621,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     return arrayOfDictionaries
                     
                 }
-                catch{ print("couldn't get the file")
+                catch{
                     self.gotJson = false
                 }
             } else {
-                print("dunnowhathappend")
+                
                 self.gotJson = false
             }
         }
-        else { print("alsodunnowhat happend")
+        else {
             self.gotJson = false
         }
         return [NSDictionary]()
@@ -590,8 +646,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //calendar stuff
         let date = NSDate()
         
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: date)
+        let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)
+
+        let components = calendar!.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: date)
         let day = components.day
         let year = components.year
         let month = components.month
@@ -600,9 +657,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for index = 0; index < eventsUnsorted.count; index++ {
             let e = eventsUnsorted[index]
             let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
-            let componentsEvent = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: eventFullDate)
+            let componentsEvent = calendar!.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: eventFullDate)
             
             e.eventDay = componentsEvent.weekday
+            e.eventDateFull = eventFullDate
             
             
             let compareDate = eventFullDate.addDays(-7)
@@ -611,14 +669,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if dateAdjustedForTime.isLessThanDate(date){
                
             } else {
+                print("year is \(year)")
                 if e.eventDate[0] == year {
                     if e.eventDate[1] == month {
                         if e.eventDate[2] == day {
                             eventsTodayArray.append(e)
+                            
                         }
+                       
                     }
                     
                 }
+               
             
             
             if e.eventDay > 5 {
@@ -682,6 +744,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.venueImage = venueJson["venueImage"] as! String
             
             e.eventTitle = jsonDictionary["eventTitle"] as! String
+            e.eventTitleThai = jsonDictionary["eventTitleThai"] as! String
             e.eventTime = jsonDictionary["eventTime"] as! String
             
             e.eventDate = jsonDictionary["eventDate"] as! [Int]
@@ -733,6 +796,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destinationVC.eventURL = self.eventURL
                 destinationVC.venueURL = self.venueURL
                 destinationVC.venueImage = self.venueImage
+                destinationVC.venuePhone = self.venuePhone
+                destinationVC.eventDateFull = self.eventDateFull
+                destinationVC.eventTitleThai = self.eventTitleThai
                 
             }
                      

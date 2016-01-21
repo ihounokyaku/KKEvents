@@ -25,6 +25,8 @@ class Event: NSObject {
     var eventURL = ""
     var venueURL = ""
     var venueImage = ""
+    var eventDateFull:NSDate = NSDate()
+    var eventTitleThai = ""
     
 
 }

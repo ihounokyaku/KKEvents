@@ -17,9 +17,9 @@ class OtherViewController: UIViewController {
         performSegueWithIdentifier("fullScreenPicSegue", sender: self)
     }
    
+    @IBOutlet weak var logoButton: UIButton!
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventDescription: UILabel!
-    @IBOutlet weak var venueLogo: UIImageView!
     
     @IBOutlet weak var entryCostLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -41,6 +41,7 @@ class OtherViewController: UIViewController {
     var eventDeetsThai = ""
     var eventImageURL = ""
     var eventTitle = ""
+    var eventTitleThai = ""
     var logo = ""
     var eventDate = ""
     var eventDateThai = ""
@@ -53,6 +54,9 @@ class OtherViewController: UIViewController {
     var venueURL = ""
     var venueImage = ""
     var eventImageFile:UIImage = UIImage()
+    var venuePhone = ""
+    var eventDateFull:NSDate = NSDate()
+
     
     
     override func viewWillAppear(animated: Bool) {
@@ -68,13 +72,15 @@ class OtherViewController: UIViewController {
         
         
         self.eventImage.image = eventImageToUse
-        self.venueLogo.image = logoImageToUse
+       self.logoButton.setImage(logoImageToUse, forState: UIControlState.Normal)
+        //self.logoButton.backgroundImageForState(UIControlState.Normal) = logoImageToUse
+        //self.logoButton.imageView!.image = logoImageToUse
         self.thaiButton.alpha = 0.8
         self.englishButton.alpha = 0.8
         self.eventImageFile = eventImageToUse
         
         //self.eventTitleLabel.font = UIFont.systemFontOfSize(20)
-        self.eventTitleLabel.text = self.eventTitle
+       
        // self.eventTitleLabel.sizeToFit()
         // set bkg image
       //  self.venueBackImage.alpha = 0.8
@@ -92,7 +98,15 @@ class OtherViewController: UIViewController {
         }
         
         // check for both languages
-        
+        if eventTitleThai == "" {
+            self.eventTitleThai = self.eventTitle
+        } else if eventTitle == ""{
+            self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
+            self.eventTitle = self.eventTitleThai
+            
+        } else {
+            
+        }
         if eventDeets != "" {
             if eventDeetsThai != "" {
                 self.englishButton.enabled = true
@@ -100,9 +114,10 @@ class OtherViewController: UIViewController {
                 //self.eventTitleLabel.font = UIFont(name: "Thonburi Light", size: 32)
                 self.dateLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
                 self.entryCostLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-                //self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
-                self.eventDescription.attributedText = self.formatAttributedText("DBHelvethaicaX-35Thin", fontSize: 20, lineSpacing: 0.1, textToFormat: self.eventDeetsThai)
-                //self.eventDescription.text = self.eventDeetsThai
+                self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
+                self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
+                self.eventTitleLabel.text = self.eventTitleThai
+                self.eventDescription.text = self.eventDeetsThai
                 self.dateLabel.text = self.eventDateThai
                 self.entryCostLabel.text = self.entryCostThai
                 
@@ -115,6 +130,7 @@ class OtherViewController: UIViewController {
                 self.dateLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
                 self.entryCostLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
                 self.eventDescription.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
+                 self.eventTitleLabel.text = self.eventTitle
                 self.dateLabel.text = self.eventDate
                 self.eventDescription.text = self.eventDeets
                
@@ -127,6 +143,8 @@ class OtherViewController: UIViewController {
             self.englishButton.hidden = true
             self.dateLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
             self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
+            self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
+            self.eventTitleLabel.text = self.eventTitleThai
             self.dateLabel.text = self.eventDateThai
             self.eventDescription.text = self.eventDeetsThai
             self.entryCostLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
@@ -140,6 +158,7 @@ class OtherViewController: UIViewController {
             self.dateLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
             self.entryCostLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
             self.eventDescription.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
+             self.eventTitleLabel.text = self.eventTitle
             self.dateLabel.text = self.eventDate
             self.entryCostLabel.text = self.entryCost
             self.eventDescription.text = "no description available \n ไม่มีข้อมูลรายละเอียดของอีเวนท์นี้"
@@ -179,7 +198,9 @@ class OtherViewController: UIViewController {
         englishButton.enabled = true
         self.dateLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
         self.entryCostLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-        self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 22)
+        self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
+        self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
+        self.eventTitleLabel.text = self.eventTitleThai
         self.eventDescription.text = self.eventDeetsThai
         self.dateLabel.text = self.eventDateThai
         self.entryCostLabel.text = self.entryCostThai
@@ -191,9 +212,18 @@ class OtherViewController: UIViewController {
         self.dateLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
         self.entryCostLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
         self.eventDescription.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
+        self.eventTitleLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
+         self.eventTitleLabel.text = self.eventTitle
         self.eventDescription.text = self.eventDeets
         self.dateLabel.text = self.eventDate
         self.entryCostLabel.text = self.entryCost
+    }
+    
+    @IBAction func calendarButtonPress(sender: AnyObject) {
+        let getDate = EnterDate()
+        var alertThing = UIAlertController()
+        alertThing = getDate.requestAccessPermission(self.eventTitle, startDate: self.eventDateFull, place:self.venueName)
+        self.presentViewController(alertThing, animated: true, completion: nil)
     }
     
     @IBAction func mapButtonPress(sender: AnyObject) {
@@ -208,12 +238,62 @@ class OtherViewController: UIViewController {
     }
 
     @IBAction func fbButtonPress(sender: AnyObject) {
-        let facebookURL = NSURL(string: "fb://profile/PageId")!
-        if UIApplication.sharedApplication().canOpenURL(facebookURL) {
-            UIApplication.sharedApplication().openURL(facebookURL)
+       // let facebookURL = NSURL(string: "fb://event/"+eventURL)!
+       
+        //let adjustedFacebookUrl = "https://www.facebook.com/events/"+self.eventURL
+       
+       // if UIApplication.sharedApplication().canOpenURL(facebookURL) {
+           // UIApplication.sharedApplication().openURL(facebookURL)
+       // } else {
+            UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/events/"+eventURL)!)
+        //}
+    }
+    
+   
+    @IBAction func phoneButtonPress(sender: AnyObject) {
+        let phoneNumber = "tel://"+self.venuePhone
+        let url = NSURL(string: phoneNumber)!
+        UIApplication.sharedApplication().openURL(url)
+    }
+    
+    @IBAction func shareButtonPressed(sender: AnyObject) {
+       var activityItems = [AnyObject]()
+        
+        let firstActivityItem = "I am going to attend \(self.eventTitle) at \(self.venueName)! Care to join me? \n"
+        let secondActivityItem : NSURL = NSURL(string:  "https://www.facebook.com/events/"+self.eventURL)!
+        let thirdActivityItem = "\n - Find out what's happening in Khon Kaen with the Khon Kaen Events app for IOS -"
+        // If you want to put an image
+        if self.eventImageURL != ""{
+            let image : UIImage = self.eventImageFile
+            activityItems = [firstActivityItem, secondActivityItem, image, thirdActivityItem]
+        
+            
         } else {
-            UIApplication.sharedApplication().openURL(NSURL(string: eventURL)!)
+            activityItems = [firstActivityItem, secondActivityItem, thirdActivityItem]
+            
         }
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        
+        // This lines is for the popover you need to show in iPad
+        activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
+        
+        // This line remove the arrow of the popover to show in iPad
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection()
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+        
+        // Anything you want to exclude
+        activityViewController.excludedActivityTypes = [
+            UIActivityTypePostToWeibo,
+            UIActivityTypePrint,
+            UIActivityTypeAssignToContact,
+            UIActivityTypeSaveToCameraRoll,
+            UIActivityTypeAddToReadingList,
+            UIActivityTypePostToVimeo,
+            UIActivityTypePostToTencentWeibo
+        ]
+        
+        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
     @IBAction func LogoButton(sender: AnyObject) {
