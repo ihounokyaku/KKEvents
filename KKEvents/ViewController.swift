@@ -7,14 +7,14 @@
 //
 
 import UIKit
-
+import Foundation
 
 
 extension NSDate {
     convenience
     init(dateString:String) {
         let dateStringFormatter = NSDateFormatter()
-        dateStringFormatter.dateFormat = "yyyy-MM-dd"
+        dateStringFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         let d = dateStringFormatter.dateFromString(dateString)!
         self.init(timeInterval:0, sinceDate:d)
@@ -52,6 +52,18 @@ extension NSDate
         
         //Return Result
         return isLess
+    }
+    func equalToDate(dateToCompare: NSDate) -> Bool {
+        //Declare Variables
+        var isEqualTo = false
+        
+        //Compare Values
+        if self.compare(dateToCompare) == NSComparisonResult.OrderedSame {
+            isEqualTo = true
+        }
+        
+        //Return Result
+        return isEqualTo
     }
     
     
@@ -105,6 +117,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var eventsWeekend = [Event]()
     var eventsAll = [Event]()
     
+    let kRotationAnimationKey = "com.myapplication.rotationanimationkey"
     
     let daysOfTheWeek = ["poopday", "Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"]
     let monthsOfTheYear = ["Monthalicious", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -180,9 +193,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.eventsAll = self.getEventData()
         self.eventsWeekend = self.getEventData()
         self.eventsToday = self.getEventData()
+        
         self.mainTable.reloadData()
-        self.syncImage.image = UIImage(named: "syncDis.png")
-        self.syncImage.startRotating()
+        
         
         
         
@@ -209,15 +222,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if self.loadedOnce == false {
+            self.syncImage.image = UIImage(named: "syncDis.png")
+            //self.syncImage.startRotating()
+             self.rotateView(syncImage)
+            print("VDA Start")
         self.refreshData()
         }
+        
         self.loadedOnce = true
         
     }
     
     func refreshData(){
+        self.upcomingEventsLabel.text = "Loading Events"
         self.syncImage.image = UIImage(named: "syncDis.png")
-        self.syncImage.startRotating()
+        //self.syncImage.startRotating()
+        self.rotateView(syncImage)
+        print("RD Start")
         let checkConnection = Reachability()
         let networkConnection = checkConnection.isConnectedToNetwork()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -235,15 +256,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.eventsWeekend = self.getEventData()
                 self.eventsToday = self.getEventData()
                 self.mainTable.reloadData()
-                self.upcomingEventsLabel.text = "Upcoming Events"
+                
                 
                 print("GOT JSON FILE")
-                self.syncImage.image = UIImage(named: "syncEn")
-                self.syncImage.stopRotating()
+                
             } else {
                 self.upcomingEventsLabel.text = "No Internet Connection"
                 self.syncImage.image = UIImage(named: "syncEn")
-                self.syncImage.stopRotating()
+               // self.syncImage.stopRotating()
+                 self.stopRotatingView(self.syncImage)
+                print("No Internet Stop")
             }
             dispatch_async(dispatch_get_main_queue(),{
             })
@@ -264,6 +286,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.weekendButton.titleLabel!.font = self.unselectedButtonFont
         self.allButton.titleLabel!.font = self.unselectedButtonFont
         self.eventsToday = self.getEventData()
+        
         self.mainTable.reloadData()
     }
     
@@ -317,7 +340,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // check if it exists before downloading it
             
             if NSFileManager().fileExistsAtPath(destinationUrl.path!) {
-                print("The file already exists at path")
+                print("The file \(jsonURL.lastPathComponent!)already exists at path")
                 do {
                     try NSFileManager.defaultManager().removeItemAtPath(destinationUrl.path!)
                     print("fileRemoved")
@@ -351,13 +374,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let jsonPath = paths.stringByAppendingPathComponent("urlList.json")
+        let jsonList:NSArray = (self.urlList[1])["venuez"]! as! NSArray
 
         if NSFileManager().fileExistsAtPath(jsonPath) {
-            let eventUrlList = self.urlList[1]
-            for index = 0; index < eventUrlList.count; index++ {
-            let jsonDictionary:NSDictionary = eventUrlList
             
-            let url = jsonDictionary["\(index)"] as! String
+            for index = 0; index < jsonList.count; index++ {
+            
+            
+            let url = jsonList[index] as! String
           
                 if let jsonURL = NSURL(string: "https://dl.dropboxusercontent.com/u/2223187/\(url)") {
             // create your document folder url
@@ -430,7 +454,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
-        
+        self.syncImage.image = UIImage(named: "syncEn")
+        //self.syncImage.stopRotating()
+        self.stopRotatingView(syncImage)
+        print("Download Image Stop")
+        self.upcomingEventsLabel.text = "Upcoming Events"
     }
     
     func clearUnusedImages() {
@@ -606,7 +634,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func getLocalJsonFile(fileName:String) -> [NSDictionary]{
-        
+        print("getting local json file")
         let fileManager = NSFileManager.defaultManager()
     
         if let documentsUrl =  fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL? {
@@ -618,6 +646,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 do {
                     let arrayOfDictionaries: [NSDictionary] = try NSJSONSerialization.JSONObjectWithData(actualJsonData, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
                     self.gotJson = true
+                    print ("got json: \(fileName)")
                     return arrayOfDictionaries
                     
                 }
@@ -656,24 +685,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var index: Int
         for index = 0; index < eventsUnsorted.count; index++ {
             let e = eventsUnsorted[index]
-            let eventFullDate = NSDate(dateString: "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])")
+            let eventDateNoTime = "\(e.eventDate[0])"+"-"+"\(e.eventDate[1])"+"-"+"\(e.eventDate[2])"
+            let eventFullDate = NSDate(dateString: eventDateNoTime + " " + "\(e.eventTime)"+":00")
+            
+            let eventEndDateNoTime = "\(e.eventEndDate[0])"+"-"+"\(e.eventEndDate[1])"+"-"+"\(e.eventEndDate[2])"
+            let eventFullEndDate = NSDate(dateString: eventEndDateNoTime + " " + "\(e.eventEndTime)"+":00")
+            
             let componentsEvent = calendar!.components([.Year, .Month, .Day, .Hour, .Minute, .Second, .Weekday], fromDate: eventFullDate)
             
             e.eventDay = componentsEvent.weekday
             e.eventDateFull = eventFullDate
+            e.eventEndDateFull = eventFullEndDate
             
             
             let compareDate = eventFullDate.addDays(-7)
-            let dateAdjustedForTime = eventFullDate.addHours(30)
+            let dateAdjustedForTime = eventFullDate.addHours(10)
             
-            if dateAdjustedForTime.isLessThanDate(date){
+            if eventFullEndDate.isLessThanDate(date){
                
             } else {
-                print("year is \(year)")
+                
                 if e.eventDate[0] == year {
                     if e.eventDate[1] == month {
                         if e.eventDate[2] == day {
                             eventsTodayArray.append(e)
+                            
+                        } else {
+                            if e.eventEndDate[0] == year {
+                                if e.eventEndDate[1] == month {
+                                    if e.eventEndDate[2] == day {
+                                        eventsTodayArray.append(e)
+                                    }
+                                }
+                            }
+
                             
                         }
                        
@@ -746,8 +791,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             e.eventTitle = jsonDictionary["eventTitle"] as! String
             e.eventTitleThai = jsonDictionary["eventTitleThai"] as! String
             e.eventTime = jsonDictionary["eventTime"] as! String
+            e.eventEndTime = jsonDictionary["eventEndTime"] as! String
             
             e.eventDate = jsonDictionary["eventDate"] as! [Int]
+            e.eventEndDate = jsonDictionary["eventEndDate"] as! [Int]
             e.eventDescription = jsonDictionary["eventDescription"] as! String
             e.eventDescriptionThai = jsonDictionary["eventDescriptionThai"] as! String
             e.eventImage = jsonDictionary["eventImage"] as! String
@@ -804,6 +851,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                      
         }
         
+    }
+    func rotateView(view: UIView, duration: Double = 1) {
+        if view.layer.animationForKey(kRotationAnimationKey) == nil {
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+            
+            rotationAnimation.fromValue = 0.0
+            rotationAnimation.toValue = Float(M_PI * 2.0)
+            rotationAnimation.duration = duration
+            rotationAnimation.repeatCount = Float.infinity
+            
+            view.layer.addAnimation(rotationAnimation, forKey: kRotationAnimationKey)
+        }
+    }
+    func stopRotatingView(view: UIView) {
+        if view.layer.animationForKey(kRotationAnimationKey) != nil {
+            view.layer.removeAnimationForKey(kRotationAnimationKey)
+          
+        }
+       
     }
 
 }

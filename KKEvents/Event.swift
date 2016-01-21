@@ -13,9 +13,11 @@ class Event: NSObject {
     var venueLogoImageUrl =  ""
     var eventTitle = ""
     var eventDate = [Int]()
+    var eventEndDate = [Int]()
     var eventDay = 0
     var eventPlaceName = ""
     var eventTime = ""
+    var eventEndTime = ""
     var eventDescription = ""
     var eventImage = ""
     var eventDescriptionThai = ""
@@ -26,6 +28,7 @@ class Event: NSObject {
     var venueURL = ""
     var venueImage = ""
     var eventDateFull:NSDate = NSDate()
+    var eventEndDateFull:NSDate = NSDate()
     var eventTitleThai = ""
     
 
