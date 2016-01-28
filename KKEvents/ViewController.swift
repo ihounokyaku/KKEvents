@@ -1,3 +1,4 @@
+
 //
 //  ViewController.swift
 //  KKEvents
@@ -16,8 +17,10 @@ extension NSDate {
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        
         let d = dateStringFormatter.dateFromString(dateString)!
         self.init(timeInterval:0, sinceDate:d)
+
     }
 }
 
@@ -108,14 +111,18 @@ extension String  {
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate   {
     
     
+    @IBOutlet weak var couponTable: UITableView!
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var upcomingEventsLabel: UILabel!
     
-
+    @IBOutlet weak var couponDeelyo: CouponView!
+    var coupons:CouponView!
     
     var eventsToday = [Event]()
     var eventsWeekend = [Event]()
     var eventsAll = [Event]()
+    
+    var couponsToDisplay = [Coupon]()
     
     let kRotationAnimationKey = "com.myapplication.rotationanimationkey"
     
@@ -155,8 +162,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var venuePhone = ""
     var eventDateFull = NSDate()
     var eventTitleThai = ""
+    
+    // coupon info to send to couponview
+    var couponVenue = ""
+    var couponTitle = ""
+    var couponTitleThai = ""
+    var couponDate = [Int]()
+    var couponEndDate = [Int]()
+    var couponDescription = ""
+    var couponDescriptionThai = ""
+    var couponImage = ""
+    var couponLogo = ""
+    var couponPhoneNumber = ""
+    var couponMap = [Double]()
+    var couponEndDay:Int = 0
+    var daysLeftToExpiration = 0
+    var couponSubtitle = ""
+    var couponSubtitleThai = ""
+    
 
-    var gotJson:Bool = false
+//    var gotJson:Bool = false
     var gotUrlJson:Bool = false
     var gotEventJson:Bool = false
     
@@ -165,11 +190,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
    //dictionaries
     var jsonObjects = [NSDictionary]()
     var urlList = [NSDictionary]()
+    var couponJson = [NSDictionary]()
     
-    
+    var couponVenues = [String]()
+    var couponsUnderHeaders = NSMutableDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        //coupons = NSBundle.mainBundle().loadNibNamed("Coupons", owner: self, options: nil).last as! CouponView
+        let arrowUp:UIImage! = UIImage(named:"arrowUp.png")
+        let arrowDown:UIImage! = UIImage(named:"arrowDown.png")
+        
+        
+        self.couponDeelyo.frame = CGRectMake(0, -self.view.frame.size.height + 100, self.view.frame.size.width, self.view.frame.size.height)
+        
+        //self.view.addSubview(coupons)
+        self.couponDeelyo.setImage(arrowUp, arrowDown:arrowDown)
+        self.couponDeelyo.setup()
+        //self.couponDeelyo.changeLabel("this worked")
+
+        
+        self.placeCouponView()
+       
+    
+        
         for family: String in UIFont.familyNames()
         {
             print("\(family)")
@@ -184,16 +230,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if self.todaySelected == true{
             self.todayButton.enabled = false
         }
+        self.couponTable.delegate = self
+        self.couponTable.dataSource = self
         self.mainTable.delegate = self
         self.mainTable.dataSource = self
         self.upcomingEventsLabel.text = "Loading Events"
         
         self.urlList = self.getLocalJsonFile("urlList.json")
         self.jsonObjects = self.getLocalJsonFile("eventz.json")
+        self.couponJson = self.getLocalJsonFile("couponz.json")
         self.eventsAll = self.getEventData()
         self.eventsWeekend = self.getEventData()
         self.eventsToday = self.getEventData()
-        
+        self.couponsToDisplay = self.getCouponInfo()
+        self.couponVenues = self.getNumberOfCouponHeaders()
+        self.couponsUnderHeaders = self.getCouponsForEachHeader()
+        self.couponTable.reloadData()
         self.mainTable.reloadData()
         
         
@@ -207,8 +259,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    
-    
+
     @IBAction func testButton(sender: AnyObject) {
         
     }
@@ -232,7 +283,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.loadedOnce = true
         
     }
-    
+    func placeCouponView (){
+            }
+
+
+func ukButtenPressed (){
+    print("PRESSED")
+}
+
     func refreshData(){
         self.upcomingEventsLabel.text = "Loading Events"
         self.syncImage.image = UIImage(named: "syncDis.png")
@@ -247,6 +305,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.urlList = self.getLocalJsonFile("urlList.json")
                 self.downloadMainJsonData("https://dl.dropboxusercontent.com/u/2223187/eventz.json")
                 self.jsonObjects = self.getLocalJsonFile("eventz.json")
+                self.couponJson = self.getLocalJsonFile("couponz.json")
                 self.downloadOtherJsonData()
                 self.downloadImageData("venueImages")
                 self.downloadImageData("eventImages")
@@ -255,6 +314,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.eventsAll = self.getEventData()
                 self.eventsWeekend = self.getEventData()
                 self.eventsToday = self.getEventData()
+                self.couponsToDisplay = self.getCouponInfo()
+                self.couponVenues = self.getNumberOfCouponHeaders()
+                self.couponsUnderHeaders = self.getCouponsForEachHeader()
+                
+                self.couponTable.reloadData()
                 self.mainTable.reloadData()
                 
                 
@@ -281,29 +345,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.todayButton.enabled = false
         self.weekendButton.enabled = true
         self.allButton.enabled = true
-        
+        self.placeCouponView()
         self.todayButton.titleLabel!.font =  self.selectedButtonFont
         self.weekendButton.titleLabel!.font = self.unselectedButtonFont
         self.allButton.titleLabel!.font = self.unselectedButtonFont
         self.eventsToday = self.getEventData()
-        
+        self.couponTable.reloadData()
         self.mainTable.reloadData()
     }
     
     @IBAction func weekendButtonPush(sender: AnyObject) {
+        
         self.todaySelected = false
         self.weekendSelected = true
         self.allSelected = false
         self.todayButton.enabled = true
         self.weekendButton.enabled = false
         self.allButton.enabled = true
-        
+        self.placeCouponView()
         self.todayButton.titleLabel!.font =  self.unselectedButtonFont
         self.weekendButton.titleLabel!.font = self.selectedButtonFont
         self.allButton.titleLabel!.font = self.unselectedButtonFont
         
          self.eventsWeekend = self.getEventData()
         self.mainTable.reloadData()
+        self.couponTable.reloadData()
     }
     
     @IBAction func allButton(sender: AnyObject) {
@@ -313,13 +379,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.todayButton.enabled = true
         self.weekendButton.enabled = true
         self.allButton.enabled = false
-        
+        self.placeCouponView()
         self.todayButton.titleLabel!.font =  self.unselectedButtonFont
         self.weekendButton.titleLabel!.font = self.unselectedButtonFont
         self.allButton.titleLabel!.font = self.selectedButtonFont
         
         self.eventsAll = self.getEventData()
         self.mainTable.reloadData()
+        self.couponTable.reloadData()
     }
 
     // refres
@@ -335,6 +402,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let documentsUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first! as NSURL
             // your destination file url
             let destinationUrl = documentsUrl.URLByAppendingPathComponent(jsonURL.lastPathComponent!)
+            print("\(destinationUrl)")
             
             
             // check if it exists before downloading it
@@ -375,13 +443,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let jsonPath = paths.stringByAppendingPathComponent("urlList.json")
         let jsonList:NSArray = (self.urlList[1])["venuez"]! as! NSArray
+       
 
         if NSFileManager().fileExistsAtPath(jsonPath) {
-            
             for index = 0; index < jsonList.count; index++ {
             
             
             let url = jsonList[index] as! String
+                
           
                 if let jsonURL = NSURL(string: "https://dl.dropboxusercontent.com/u/2223187/\(url)") {
             // create your document folder url
@@ -420,6 +489,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             print("no Jsonfile at path")
         }
+        self.couponsToDisplay = self.getCouponInfo()
+        self.couponVenues = self.getNumberOfCouponHeaders()
+        self.couponsUnderHeaders = self.getCouponsForEachHeader()
+        self.couponTable.reloadData()
     }
     
     func downloadImageData(kind:String){
@@ -490,89 +563,257 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
     }
-
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if todaySelected == true {
-            return self.eventsToday.count
-        } else if weekendSelected == true{
-            return self.eventsWeekend.count
-        } else if allSelected == true {
-            return self.eventsAll.count
+    
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if tableView == self.mainTable {
+            return 1
+        }
+        if tableView == self.couponTable {
+            if self.couponVenues.count != 0 {
+                return self.couponVenues.count
+            } else {
+                return 1
+            }
+            
         } else {
-            return eventsToday.count
+            return 1
         }
         
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var eventsToDisplay = [Event]()
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if self.todaySelected == true {
-            eventsToDisplay = self.eventsToday
-        } else if weekendSelected == true {
-                eventsToDisplay = self.eventsWeekend
-        } else if allSelected == true {
-                eventsToDisplay = self.eventsAll
+        var returnInt = 0
+        if tableView == self.mainTable {
+            if todaySelected == true {
+                return self.eventsToday.count
+            } else if weekendSelected == true{
+                return self.eventsWeekend.count
+            } else if allSelected == true {
+                return self.eventsAll.count
+            } else {
+                returnInt = eventsToday.count
+            }
+        } else if tableView == self.couponTable{
+            if self.couponVenues.count != 0 {
+                let venueName = self.couponVenues[section]
+                let couponsAtVenue = self.couponsUnderHeaders[venueName] as! [Coupon]
+                returnInt = couponsAtVenue.count
+                
+            }
+        }
+    return returnInt
+    
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == self.mainTable {
+            return 0
+        } else if tableView == self.couponTable {
+            return 50
         } else {
-            eventsToDisplay = self.eventsToday
+            return 0
         }
         
-        let monthName = self.monthsOfTheYear[(eventsToDisplay[indexPath.row].eventDate[1])]
-        let weekDayName = self.daysOfTheWeek[eventsToDisplay[indexPath.row].eventDay]
-        
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("eventCell")!
-        
-        var titleToAlter = ""
-        //let attrib = [NSFontAttributeName: UIFont(name: "DBHelvethaicaX-35Thin", size: 18)!]
-        //let attrib2 = [NSFontAttributeName: UIFont(name: "DBHelvethaicaX-36ThinIt", size: 26)!]
-        
-        let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12)]
+    }
     
-        if eventsToDisplay[indexPath.row].eventTitle != "" {
-            titleToAlter = eventsToDisplay[indexPath.row].eventTitle
-            
-        } else {
-            titleToAlter = eventsToDisplay[indexPath.row].eventTitleThai
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let header = UIView()
+        if tableView == mainTable {
            
         }
         
-        let titleToDisplay = titleToAlter.truncateTail(19)
+        if tableView == couponTable {
+            let colorPicker = FontColorChange()
+            
+            header.frame = CGRectMake(0, 0, tableView.frame.width, 50)
+            let headerCenterX = tableView.frame.width / 2
+            let headerCenterY = header.frame.height  / 2
+            let imageSize = header.frame.height - 10
+            
+
+            header.backgroundColor = colorPicker.UIColorFromRGB("294d69")
+            let frame = CGRectMake(15, 0, imageSize, imageSize)
+            let customView: UIImageView = UIImageView(frame: frame)
+          
+           
+            customView.center.y = headerCenterY
+            
+            if self.couponVenues.count > section {
+                let sectionViewName = self.couponVenues[section]
+                let gimage = GetImage()
         
-        let eventName = NSMutableAttributedString(string:titleToDisplay + "\n")
+            let couponVenueInfo = self.couponsUnderHeaders[sectionViewName] as! [Coupon]
+            let couponImageName = couponVenueInfo[0].couponLogo
+            let couponImageToUse:UIImage = gimage.getImageFromDocuments(couponImageName)
+            customView.image = couponImageToUse
+        
+            
+            let attrib = [NSFontAttributeName: UIFont(name: "DBHelvethaicaX-Li", size: 35)!]
+            let placeName = NSMutableAttributedString(string:sectionViewName, attributes:attrib)
+            let titleEnglishLabel = UILabel(frame: CGRectMake(0, 0, 200, 40))
+            titleEnglishLabel.textColor = colorPicker.UIColorFromRGB("accae1")
+            //titleEnglishLabel.frame.size.width = labelWidth
+            titleEnglishLabel.textAlignment = NSTextAlignment.Center
+            titleEnglishLabel.adjustsFontSizeToFitWidth = true
+            titleEnglishLabel.attributedText = placeName
+            titleEnglishLabel.center.y = headerCenterY
+            titleEnglishLabel.center.x = headerCenterX + 20
+            //titleEnglishLabel.frame.origin.x = 50
+            //titleEnglishLabel.frame.origin.y = 0
+            titleEnglishLabel.alpha = 1
+            
+            
+            header.addSubview(titleEnglishLabel)
+            header.addSubview(customView)
+            
+            
+        }
+        }
+        return header
+    
+    }
+    
+    
+  
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell:UITableViewCell!
+        
+        if tableView == self.mainTable {
+            var eventsToDisplay = [Event]()
+        
+            if self.todaySelected == true {
+                eventsToDisplay = self.eventsToday
+            } else if weekendSelected == true {
+                eventsToDisplay = self.eventsWeekend
+            } else if allSelected == true {
+                eventsToDisplay = self.eventsAll
+            } else {
+                eventsToDisplay = self.eventsToday
+            }
+            
+            let monthName = self.monthsOfTheYear[(eventsToDisplay[indexPath.row].eventDate[1])]
+            let weekDayName = self.daysOfTheWeek[eventsToDisplay[indexPath.row].eventDay]
+        
+            cell = tableView.dequeueReusableCellWithIdentifier("eventCell")!
+        
+            var titleToAlter = ""
+       
+        
+            let attrib = [NSFontAttributeName: UIFont.systemFontOfSize(12)]
+    
+            if eventsToDisplay[indexPath.row].eventTitle != "" {
+                titleToAlter = eventsToDisplay[indexPath.row].eventTitle
+            
+            } else {
+                titleToAlter = eventsToDisplay[indexPath.row].eventTitleThai
+           
+        }
+        
+            let titleToDisplay = titleToAlter.truncateTail(19)
+
+            let eventName = NSMutableAttributedString(string:titleToDisplay + "\n")
+        
+            let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n", attributes:attrib)
         
         
-        let event = NSMutableAttributedString(string: "\(weekDayName), \(monthName)  \(eventsToDisplay[indexPath.row].eventDate[2])\n", attributes:attrib)
-        
-        let placeString = NSMutableAttributedString(string: eventsToDisplay[indexPath.row].eventTime + " at " + eventsToDisplay[indexPath.row].eventPlaceName, attributes: attrib)
+            let placeString = NSMutableAttributedString(string: eventsToDisplay[indexPath.row].eventTime + " at " + eventsToDisplay[indexPath.row].eventPlaceName, attributes: attrib)
         
         
-        let gimage = GetImage()
-        let eventImageName = eventsToDisplay[indexPath.row].eventImage
-        let eventImageToUse:UIImage = gimage.getImageFromDocuments(eventImageName)
-        let logoImageName = eventsToDisplay[indexPath.row].venueLogoImageUrl
-        let logoImageToUse:UIImage = gimage.getImageFromDocuments(logoImageName)
+            let gimage = GetImage()
+            let eventImageName = eventsToDisplay[indexPath.row].eventImage
+            let eventImageToUse:UIImage = gimage.getImageFromDocuments(eventImageName)
+            let logoImageName = eventsToDisplay[indexPath.row].venueLogoImageUrl
+            let logoImageToUse:UIImage = gimage.getImageFromDocuments(logoImageName)
         
         //set cell image
-        cell.imageView!.image = logoImageToUse
-        cell.imageView!.alpha = 0.8
+            cell.imageView!.image = logoImageToUse
+            cell.imageView!.alpha = 0.8
         
         //set cell background
-        cell.backgroundView = UIImageView(image: eventImageToUse)
-        cell.backgroundView!.contentMode = UIViewContentMode.ScaleAspectFill
-        cell.backgroundView?.alpha = 0.2
-        //cell.backgroundColor = UIColor.grayColor()
-    
-        cell.textLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        cell.textLabel!.textAlignment = NSTextAlignment.Center
-        cell.textLabel!.numberOfLines = 0
-        cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        event.appendAttributedString(eventName)
-        event.appendAttributedString(placeString)
-        cell.textLabel!.attributedText = event
-        cell.textLabel!.backgroundColor = (UIColor(white: 1, alpha: 0))
+            cell.backgroundView = UIImageView(image: eventImageToUse)
+            cell.backgroundView!.contentMode = UIViewContentMode.ScaleAspectFill
+            cell.backgroundView?.alpha = 0.2
         
-      
+    
+            cell.textLabel!.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+            cell.textLabel!.textAlignment = NSTextAlignment.Center
+            cell.textLabel!.numberOfLines = 0
+            cell.textLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            event.appendAttributedString(eventName)
+            event.appendAttributedString(placeString)
+            cell.textLabel!.attributedText = event
+            cell.textLabel!.backgroundColor = (UIColor(white: 1, alpha: 0))
+        
+        }
+        if tableView == self.couponTable {
+            
+            
+            cell = tableView.dequeueReusableCellWithIdentifier("couponCell")!
+            
+            let venueNameForSection = self.couponVenues[indexPath.section]
+            let cellsInSection = self.couponsUnderHeaders[venueNameForSection] as! [Coupon]
+            let couponInCell = cellsInSection[indexPath.row]
+            
+            
+            let attrib = [NSFontAttributeName: UIFont(name: "DBHelvethaicaX-36ThinIt", size: 33)!]
+            let attrib2 = [NSFontAttributeName: UIFont(name: "DBHelvethaicaX-Li", size: 20)!]
+            var titleToDisplay = ""
+            let englishTitle = couponInCell.couponTitle
+            let thaiTitle = couponInCell.couponTitleThai
+            
+            if englishTitle != "" {
+                if thaiTitle != "" {
+                    titleToDisplay = englishTitle + " / " + thaiTitle
+                } else {
+                    titleToDisplay = englishTitle
+                }
+            }else {
+                titleToDisplay = thaiTitle
+            }
+            
+            
+            let colorPicker = FontColorChange()
+            let couponName = NSMutableAttributedString(string:titleToDisplay, attributes:attrib)
+            couponName.addAttribute(NSForegroundColorAttributeName, value: colorPicker.UIColorFromRGB("294d69"), range: NSMakeRange(0, couponName.length))
+            var expirationString = ""
+            var textColor = ""
+            if couponInCell.daysLeftToExpiration > 1 {
+                expirationString = "Expires in \(couponInCell.daysLeftToExpiration) days / หมดโปรภายใน \(couponInCell.daysLeftToExpiration) วัน"
+                textColor = "294d69"
+            } else if couponInCell.daysLeftToExpiration == 1 {
+                textColor = "c83f27"
+                expirationString = "EXPIRES TOMORROW! / หมดโปรพรุ่งนี้!"
+            } else {
+                expirationString = "EXPIRES TODAY! / หมดโปรวันนี้!"
+                textColor = "c83f27"
+            }
+            
+            let expirationDate = NSMutableAttributedString(string:"\n" + expirationString, attributes:attrib2)
+            expirationDate.addAttribute(NSForegroundColorAttributeName, value: colorPicker.UIColorFromRGB(textColor), range: NSMakeRange(0, expirationDate.length))
+            
+            couponName.appendAttributedString(expirationDate)
+            
+            cell.textLabel!.attributedText = couponName
+            cell.textLabel!.textAlignment = NSTextAlignment.Center
+            cell.textLabel!.adjustsFontSizeToFitWidth = true
+            
+            cell.textLabel!.numberOfLines = 0
+            
+
+            
+            
+           // let gimage = GetImage()
+            //let couponImageName = couponInCell.couponLogo
+            //let couponImageToUse:UIImage = gimage.getImageFromDocuments(couponImageName)
+            
+            //cell.imageView!.image = couponImageToUse
+            
+           
+        }
         
     
     
@@ -584,8 +825,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       
-        var eventsToDisplay = [Event]()
+        if tableView == self.mainTable {
+            var eventsToDisplay = [Event]()
         
         if self.todaySelected == true {
             eventsToDisplay = self.eventsToday
@@ -629,6 +870,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
        
         performSegueWithIdentifier("ShowEventInfoSegue", sender: self)
+        }
+        
+        if tableView == couponTable {
+            
+            let venueNameForSection = self.couponVenues[indexPath.section]
+            let cellsInSection = self.couponsUnderHeaders[venueNameForSection] as! [Coupon]
+            let couponInCell = cellsInSection[indexPath.row]
+            
+            self.couponVenue = couponInCell.couponVenue
+            self.couponTitle = couponInCell.couponTitle
+            self.couponTitleThai = couponInCell.couponTitleThai
+            self.couponDate = couponInCell.couponDate
+            self.couponEndDate = couponInCell.couponEndDate
+            self.couponDescription = couponInCell.couponDescription
+            self.couponDescriptionThai = couponInCell.couponDescriptionThai
+            self.couponImage = couponInCell.couponImage
+            self.couponLogo = couponInCell.couponLogo
+            self.couponPhoneNumber = couponInCell.couponPhoneNumber
+            self.couponMap = couponInCell.couponMap
+            self.couponEndDay = couponInCell.couponEndDay
+            self.daysLeftToExpiration = couponInCell.daysLeftToExpiration
+            self.couponSubtitle = couponInCell.couponSubtitle
+            self.couponSubtitleThai = couponInCell.couponSubtitleThai
+           
+            
+            performSegueWithIdentifier("couponViewSegue", sender: self)
+        }
     }
     
     
@@ -641,25 +909,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let urlPath = documentsUrl.URLByAppendingPathComponent(fileName)
             
             let jsonData:NSData? = NSData(contentsOfURL: urlPath)
+            print("\(urlPath)")
             
             if let actualJsonData = jsonData {
                 do {
                     let arrayOfDictionaries: [NSDictionary] = try NSJSONSerialization.JSONObjectWithData(actualJsonData, options: NSJSONReadingOptions.MutableContainers) as! [NSDictionary]
-                    self.gotJson = true
+                    //self.gotJson = true
                     print ("got json: \(fileName)")
                     return arrayOfDictionaries
                     
                 }
                 catch{
-                    self.gotJson = false
+                    //self.gotJson = false
+                    print( "couldn't get the file \(fileName) 1")
                 }
             } else {
-                
-                self.gotJson = false
+                 print( "couldn't get the file \(fileName) 2")
+                //self.gotJson = false
             }
         }
         else {
-            self.gotJson = false
+             print( "couldn't get the file \(fileName) 3")
+            //self.gotJson = false
         }
         return [NSDictionary]()
     }
@@ -699,7 +970,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             
             let compareDate = eventFullDate.addDays(-7)
-            let dateAdjustedForTime = eventFullDate.addHours(10)
+            //let dateAdjustedForTime = eventFullDate.addHours(10)
             
             if eventFullEndDate.isLessThanDate(date){
                
@@ -767,6 +1038,81 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
 
     
+    func getCouponInfo () ->[Coupon]{
+        var index:Int
+        var listOfCoupons = [Coupon]()
+        
+        for index = 0; index < self.couponJson.count; index++ {
+            
+            let jsonDictionary:NSDictionary = self.couponJson[index]
+            let couponVenueInfoNoJson = jsonDictionary["couponVenue"] as! String
+            let couponVenueInfo = couponVenueInfoNoJson+".json"
+            
+            
+            let venueJsonFile:[NSDictionary] = self.getLocalJsonFile(couponVenueInfo)
+            let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+            
+            let jsonPath = paths.stringByAppendingPathComponent(couponVenueInfo)
+            if NSFileManager().fileExistsAtPath(jsonPath){
+                let venueJson:NSDictionary = venueJsonFile[0]
+                let getCoupon = GetCoupon()
+                let coupon = getCoupon.GetCouponInfo(jsonDictionary, venueFile: venueJson)
+                
+                let daysLeftForCoupon = getCoupon.couponNotExpired(coupon)
+                coupon.daysLeftToExpiration = daysLeftForCoupon
+                
+                if daysLeftForCoupon >= 0 {
+                    listOfCoupons.append(coupon)
+                }
+                
+            }
+            
+        }
+        return listOfCoupons
+    }
+    
+    func getNumberOfCouponHeaders () ->[String]{
+        var venueArray = [String]()
+        var index = 0
+        
+        for index=0; index < self.couponsToDisplay.count; index++ {
+            
+            let venueName = self.couponsToDisplay[index].couponVenue
+            if venueArray.contains(venueName) {
+                
+            } else {
+            venueArray.append(venueName)
+               
+            }
+            
+        }
+        print("venueArray is \(venueArray.count) items")
+        return venueArray
+    }
+    
+    func getCouponsForEachHeader ()-> NSMutableDictionary{
+        let couponsUnderHeaders = NSMutableDictionary()
+        var index = 0
+        for index=0; index < self.couponsToDisplay.count; index++ {
+            let venueNameForThing = self.couponsToDisplay[index].couponVenue
+            let couponToAdd = self.couponsToDisplay[index]
+            if couponsUnderHeaders[venueNameForThing] == nil {
+                couponsUnderHeaders[venueNameForThing] = [couponToAdd]
+            } else {
+                var couponArray = couponsUnderHeaders[venueNameForThing] as! [Coupon]
+                
+               
+                couponArray.append(couponToAdd)
+                
+                couponsUnderHeaders[venueNameForThing] = couponArray
+                
+                               // print("the numberof coupons at couons under header \(venueNameForThing) is \(countAgain)")
+            }
+          
+        }
+        return couponsUnderHeaders
+    }
+    
     func getEventsUnsortedArray () ->[Event]{
         var index: Int
         var eventsUnsorted: [Event] = [Event]()
@@ -778,7 +1124,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let eventVenueInfo = eventVenueInfoNoJson+".json"
             
             let venueJsonFile:[NSDictionary] = self.getLocalJsonFile(eventVenueInfo)
-            if self.gotJson == true {
+            let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+
+            let jsonPath = paths.stringByAppendingPathComponent(eventVenueInfo)
+            if NSFileManager().fileExistsAtPath(jsonPath){
+        
             let venueJson:NSDictionary = venueJsonFile[0]
             let e:Event = Event()
             
@@ -813,17 +1163,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 e.venueURL = testURLFB
             } else {
                 e.venueURL = venueJson["venueURLFB"] as! String
-            }
-
+            
             eventsUnsorted.append(e)
         
             }
         }
         
-        return eventsUnsorted
-        
+            
     }
+        return eventsUnsorted
 
+    
+    }
 
    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -850,8 +1201,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
                      
         }
+        if segue.identifier == "couponViewSegue"
+        {
+            if let destinationVC = segue.destinationViewController as? CouponViewController{
+                
+                destinationVC.couponVenue = self.couponVenue
+                destinationVC.couponTitle = self.couponTitle
+                destinationVC.couponTitleThai = self.couponTitleThai
+                destinationVC.couponDate = self.couponDate
+                destinationVC.couponEndDate = self.couponEndDate
+                destinationVC.couponDescription = self.couponDescription
+                destinationVC.couponDescriptionThai = self.couponDescriptionThai
+                destinationVC.couponImage = self.couponImage
+                destinationVC.couponLogo = self.couponLogo
+                destinationVC.couponPhoneNumber = self.couponPhoneNumber
+                destinationVC.couponMap = self.couponMap
+                destinationVC.couponEndDay = self.couponEndDay
+                destinationVC.daysLeftToExpiration = self.daysLeftToExpiration
+                destinationVC.couponSubtitle = self.couponSubtitle
+                destinationVC.couponSubtitleThai = self.couponSubtitleThai
+                
+                
+                
+            }
+            
+        }
+
         
-    }
+        }
+    
+    
+ 
+
     func rotateView(view: UIView, duration: Double = 1) {
         if view.layer.animationForKey(kRotationAnimationKey) == nil {
             let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
@@ -871,7 +1252,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
        
     }
-
+    
+    
 }
 
 

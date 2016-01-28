@@ -24,11 +24,11 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>DB Helvethaica X Li It v3.2.ttf</string>
+		<string>db helvethaica x li.ttf</string>
 		<string>DB Helvethaica X Thin It v3.2.ttf</string>
 		<string>DB Helvethaica X Thin v3.2.ttf</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -19,7 +19,6 @@
 		45CEB39E1C18825D0039019E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB39D1C18825D0039019E /* CoreLocation.framework */; };
 		45CEB3A01C1882680039019E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB39F1C1882680039019E /* QuartzCore.framework */; };
 		45CEB3A21C1882720039019E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A11C1882720039019E /* Security.framework */; };
-		45CEB3A41C18827C0039019E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A31C18827C0039019E /* StoreKit.framework */; };
 		45CEB3A61C18828A0039019E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A51C18828A0039019E /* SystemConfiguration.framework */; };
 		45CEB3A81C1882970039019E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A71C1882970039019E /* libz.tbd */; };
 		45CEB3AA1C1882A50039019E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A91C1882A50039019E /* libsqlite3.tbd */; };
@@ -30,13 +29,19 @@
 		45EE8B691C194E0400ED05A9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A91C1882A50039019E /* libsqlite3.tbd */; };
 		45EE8B6A1C194E0400ED05A9 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A71C1882970039019E /* libz.tbd */; };
 		45EE8B6B1C194E0400ED05A9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A51C18828A0039019E /* SystemConfiguration.framework */; };
-		45EE8B6C1C194E0400ED05A9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A31C18827C0039019E /* StoreKit.framework */; };
 		45EE8B6D1C194E0400ED05A9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3A11C1882720039019E /* Security.framework */; };
 		45EE8B6E1C194E0400ED05A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB39F1C1882680039019E /* QuartzCore.framework */; };
 		45EE8B6F1C194E0400ED05A9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB39D1C18825D0039019E /* CoreLocation.framework */; };
 		45EE8B701C194E0400ED05A9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB39B1C1882520039019E /* CoreGraphics.framework */; };
 		45EE8B711C194E0400ED05A9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3991C1882470039019E /* CFNetwork.framework */; };
 		45EE8B721C194E0400ED05A9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CEB3971C1881AB0039019E /* AudioToolbox.framework */; };
+		C40967371C563AA2000D1C8D /* db helvethaica x li.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C40967361C563A65000D1C8D /* db helvethaica x li.ttf */; };
+		C40967391C567177000D1C8D /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40967381C567177000D1C8D /* CouponViewController.swift */; };
+		C409673A1C567177000D1C8D /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40967381C567177000D1C8D /* CouponViewController.swift */; };
+		C409673B1C567177000D1C8D /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40967381C567177000D1C8D /* CouponViewController.swift */; };
+		C409673D1C56792E000D1C8D /* MyCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C409673C1C56792E000D1C8D /* MyCustomView.swift */; };
+		C409673E1C56792E000D1C8D /* MyCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C409673C1C56792E000D1C8D /* MyCustomView.swift */; };
+		C409673F1C56792E000D1C8D /* MyCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C409673C1C56792E000D1C8D /* MyCustomView.swift */; };
 		C414A1051C3E564E00D435B0 /* EventPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414A1041C3E564E00D435B0 /* EventPicViewController.swift */; };
 		C414A1061C3E564E00D435B0 /* EventPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414A1041C3E564E00D435B0 /* EventPicViewController.swift */; };
 		C414A1071C3E564E00D435B0 /* EventPicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414A1041C3E564E00D435B0 /* EventPicViewController.swift */; };
@@ -52,6 +57,18 @@
 		C430C0271C3C200C00C6AF08 /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430C0261C3C200C00C6AF08 /* GetImage.swift */; };
 		C430C0281C3C200C00C6AF08 /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430C0261C3C200C00C6AF08 /* GetImage.swift */; };
 		C430C0291C3C200C00C6AF08 /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C430C0261C3C200C00C6AF08 /* GetImage.swift */; };
+		C4566B481C57F659004F290C /* KKN loadscreen bkg-14.png in Resources */ = {isa = PBXBuildFile; fileRef = C4566B471C57F659004F290C /* KKN loadscreen bkg-14.png */; };
+		C4566B491C57F659004F290C /* KKN loadscreen bkg-14.png in Resources */ = {isa = PBXBuildFile; fileRef = C4566B471C57F659004F290C /* KKN loadscreen bkg-14.png */; };
+		C4566B4A1C57F659004F290C /* KKN loadscreen bkg-14.png in Resources */ = {isa = PBXBuildFile; fileRef = C4566B471C57F659004F290C /* KKN loadscreen bkg-14.png */; };
+		C4566B501C57F8BC004F290C /* KKN loadscreen log-14-14.png in Resources */ = {isa = PBXBuildFile; fileRef = C4566B4F1C57F8BC004F290C /* KKN loadscreen log-14-14.png */; };
+		C4566B511C57F8BC004F290C /* KKN loadscreen log-14-14.png in Resources */ = {isa = PBXBuildFile; fileRef = C4566B4F1C57F8BC004F290C /* KKN loadscreen log-14-14.png */; };
+		C4566B521C57F8BC004F290C /* KKN loadscreen log-14-14.png in Resources */ = {isa = PBXBuildFile; fileRef = C4566B4F1C57F8BC004F290C /* KKN loadscreen log-14-14.png */; };
+		C462657D1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C462657C1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf */; };
+		C462657E1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C462657C1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf */; };
+		C462657F1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C462657C1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf */; };
+		C46265811C57B9E000F1BD50 /* FontColorChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46265801C57B9E000F1BD50 /* FontColorChange.swift */; };
+		C46265821C57B9E000F1BD50 /* FontColorChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46265801C57B9E000F1BD50 /* FontColorChange.swift */; };
+		C46265831C57B9E000F1BD50 /* FontColorChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46265801C57B9E000F1BD50 /* FontColorChange.swift */; };
 		C48A9CEB1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
 		C48A9CEC1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
 		C48A9CED1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */; };
@@ -66,9 +83,6 @@
 		C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
 		C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */ = {isa = PBXBuildFile; fileRef = C48A9D341C316C2200FB9E12 /* supanGameNight.png */; };
 		C48A9D391C328B3F00FB9E12 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C48A9D381C328B3F00FB9E12 /* MapKit.framework */; };
-		C49AE60D1C47BAB800B38424 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE60C1C47BAB800B38424 /* Downloader.swift */; };
-		C49AE60E1C47BAB800B38424 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE60C1C47BAB800B38424 /* Downloader.swift */; };
-		C49AE60F1C47BAB800B38424 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE60C1C47BAB800B38424 /* Downloader.swift */; };
 		C49AE6121C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */; };
 		C49AE6131C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */; };
 		C49AE6141C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */; };
@@ -79,16 +93,21 @@
 		C49AE61F1C48F10F00B38424 /* EnterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE61D1C48F10F00B38424 /* EnterDate.swift */; };
 		C49AE6201C48F10F00B38424 /* EnterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49AE61D1C48F10F00B38424 /* EnterDate.swift */; };
 		C49AE6221C48F1C500B38424 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49AE6211C48F1C500B38424 /* EventKit.framework */; };
-		C4A3ACD31C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
-		C4A3ACD41C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
-		C4A3ACD51C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */; };
 		C4B5A5E61C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
 		C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B5A5E51C2BF3D7005D690A /* supan.png */; };
+		C4DBF5751C54C274000C38C6 /* GetCouponArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBF5741C54C274000C38C6 /* GetCouponArray.swift */; };
+		C4DBF5761C54C275000C38C6 /* GetCouponArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBF5741C54C274000C38C6 /* GetCouponArray.swift */; };
+		C4DBF5771C54C275000C38C6 /* GetCouponArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBF5741C54C274000C38C6 /* GetCouponArray.swift */; };
+		C4E5548E1C51F73000A378A4 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E5548D1C51F73000A378A4 /* CouponView.swift */; };
+		C4E5548F1C51F73000A378A4 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E5548D1C51F73000A378A4 /* CouponView.swift */; };
+		C4E554901C51F73000A378A4 /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E5548D1C51F73000A378A4 /* CouponView.swift */; };
+		C4EC42571C523C6A009E22E6 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EC42561C523C6A009E22E6 /* Coupon.swift */; };
+		C4EC42581C523C6A009E22E6 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EC42561C523C6A009E22E6 /* Coupon.swift */; };
+		C4EC42591C523C6A009E22E6 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EC42561C523C6A009E22E6 /* Coupon.swift */; };
 		C4F5C4C91C0F2573001389B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */; };
 		C4F5C4CB1C0F2573001389B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4CA1C0F2573001389B7 /* ViewController.swift */; };
 		C4F5C4D01C0F2573001389B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */; };
-		C4F5C4D31C0F2573001389B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4F5C4D11C0F2573001389B7 /* LaunchScreen.storyboard */; };
 		C4F5C4DE1C0F2574001389B7 /* KKEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4DD1C0F2574001389B7 /* KKEventsTests.swift */; };
 		C4F5C4E91C0F2574001389B7 /* KKEventsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F5C4E81C0F2574001389B7 /* KKEventsUITests.swift */; };
 /* End PBXBuildFile section */
@@ -134,7 +153,6 @@
 		45CEB39D1C18825D0039019E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		45CEB39F1C1882680039019E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		45CEB3A11C1882720039019E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		45CEB3A31C18827C0039019E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		45CEB3A51C18828A0039019E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		45CEB3A71C1882970039019E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		45CEB3A91C1882A50039019E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -142,27 +160,34 @@
 		45EE8B621C194C7700ED05A9 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		45EE8B631C194C7700ED05A9 /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		45EE8B641C194C7700ED05A9 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		C40967361C563A65000D1C8D /* db helvethaica x li.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "db helvethaica x li.ttf"; path = "../../Library/Fonts/db helvethaica x li.ttf"; sourceTree = "<group>"; };
+		C40967381C567177000D1C8D /* CouponViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponViewController.swift; sourceTree = "<group>"; };
+		C409673C1C56792E000D1C8D /* MyCustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomView.swift; sourceTree = "<group>"; };
 		C414A1041C3E564E00D435B0 /* EventPicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPicViewController.swift; sourceTree = "<group>"; };
 		C414A1081C3E5AFB00D435B0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C42D2E621C3A0E51008DC4BB /* supansbkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supansbkg.png; sourceTree = "<group>"; };
 		C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
 		C430C0261C3C200C00C6AF08 /* GetImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImage.swift; sourceTree = "<group>"; };
+		C4566B471C57F659004F290C /* KKN loadscreen bkg-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KKN loadscreen bkg-14.png"; sourceTree = "<group>"; };
+		C4566B4F1C57F8BC004F290C /* KKN loadscreen log-14-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KKN loadscreen log-14-14.png"; sourceTree = "<group>"; };
+		C462657C1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DB Helvethaica X Li It v3.2.ttf"; sourceTree = "<group>"; };
+		C46265801C57B9E000F1BD50 /* FontColorChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontColorChange.swift; sourceTree = "<group>"; };
 		C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		C48A9CEE1C2ED8B800FB9E12 /* rawk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rawk.png; sourceTree = "<group>"; };
 		C48A9D341C316C2200FB9E12 /* supanGameNight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supanGameNight.png; sourceTree = "<group>"; };
 		C48A9D381C328B3F00FB9E12 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		C49AE60C1C47BAB800B38424 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DB Helvethaica X Thin It v3.2.ttf"; sourceTree = "<group>"; };
 		C49AE6191C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DB Helvethaica X Thin v3.2.ttf"; sourceTree = "<group>"; };
 		C49AE61D1C48F10F00B38424 /* EnterDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterDate.swift; sourceTree = "<group>"; };
 		C49AE6211C48F1C500B38424 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rotation.swift"; sourceTree = "<group>"; };
 		C4B5A5E51C2BF3D7005D690A /* supan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = supan.png; sourceTree = "<group>"; };
+		C4DBF5741C54C274000C38C6 /* GetCouponArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCouponArray.swift; sourceTree = "<group>"; };
+		C4E5548D1C51F73000A378A4 /* CouponView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
+		C4EC42561C523C6A009E22E6 /* Coupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
 		C4F5C4C51C0F2573001389B7 /* KKEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4F5C4CA1C0F2573001389B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C4F5C4D21C0F2573001389B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4F5C4D41C0F2573001389B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4F5C4D91C0F2574001389B7 /* KKEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KKEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F5C4DD1C0F2574001389B7 /* KKEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KKEventsTests.swift; sourceTree = "<group>"; };
@@ -188,7 +213,6 @@
 				45EE8B691C194E0400ED05A9 /* libsqlite3.tbd in Frameworks */,
 				45EE8B6A1C194E0400ED05A9 /* libz.tbd in Frameworks */,
 				45EE8B6B1C194E0400ED05A9 /* SystemConfiguration.framework in Frameworks */,
-				45EE8B6C1C194E0400ED05A9 /* StoreKit.framework in Frameworks */,
 				45EE8B6D1C194E0400ED05A9 /* Security.framework in Frameworks */,
 				45EE8B6E1C194E0400ED05A9 /* QuartzCore.framework in Frameworks */,
 				45EE8B6F1C194E0400ED05A9 /* CoreLocation.framework in Frameworks */,
@@ -212,7 +236,6 @@
 				45CEB3AA1C1882A50039019E /* libsqlite3.tbd in Frameworks */,
 				45CEB3A81C1882970039019E /* libz.tbd in Frameworks */,
 				45CEB3A61C18828A0039019E /* SystemConfiguration.framework in Frameworks */,
-				45CEB3A41C18827C0039019E /* StoreKit.framework in Frameworks */,
 				45CEB3A21C1882720039019E /* Security.framework in Frameworks */,
 				45CEB3A01C1882680039019E /* QuartzCore.framework in Frameworks */,
 				45CEB39E1C18825D0039019E /* CoreLocation.framework in Frameworks */,
@@ -239,7 +262,6 @@
 				45CEB3A91C1882A50039019E /* libsqlite3.tbd */,
 				45CEB3A71C1882970039019E /* libz.tbd */,
 				45CEB3A51C18828A0039019E /* SystemConfiguration.framework */,
-				45CEB3A31C18827C0039019E /* StoreKit.framework */,
 				45CEB3A11C1882720039019E /* Security.framework */,
 				45CEB39F1C1882680039019E /* QuartzCore.framework */,
 				45CEB39D1C18825D0039019E /* CoreLocation.framework */,
@@ -253,6 +275,10 @@
 		C49AE6101C47D8FF00B38424 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4566B4F1C57F8BC004F290C /* KKN loadscreen log-14-14.png */,
+				C4566B471C57F659004F290C /* KKN loadscreen bkg-14.png */,
+				C462657C1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf */,
+				C40967361C563A65000D1C8D /* db helvethaica x li.ttf */,
 				C49AE6191C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf */,
 				C49AE6111C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf */,
 			);
@@ -287,21 +313,24 @@
 				457B148F1C101D1200CFE03C /* Chat.swift */,
 				C4F5C4C81C0F2573001389B7 /* AppDelegate.swift */,
 				4519CD2A1C2AC66700911174 /* Event.swift */,
-				C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */,
-				C4F5C4CA1C0F2573001389B7 /* ViewController.swift */,
-				C430C0261C3C200C00C6AF08 /* GetImage.swift */,
-				C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */,
-				C414A1081C3E5AFB00D435B0 /* Main.storyboard */,
+				C4EC42561C523C6A009E22E6 /* Coupon.swift */,
 				C49AE61D1C48F10F00B38424 /* EnterDate.swift */,
-				C49AE60C1C47BAB800B38424 /* Downloader.swift */,
+				C42D2E831C3A7120008DC4BB /* NetworkConnection.swift */,
+				C46265801C57B9E000F1BD50 /* FontColorChange.swift */,
+				C4DBF5741C54C274000C38C6 /* GetCouponArray.swift */,
+				C430C0261C3C200C00C6AF08 /* GetImage.swift */,
+				C4E5548D1C51F73000A378A4 /* CouponView.swift */,
+				C4F5C4CA1C0F2573001389B7 /* ViewController.swift */,
+				C40967381C567177000D1C8D /* CouponViewController.swift */,
+				C48A9CEA1C2EC66A00FB9E12 /* OtherViewController.swift */,
 				C414A1041C3E564E00D435B0 /* EventPicViewController.swift */,
-				C4A3ACD21C3E9BDB0010A816 /* UIView+Rotation.swift */,
+				C414A1081C3E5AFB00D435B0 /* Main.storyboard */,
+				C409673C1C56792E000D1C8D /* MyCustomView.swift */,
 				C4F5C4CF1C0F2573001389B7 /* Assets.xcassets */,
 				C42D2E621C3A0E51008DC4BB /* supansbkg.png */,
 				C4B5A5E51C2BF3D7005D690A /* supan.png */,
 				C48A9CEE1C2ED8B800FB9E12 /* rawk.png */,
 				C48A9D341C316C2200FB9E12 /* supanGameNight.png */,
-				C4F5C4D11C0F2573001389B7 /* LaunchScreen.storyboard */,
 				C4F5C4D41C0F2573001389B7 /* Info.plist */,
 			);
 			path = KKEvents;
@@ -395,6 +424,14 @@
 					C4F5C4C41C0F2573001389B7 = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = UQ3BB547F3;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					C4F5C4D81C0F2574001389B7 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -431,15 +468,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C40967371C563AA2000D1C8D /* db helvethaica x li.ttf in Resources */,
 				C414A1091C3E5AFB00D435B0 /* Main.storyboard in Resources */,
 				C42D2E631C3A0E51008DC4BB /* supansbkg.png in Resources */,
 				C48A9D351C316C2200FB9E12 /* supanGameNight.png in Resources */,
-				C4F5C4D31C0F2573001389B7 /* LaunchScreen.storyboard in Resources */,
 				C4F5C4D01C0F2573001389B7 /* Assets.xcassets in Resources */,
 				C48A9CEF1C2ED8B800FB9E12 /* rawk.png in Resources */,
 				C49AE6121C47D98500B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */,
+				C462657D1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf in Resources */,
 				C4B5A5E61C2BF3D7005D690A /* supan.png in Resources */,
+				C4566B481C57F659004F290C /* KKN loadscreen bkg-14.png in Resources */,
 				C49AE61A1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */,
+				C4566B501C57F8BC004F290C /* KKN loadscreen log-14-14.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,11 +489,14 @@
 			files = (
 				C42D2E641C3A0E51008DC4BB /* supansbkg.png in Resources */,
 				C414A10A1C3E5AFB00D435B0 /* Main.storyboard in Resources */,
+				C462657E1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf in Resources */,
 				C48A9D361C316C2200FB9E12 /* supanGameNight.png in Resources */,
+				C4566B491C57F659004F290C /* KKN loadscreen bkg-14.png in Resources */,
 				C49AE61B1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */,
 				C4B5A5E71C2BF3D7005D690A /* supan.png in Resources */,
 				C49AE6131C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */,
 				C48A9CF01C2ED8B800FB9E12 /* rawk.png in Resources */,
+				C4566B511C57F8BC004F290C /* KKN loadscreen log-14-14.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,11 +506,14 @@
 			files = (
 				C42D2E651C3A0E51008DC4BB /* supansbkg.png in Resources */,
 				C414A10B1C3E5AFB00D435B0 /* Main.storyboard in Resources */,
+				C462657F1C57AE4F00F1BD50 /* DB Helvethaica X Li It v3.2.ttf in Resources */,
 				C48A9D371C316C2200FB9E12 /* supanGameNight.png in Resources */,
+				C4566B4A1C57F659004F290C /* KKN loadscreen bkg-14.png in Resources */,
 				C49AE61C1C47F75600B38424 /* DB Helvethaica X Thin v3.2.ttf in Resources */,
 				C4B5A5E81C2BF3D7005D690A /* supan.png in Resources */,
 				C49AE6141C47D98600B38424 /* DB Helvethaica X Thin It v3.2.ttf in Resources */,
 				C48A9CF11C2ED8B800FB9E12 /* rawk.png in Resources */,
+				C4566B521C57F8BC004F290C /* KKN loadscreen log-14-14.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,16 +525,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C49AE61E1C48F10F00B38424 /* EnterDate.swift in Sources */,
-				C49AE60D1C47BAB800B38424 /* Downloader.swift in Sources */,
+				C40967391C567177000D1C8D /* CouponViewController.swift in Sources */,
+				C4EC42571C523C6A009E22E6 /* Coupon.swift in Sources */,
 				4519CD2B1C2AC66800911174 /* Event.swift in Sources */,
 				C430C0271C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C4F5C4CB1C0F2573001389B7 /* ViewController.swift in Sources */,
+				C4DBF5751C54C274000C38C6 /* GetCouponArray.swift in Sources */,
 				C42D2E841C3A7120008DC4BB /* NetworkConnection.swift in Sources */,
+				C409673D1C56792E000D1C8D /* MyCustomView.swift in Sources */,
+				C4E5548E1C51F73000A378A4 /* CouponView.swift in Sources */,
 				C414A1051C3E564E00D435B0 /* EventPicViewController.swift in Sources */,
+				C46265811C57B9E000F1BD50 /* FontColorChange.swift in Sources */,
 				457B14901C101D1200CFE03C /* Chat.swift in Sources */,
 				C4F5C4C91C0F2573001389B7 /* AppDelegate.swift in Sources */,
 				C48A9CEB1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
-				C4A3ACD31C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,16 +547,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C49AE61F1C48F10F00B38424 /* EnterDate.swift in Sources */,
-				C49AE60E1C47BAB800B38424 /* Downloader.swift in Sources */,
+				C409673A1C567177000D1C8D /* CouponViewController.swift in Sources */,
+				C4EC42581C523C6A009E22E6 /* Coupon.swift in Sources */,
 				4519CD2C1C2AC67D00911174 /* Event.swift in Sources */,
 				C430C0281C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C48A9CEC1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
+				C4DBF5761C54C275000C38C6 /* GetCouponArray.swift in Sources */,
 				C42D2E851C3A7120008DC4BB /* NetworkConnection.swift in Sources */,
+				C409673E1C56792E000D1C8D /* MyCustomView.swift in Sources */,
+				C4E5548F1C51F73000A378A4 /* CouponView.swift in Sources */,
 				C414A1061C3E564E00D435B0 /* EventPicViewController.swift in Sources */,
+				C46265821C57B9E000F1BD50 /* FontColorChange.swift in Sources */,
 				C48A9CF21C2FDD4300FB9E12 /* ViewController.swift in Sources */,
 				C48A9CF41C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */,
 				C4F5C4DE1C0F2574001389B7 /* KKEventsTests.swift in Sources */,
-				C4A3ACD41C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,16 +569,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C49AE6201C48F10F00B38424 /* EnterDate.swift in Sources */,
-				C49AE60F1C47BAB800B38424 /* Downloader.swift in Sources */,
+				C409673B1C567177000D1C8D /* CouponViewController.swift in Sources */,
+				C4EC42591C523C6A009E22E6 /* Coupon.swift in Sources */,
 				4519CD2D1C2AC67E00911174 /* Event.swift in Sources */,
 				C430C0291C3C200C00C6AF08 /* GetImage.swift in Sources */,
 				C48A9CED1C2EC66A00FB9E12 /* OtherViewController.swift in Sources */,
+				C4DBF5771C54C275000C38C6 /* GetCouponArray.swift in Sources */,
 				C42D2E861C3A7120008DC4BB /* NetworkConnection.swift in Sources */,
+				C409673F1C56792E000D1C8D /* MyCustomView.swift in Sources */,
+				C4E554901C51F73000A378A4 /* CouponView.swift in Sources */,
 				C414A1071C3E564E00D435B0 /* EventPicViewController.swift in Sources */,
+				C46265831C57B9E000F1BD50 /* FontColorChange.swift in Sources */,
 				C48A9CF31C2FDD4400FB9E12 /* ViewController.swift in Sources */,
 				C48A9CF51C2FDD4A00FB9E12 /* AppDelegate.swift in Sources */,
 				C4F5C4E91C0F2574001389B7 /* KKEventsUITests.swift in Sources */,
-				C4A3ACD51C3E9BDB0010A816 /* UIView+Rotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,17 +600,6 @@
 			targetProxy = C4F5C4E51C0F2574001389B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		C4F5C4D11C0F2573001389B7 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C4F5C4D21C0F2573001389B7 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C4F5C4EB1C0F2574001389B7 /* Debug */ = {
@@ -642,6 +689,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -662,6 +710,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

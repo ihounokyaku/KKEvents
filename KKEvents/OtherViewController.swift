@@ -16,7 +16,7 @@ class OtherViewController: UIViewController {
     @IBAction func gotoFullscreenPic(sender: AnyObject) {
         performSegueWithIdentifier("fullScreenPicSegue", sender: self)
     }
-   
+   let prefs = NSUserDefaults.standardUserDefaults()
     @IBOutlet weak var logoButton: UIButton!
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventDescription: UILabel!
@@ -56,13 +56,17 @@ class OtherViewController: UIViewController {
     var eventImageFile:UIImage = UIImage()
     var venuePhone = ""
     var eventDateFull:NSDate = NSDate()
+    
+    var thaiOn = true
 
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-      
+        if let temp = NSUserDefaults.standardUserDefaults().objectForKey("Language") as? Bool {
+            self.thaiOn = temp
+        }
         
         let gimage = GetImage()
         let eventImageName = eventImageURL
@@ -96,6 +100,8 @@ class OtherViewController: UIViewController {
             self.entryCostThai = "เข้างาน ฿\(self.entryNumber)"
             self.entryCost = "Entry: \(self.entryNumber) Baht"
         }
+        
+        
         
         // check for both languages
         if eventTitleThai == "" {
@@ -238,16 +244,8 @@ class OtherViewController: UIViewController {
     }
 
     @IBAction func fbButtonPress(sender: AnyObject) {
-       // let facebookURL = NSURL(string: "fb://event/"+eventURL)!
-       
-        //let adjustedFacebookUrl = "https://www.facebook.com/events/"+self.eventURL
-       
-       // if UIApplication.sharedApplication().canOpenURL(facebookURL) {
-           // UIApplication.sharedApplication().openURL(facebookURL)
-       // } else {
-            UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/events/"+eventURL)!)
-        //}
-    }
+                  UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/events/"+eventURL)!)
+           }
     
    
     @IBAction func phoneButtonPress(sender: AnyObject) {
@@ -301,6 +299,10 @@ class OtherViewController: UIViewController {
         if self.venueURL != ""{
         UIApplication.sharedApplication().openURL(NSURL(string:self.venueURL)!)
         }
+    }
+    
+    func saveStuff() {
+        NSUserDefaults.standardUserDefaults().setObject(self.thaiOn, forKey: "Language")
     }
     
     
