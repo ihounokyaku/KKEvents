@@ -9,20 +9,21 @@
 import UIKit
 import EventKit
 
-public class EnterDate: NSObject {
-    var alertController = UIAlertController()
+open class EnterDate: NSObject {
+    var eventSaved = false
     
     var savedEventId : String = ""
     
     
-    func requestAccessPermission(title:String, startDate:NSDate, place:String)->UIAlertController {
+    func requestAccessPermission(_ title:String, startDate:Date, endDate:Date, place:String)->Bool {
+        
         let eventStore = EKEventStore()
         
-    
-        let endDate = startDate.dateByAddingTimeInterval(60 * 60) // Ends one hour later
         
-        if (EKEventStore.authorizationStatusForEntityType(.Event) != EKAuthorizationStatus.Authorized) {
-            eventStore.requestAccessToEntityType(.Event, completion: {
+        
+        
+        if (EKEventStore.authorizationStatus(for: .event) != EKAuthorizationStatus.authorized) {
+            eventStore.requestAccess(to: .event, completion: {
                 granted, error in
                 self.createEvent(eventStore, title: title, startDate: startDate, endDate: endDate, place:place)
                 
@@ -30,11 +31,13 @@ public class EnterDate: NSObject {
         } else {
             createEvent(eventStore, title: title, startDate: startDate, endDate: endDate, place: place)
         }
-        return self.alertController
+        
+        
+        return self.eventSaved
     }
     
     
-    func createEvent(eventStore: EKEventStore, title: String, startDate: NSDate, endDate: NSDate, place:String) {
+    func createEvent(_ eventStore: EKEventStore, title: String, startDate: Date, endDate: Date, place:String) {
         let event = EKEvent(eventStore: eventStore)
         event.title = title
         event.startDate = startDate
@@ -46,25 +49,19 @@ public class EnterDate: NSObject {
         
         
         do {
-            try eventStore.saveEvent(event, span: .ThisEvent)
-            savedEventId = event.eventIdentifier
-            self.alertController = UIAlertController(title: "KK Events", message:
-                "Event saved to calendar!", preferredStyle: UIAlertControllerStyle.Alert)
-            self.alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,
-                handler: nil))
             
+            try eventStore.save(event, span: .thisEvent)
+            savedEventId = event.eventIdentifier
+            self.eventSaved = true
             
         } catch {
-            self.alertController = UIAlertController(title: "Error!", message:
-                "Event not saved to calendar for some reason", preferredStyle: UIAlertControllerStyle.Alert)
-            self.alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,
-                handler: nil))
-       
+            self.eventSaved = false
+            
         }
         
         
     }
-
-
-
+    
+    
+    
 }
