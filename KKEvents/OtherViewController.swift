@@ -8,15 +8,16 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 
 class OtherViewController: UIViewController {
     @IBOutlet weak var mapButton: UIButton!
 
-    @IBAction func gotoFullscreenPic(sender: AnyObject) {
-        performSegueWithIdentifier("fullScreenPicSegue", sender: self)
+    @IBAction func gotoFullscreenPic(_ sender: AnyObject) {
+        performSegue(withIdentifier: "fullScreenPicSegue", sender: self)
     }
-   let prefs = NSUserDefaults.standardUserDefaults()
+   
     @IBOutlet weak var logoButton: UIButton!
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventDescription: UILabel!
@@ -35,145 +36,48 @@ class OtherViewController: UIViewController {
     // var english = false
     
     @IBOutlet weak var backgroundView: UIView!
+    var coreData = CoreData()
+    let imageHandler = ImageHandler()
+    var event:NSManagedObject!
+    var venue:NSManagedObject!
+    let prefs = Prefs()
+   
+    
+    let titleByLanguage = ["Thai":"titleThai", "Eng":"title"]
+    let descByLanguage = ["Thai":"descThai", "Eng":"desc"]
+    var costByLanguage = ["Thai":"", "Eng":""]
+    var venueNameKeys = ["Thai":"name", "Eng":"name"]
     
     
-    var eventDeets = ""
-    var eventDeetsThai = ""
-    var eventImageURL = ""
-    var eventTitle = ""
-    var eventTitleThai = ""
-    var logo = ""
-    var eventDate = ""
-    var eventDateThai = ""
-    var entryCost = ""
-    var entryCostThai = ""
-    var entryNumber = ""
-    var venueName = ""
-    var venueCoordinates = [0.0,0.0]
-    var eventURL = ""
-    var venueURL = ""
-    var venueImage = ""
-    var eventImageFile:UIImage = UIImage()
-    var venuePhone = ""
-    var eventDateFull:NSDate = NSDate()
     
-    var thaiOn = true
-
-    
-    
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let temp = NSUserDefaults.standardUserDefaults().objectForKey("Language") as? Bool {
-            self.thaiOn = temp
+        if let venue = self.event.value(forKey: "venue") as? NSManagedObject {
+            self.venue = venue
+        } else {
+            let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+            let entity = NSEntityDescription.entity(forEntityName: "Venue", in: context)
+            self.venue = NSManagedObject(entity: entity!, insertInto: context)
         }
         
-        let gimage = GetImage()
-        let eventImageName = eventImageURL
-        let eventImageToUse:UIImage = gimage.getImageFromDocuments(eventImageName)
-        let logoImageName = logo
-        let logoImageToUse:UIImage = gimage.getImageFromDocuments(logoImageName)
+        let imageName = self.event.stringValue("imageName")
+        let logoName = self.venue.stringValue("logoName")
         
-        
-        self.eventImage.image = eventImageToUse
-       self.logoButton.setImage(logoImageToUse, forState: UIControlState.Normal)
-        //self.logoButton.backgroundImageForState(UIControlState.Normal) = logoImageToUse
-        //self.logoButton.imageView!.image = logoImageToUse
+        self.eventImage.image = self.imageHandler.getImageData(imageName)
+       self.logoButton.setImage(self.imageHandler.getImageData(logoName), for: UIControlState())
         self.thaiButton.alpha = 0.8
         self.englishButton.alpha = 0.8
-        self.eventImageFile = eventImageToUse
-        
-        //self.eventTitleLabel.font = UIFont.systemFontOfSize(20)
-       
-       // self.eventTitleLabel.sizeToFit()
-        // set bkg image
-      //  self.venueBackImage.alpha = 0.8
-        //if self.venueImage != "" {
-          //  self.venueBackImage.image = UIImage(named:venueImage)
-        //}
         
         // Format entry cost
-        if self.entryNumber == "free" {
-            self.entryCostThai = "เข้างานฟรี!"
-            self.entryCost = "Free Entry!"
+        if event.stringValue("cost") == "free" {
+            self.costByLanguage["Thai"] = "เข้างานฟรี!"
+            self.costByLanguage["Eng"] = "Free Entry!"
         } else {
-            self.entryCostThai = "เข้างาน ฿\(self.entryNumber)"
-            self.entryCost = "Entry: \(self.entryNumber) Baht"
+            self.costByLanguage["Thai"] = "เข้างาน ฿" + self.event.stringValue("cost")
+            self.costByLanguage["Eng"] = "Entry: " + self.event.stringValue("cost") + "Baht"
         }
-        
-        
-        
-        // check for both languages
-        if eventTitleThai == "" {
-            self.eventTitleThai = self.eventTitle
-        } else if eventTitle == ""{
-            self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
-            self.eventTitle = self.eventTitleThai
-            
-        } else {
-            
-        }
-        if eventDeets != "" {
-            if eventDeetsThai != "" {
-                self.englishButton.enabled = true
-                self.thaiButton.enabled = false
-                //self.eventTitleLabel.font = UIFont(name: "Thonburi Light", size: 32)
-                self.dateLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-                self.entryCostLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-                self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
-                self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
-                self.eventTitleLabel.text = self.eventTitleThai
-                self.eventDescription.text = self.eventDeetsThai
-                self.dateLabel.text = self.eventDateThai
-                self.entryCostLabel.text = self.entryCostThai
-                
-                
-            } else {
-                self.englishButton.enabled = false
-                self.thaiButton.enabled = false
-                self.thaiButton.hidden = true
-                self.englishButton.hidden = true
-                self.dateLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
-                self.entryCostLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
-                self.eventDescription.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
-                 self.eventTitleLabel.text = self.eventTitle
-                self.dateLabel.text = self.eventDate
-                self.eventDescription.text = self.eventDeets
-               
-                self.entryCostLabel.text = self.entryCost
-            }
-        } else if eventDeetsThai != "" {
-            self.englishButton.enabled = false
-            self.thaiButton.enabled = false
-            self.thaiButton.hidden = true
-            self.englishButton.hidden = true
-            self.dateLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-            self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
-            self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
-            self.eventTitleLabel.text = self.eventTitleThai
-            self.dateLabel.text = self.eventDateThai
-            self.eventDescription.text = self.eventDeetsThai
-            self.entryCostLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-             //self.entryCostLabel.font = UIFont(name: "Thonburi-Light", size: 10.0)
-            self.entryCostLabel.text = self.entryCostThai
-        } else {
-            self.englishButton.enabled = false
-            self.thaiButton.enabled = false
-            self.thaiButton.hidden = true
-            self.englishButton.hidden = true
-            self.dateLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
-            self.entryCostLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
-            self.eventDescription.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
-             self.eventTitleLabel.text = self.eventTitle
-            self.dateLabel.text = self.eventDate
-            self.entryCostLabel.text = self.entryCost
-            self.eventDescription.text = "no description available \n ไม่มีข้อมูลรายละเอียดของอีเวนท์นี้"
-        }
-        
-       // self.eventDescription.sizeToFit()
-        
-        
-        
+        self.toggleLanguage()
     }
 
     override func viewDidLoad() {
@@ -187,90 +91,87 @@ class OtherViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func formatAttributedText(typefaceName:String, fontSize:CGFloat, lineSpacing:CGFloat, textToFormat:String) ->NSAttributedString {
+    func formatAttributedText(_ typefaceName:String, fontSize:CGFloat, lineSpacing:CGFloat, textToFormat:String) ->NSAttributedString {
         let attrib = [NSFontAttributeName: UIFont(name:typefaceName, size: fontSize)!]
         let attributedText = NSMutableAttributedString(string: textToFormat, attributes: attrib)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
-        paragraphStyle.alignment = NSTextAlignment.Center
+        paragraphStyle.alignment = NSTextAlignment.center
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
         return attributedText
     }
     
 
     
-    @IBAction func thaiButtonPress(sender: AnyObject) {
-        thaiButton.enabled = false
-        englishButton.enabled = true
-        self.dateLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-        self.entryCostLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
-        self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
-        self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
-        self.eventTitleLabel.text = self.eventTitleThai
-        self.eventDescription.text = self.eventDeetsThai
-        self.dateLabel.text = self.eventDateThai
-        self.entryCostLabel.text = self.entryCostThai
+    @IBAction func thaiButtonPress(_ sender: AnyObject) {
+        self.prefs.thaiOn = true
+        self.prefs.set()
+        self.toggleLanguage()
     }
     
-    @IBAction func englishButtonPress(sender: AnyObject) {
-        thaiButton.enabled = true
-        englishButton.enabled = false
-        self.dateLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
-        self.entryCostLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
-        self.eventDescription.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
-        self.eventTitleLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
-         self.eventTitleLabel.text = self.eventTitle
-        self.eventDescription.text = self.eventDeets
-        self.dateLabel.text = self.eventDate
-        self.entryCostLabel.text = self.entryCost
+    @IBAction func englishButtonPress(_ sender: AnyObject) {
+        self.prefs.thaiOn = false
+        self.prefs.set()
+        self.toggleLanguage()
     }
     
-    @IBAction func calendarButtonPress(sender: AnyObject) {
+    @IBAction func calendarButtonPress(_ sender: AnyObject) {
+        var messageTitle = ""
+        var messageContents = ""
         let getDate = EnterDate()
-        var alertThing = UIAlertController()
-        alertThing = getDate.requestAccessPermission(self.eventTitle, startDate: self.eventDateFull, place:self.venueName)
-        self.presentViewController(alertThing, animated: true, completion: nil)
+        
+        let eventSaved = getDate.requestAccessPermission(self.event.stringValue(self.titleByLanguage[self.prefs.language]!), startDate: self.event.dateValue("date"), endDate: self.event.dateValue("endDate"),place:self.venue.stringValue(self.venueNameKeys[self.prefs.language]!))
+        
+        if eventSaved == true {
+            messageTitle = "KK Nightlife"
+            messageContents = "Event Saved!"
+        } else {
+            messageTitle = "Error!"
+            messageContents = "Event not saved to calendar for some reason"
+            
+        }
+        let alertThing = UIAlertController(title: messageTitle, message:
+            messageContents, preferredStyle: UIAlertControllerStyle.alert)
+        alertThing.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,
+            handler: nil))
+
+        self.present(alertThing, animated: true, completion: nil)
     }
     
-    @IBAction func mapButtonPress(sender: AnyObject) {
+    @IBAction func mapButtonPress(_ sender: AnyObject) {
      
         
-           let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:self.venueCoordinates[0], longitude:self.venueCoordinates[1]), addressDictionary: nil))
+           let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude:self.venue.doubleValue("coordinates1"), longitude:self.venue.doubleValue("coordinates2")), addressDictionary: nil))
         
-       mapItem.name = self.venueName
+       mapItem.name = self.venue.stringValue(self.venueNameKeys[self.prefs.language]!)
     
-        mapItem.openInMapsWithLaunchOptions(nil)
+        mapItem.openInMaps(launchOptions: nil)
         
     }
 
-    @IBAction func fbButtonPress(sender: AnyObject) {
-                  UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/events/"+eventURL)!)
+    @IBAction func fbButtonPress(_ sender: AnyObject) {
+                  UIApplication.shared.openURL(URL(string: self.event.stringValue("url"))!)
            }
     
    
-    @IBAction func phoneButtonPress(sender: AnyObject) {
-        let phoneNumber = "tel://"+self.venuePhone
-        let url = NSURL(string: phoneNumber)!
-        UIApplication.sharedApplication().openURL(url)
+    @IBAction func phoneButtonPress(_ sender: AnyObject) {
+        let phoneNumber = "tel://" + self.venue.stringValue("phoneNumber")
+        let url = URL(string: phoneNumber)!
+        UIApplication.shared.openURL(url)
     }
     
-    @IBAction func shareButtonPressed(sender: AnyObject) {
+    @IBAction func shareButtonPressed(_ sender: AnyObject) {
        var activityItems = [AnyObject]()
         
-        let firstActivityItem = "I am going to attend \(self.eventTitle) at \(self.venueName)! Care to join me? \n"
-        let secondActivityItem : NSURL = NSURL(string:  "https://www.facebook.com/events/"+self.eventURL)!
-        let thirdActivityItem = "\n - Find out what's happening in Khon Kaen with the Khon Kaen Events app for IOS -"
-        // If you want to put an image
-        if self.eventImageURL != ""{
-            let image : UIImage = self.eventImageFile
-            activityItems = [firstActivityItem, secondActivityItem, image, thirdActivityItem]
+        let firstActivityItem = "I am going to attend \(self.event.stringValue(self.titleByLanguage["Eng"]!)) at \(self.venue.stringValue(self.venueNameKeys["Eng"]!))! Care to join me? \nฒันจะไป \(self.event.stringValue(self.titleByLanguage["Thai"]!)) ที่ \(self.venue.stringValue("nameThai"))! คุณอยากจะไปกับฉันไหม"
+        let secondActivityItem : URL = URL(string:  self.event.stringValue("url"))!
+        let thirdActivityItem = "\n - Find out what's happening in Khon Kaen with the Khon Kaen Nighlife app for IOS -\nหากท่านกำลังมองหาแหล่งบันเทิง นี่เลย! Khon Kaen Nightlife! \nhttp://appstore.com/khonkaennightlife"
+        
+        
+            let image : UIImage = self.eventImage.image!
+            activityItems = [firstActivityItem as AnyObject, secondActivityItem as AnyObject, image, thirdActivityItem as AnyObject]
         
             
-        } else {
-            activityItems = [firstActivityItem, secondActivityItem, thirdActivityItem]
-            
-        }
-        
         let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         
         // This lines is for the popover you need to show in iPad
@@ -282,36 +183,61 @@ class OtherViewController: UIViewController {
         
         // Anything you want to exclude
         activityViewController.excludedActivityTypes = [
-            UIActivityTypePostToWeibo,
-            UIActivityTypePrint,
-            UIActivityTypeAssignToContact,
-            UIActivityTypeSaveToCameraRoll,
-            UIActivityTypeAddToReadingList,
-            UIActivityTypePostToVimeo,
-            UIActivityTypePostToTencentWeibo
+            UIActivityType.postToWeibo,
+            UIActivityType.print,
+            UIActivityType.assignToContact,
+            UIActivityType.saveToCameraRoll,
+            UIActivityType.addToReadingList,
+            UIActivityType.postToVimeo,
+            UIActivityType.postToTencentWeibo
         ]
         
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @IBAction func LogoButton(sender: AnyObject) {
+    @IBAction func LogoButton(_ sender: AnyObject) {
         
-        if self.venueURL != ""{
-        UIApplication.sharedApplication().openURL(NSURL(string:self.venueURL)!)
+       
+        UIApplication.shared.openURL(URL(string:self.venue.stringValue("url"))!)
+        
+    }
+    
+    
+    
+    func toggleLanguage () {
+        if self.prefs.thaiOn {
+            self.dateLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
+            self.entryCostLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 32)
+            self.eventDescription.font = UIFont(name: "DBHelvethaicaX-35Thin", size: 25)
+            self.eventTitleLabel.font = UIFont(name: "DBHelvethaicaX-36ThinIt", size: 42)
+        } else {
+            self.dateLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
+            self.entryCostLabel.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 23)
+            self.eventDescription.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
+            self.eventTitleLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 32)
         }
+        
+        self.thaiButton.isEnabled = !self.prefs.thaiOn
+        self.englishButton.isEnabled = self.prefs.thaiOn
+        
+        if let eventDate = self.event.value(forKey: "date") as? Date {
+            self.dateLabel.text = eventDate.string(self.prefs.language, dateFormat: ["Thai":"EEEE ที่ d MMM", "Eng":"EEEE, MMMM d"])
+        }
+        self.eventTitleLabel.text = event.stringValue(self.titleByLanguage[self.prefs.language]!)
+        
+        self.eventDescription.text = event.stringValue(self.descByLanguage[self.prefs.language]!)
+        self.entryCostLabel.text = self.costByLanguage[self.prefs.language]!
     }
     
-    func saveStuff() {
-        NSUserDefaults.standardUserDefaults().setObject(self.thaiOn, forKey: "Language")
+    @IBAction func unwindToHome(_ segue: UIStoryboardSegue) {
+        
     }
     
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fullScreenPicSegue"
         {
-            if let destinationVC = segue.destinationViewController as? EventPicViewController{
-                destinationVC.eventImage = self.eventImageFile
-                
+            if let destinationVC = segue.destination as? EventPicViewController{
+                destinationVC.eventImage = self.eventImage.image!
             }
             
         }
